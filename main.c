@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/05 14:02:40 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/05 18:38:43 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,25 @@
 
 int     main(void)
 {
+	int		d = 21;
+	printf("flags && width\n");
+	printf("original: %d hello\n", d);
+	printf("original: % d hello\n", d);
+	printf("original: % d hello\n", -d);
+	printf("original: %+d hello\n", d);
+	printf("original: % +d hello\n", d);
+	printf("original: %+ d hello\n", d);
+
+	printf("original: %10d hello\n", d);
+	printf("original: % 10d hello\n", d);
+	printf("original: % 10d hello\n", -d);
+	printf("original: %+10d hello\n", d);
+	printf("original: %010d hello\n", d);
+	printf("original: %-10d hello\n", d);
+	printf("original: %+-10d hello\n", d);
+	printf("original: %0010d hello\n", -d);
+	printf("original: %-010d hello\n", d);
+/*
 	int						d = 21;
 	printf("\n%%d\n");
 	printf("original: num: %d, -num: %d\n", d, -d);
@@ -125,6 +144,6 @@ int     main(void)
 	ft_printf("customft: MAX+1: %llu, MIN-1: %llu\n", ULLONG_MAX + 1, LLONG_MIN - 1);
 	printf("original: MAX+21: %llu, MIN-21: %llu\n", ULLONG_MAX + 21, LLONG_MIN - 21);
 	ft_printf("customft: MAX+21: %llu, MIN-21: %llu\n", ULLONG_MAX + 21, LLONG_MIN - 21);
-
+*/
 	return (0);
 }

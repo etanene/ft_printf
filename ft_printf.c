@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/06 15:28:54 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/06 19:20:45 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ void		ft_set_width(const char **format, t_options *options)
 		*format += ft_numlen(options->width);
 }
 
+void		ft_set_prec(const char **format, t_options *options)
+{
+	if (**format == '.')
+	{
+		(*format)++;
+		options->prec = ft_atoi(*format);
+		if (options->prec)
+			*format += ft_numlen(options->prec);
+	}
+}
+
 void		ft_set_length(const char **format, t_options *options)
 {
 	while (**format)
@@ -96,7 +107,7 @@ t_options	ft_set_options(const char **format)
 	while (i < 5)
 		options.flags[i++] = 0;
 	options.width = 0;
-	options.precision = 0;
+	options.prec = 0;
 	options.length = 0;
 	options.spec = 0;
 	while (**format)
@@ -105,6 +116,7 @@ t_options	ft_set_options(const char **format)
 			break;
 		ft_set_flags(format, &options);
 		ft_set_width(format, &options);
+		ft_set_prec(format, &options);
 		ft_set_length(format, &options);
 	}
 	return (options);
@@ -129,10 +141,11 @@ int			ft_sum_flags(char *flags)
 	return (sum);
 }
 
-void		ft_parse_options(t_options options, long long int num, int type)
+int			ft_parse_options(t_options options, long long int num, int type)
 {
 	unsigned long long int	unum;
 	int						len;
+	int						temp;	
 	int						flags_sum;
 
 	unum = num;
@@ -149,85 +162,109 @@ void		ft_parse_options(t_options options, long long int num, int type)
 	flags_sum = ft_sum_flags(options.flags);
 	if (options.flags[2] == FLAG_SP || options.flags[1] == FLAG_PLUS)
 	{
-		len += 1;
+		len++;
 		if (options.flags[2] == FLAG_SP)
 			ft_putchar(' ');
 		else if (options.flags[4] == FLAG_NULL || options.flags[0] == FLAG_MINUS)
 			ft_putchar(num < 0 ? '-' : '+');
 	}
-	while (options.flags[0] != FLAG_MINUS && options.width > len)
+	temp = MAX(len, options.prec);
+	while (options.flags[0] != FLAG_MINUS && options.width > temp)
 	{
-		if (options.flags[4])
+		if (options.flags[4] && !options.prec)
 			ft_putchar('0');
 		else
 			ft_putchar(' ');
-		options.width--;
+		temp++;
 	}
 	if (flags_sum == FLAG_PLUS)
 		ft_putchar(num < 0 ? '-' : '+');
+	while (options.prec > len - (options.flags[2] == FLAG_SP || options.flags[1] == FLAG_PLUS))
+	{
+		ft_putchar('0');
+		len++;
+	}
 	ft_printnum(unum);
+	len = temp;
 	while (options.flags[0] == FLAG_MINUS && options.width > len)
 	{
 		ft_putchar(' ');
-		options.width--;
+		len++;
 	}
+	return (len);
 }
 
-void		ft_parse_num(t_options options, long long int num, int type)
+int			ft_parse_num(t_options options, long long int num, int type)
 {
+	int		len;
+
+	len = 0;
 	if (options.length == 0)
-		ft_parse_options(options, (int)num, type);
+		len = ft_parse_options(options, (int)num, type);
 	else if (options.length == LEN_HH)
-		ft_parse_options(options, (char)num, type);
+		len = ft_parse_options(options, (char)num, type);
 	else if (options.length == LEN_H)
-		ft_parse_options(options, (short int)num, type);
+		len = ft_parse_options(options, (short int)num, type);
 	else if (options.length == LEN_L)
-		ft_parse_options(options, (long int)num, type);
+		len = ft_parse_options(options, (long int)num, type);
 	else if (options.length == LEN_LL)
-		ft_parse_options(options, (long long int)num, type);
+		len = ft_parse_options(options, (long long int)num, type);
+	return (len);
 }
 
-void		ft_parse_unum(t_options options, long long int num, int type)
+int			ft_parse_unum(t_options options, long long int num, int type)
 {
+	int		len;
+
+	len = 0;
 	if (options.length == 0)
-		ft_parse_options(options, (unsigned int)num, type);
+		len = ft_parse_options(options, (unsigned int)num, type);
 	else if (options.length == LEN_HH)
-		ft_parse_options(options, (unsigned char)num, type);
+		len = ft_parse_options(options, (unsigned char)num, type);
 	else if (options.length == LEN_H)
-		ft_parse_options(options, (unsigned short int)num, type);
+		len = ft_parse_options(options, (unsigned short int)num, type);
 	else if (options.length == LEN_L)
-		ft_parse_options(options, (unsigned long int)num, type);
+		len = ft_parse_options(options, (unsigned long int)num, type);
 	else if (options.length == LEN_LL)
-		ft_parse_options(options, (unsigned long long int)num, type);
+		len = ft_parse_options(options, (unsigned long long int)num, type);
+	return (len);
 }
 
-void		ft_parse_spec(t_options options, va_list ap)
+int			ft_parse_spec(t_options options, va_list ap)
 {
-	
+	int		len;
+
+	len = 0;
 	if (options.spec == 'd' || options.spec == 'i')
-		ft_parse_num(options, va_arg(ap, long long int), SIGN);
+		len = ft_parse_num(options, va_arg(ap, long long int), SIGN);
 	else if (options.spec == 'u')
-		ft_parse_unum(options, va_arg(ap, long long int), UNSIGN);	
+		len = ft_parse_unum(options, va_arg(ap, long long int), UNSIGN);
+	return (len);
 }
 
 int			ft_printf(const char *format, ...)
 {
 	va_list 	ap;
 	t_options	options;
+	int			len;
 
 	va_start(ap, format);
+	len = 0;
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			format++;
 			options = ft_set_options(&format);
-			ft_parse_spec(options, ap);
+			len += ft_parse_spec(options, ap);
 		}
 		else
+		{
 			ft_putchar(*format);
+			len++;
+		}
 		format++;
 	}
 	va_end(ap);
-	return (1);
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/06 15:22:07 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/06 19:21:32 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int     main(void)
 {
 	int		d = 21;
-	printf("flags && width\n");
+	printf("\nflags\n");
 	printf("original: %d hello\n", d);
 	ft_printf("customft: %d hello\n\n", d);
 	printf("original: % d hello\n", d);
@@ -31,6 +31,7 @@ int     main(void)
 	printf("original: %+ d hello\n", d);
 	ft_printf("customft: %+ d hello\n\n", d);
 
+	printf("\nwidth\n");
 	printf("original: %10d hello\n", d);
 	ft_printf("customft: %10d hello\n\n", d);
 	printf("original: % 10d hello\n", d);
@@ -45,10 +46,36 @@ int     main(void)
 	ft_printf("customft: %-10d hello\n\n", d);
 	printf("original: %+-10d hello\n", d);
 	ft_printf("customft: %+-10d hello\n\n", d);
-	printf("original: %0010d hello\n", -d);
-	ft_printf("customft: %0010d hello\n\n", -d);
 	printf("original: %- 010d hello\n", d);
 	ft_printf("customft: %- 010d hello\n\n", d);
+	printf("original: %0010d hello\n", -d);
+	ft_printf("customft: %0010d hello\n\n", -d);
+
+	printf("\nprecision\n");
+	printf("original: %.d\n", d);
+	ft_printf("customft: %.d\n\n", d);
+	printf("original: %.5d\n", d);
+	ft_printf("customft: %.5d\n\n", d);
+	printf("original: %0.5d\n", d);
+	ft_printf("customft: %0.5d\n\n", d);
+	printf("original: %-.5d\n", d);
+	ft_printf("customft: %-.5d\n\n", d);
+	printf("original: % .5d\n", d);
+	ft_printf("customft: % .5d\n\n", d);
+	printf("original: %10.5d\n", d);
+	ft_printf("customft: %10.5d\n\n", d);
+	printf("original: %5.10d\n", d);
+	ft_printf("customft: %5.10d\n\n", d);
+	printf("original: %+5.10d\n", d);
+	ft_printf("customft: %+5.10d\n\n", d);
+	printf("original: %5.10d\n", -d);
+	ft_printf("customft: %5.10d\n\n", -d);
+	printf("original: %010.5d\n", d);
+	ft_printf("customft: %010.5d\n\n", d);
+	printf("original: %05.10d\n", d);
+	ft_printf("customft: %05.10d\n\n", d);
+	printf("original: %-010.5d\n", d);
+	ft_printf("customft: %-010.5d\n\n", d);
 /*
 	int						d = 21;
 	printf("\n%%d\n");

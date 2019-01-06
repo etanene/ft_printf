@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/06 15:45:09 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/06 18:46:48 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@
 # define FLAG_SHARP 8
 # define FLAG_NULL 16
 
+# define MAX(a, b) (a > b ? a : b)
+
 typedef struct	s_options
 {
 	char		flags[5];
 	int			width;
-	int			precision;
+	int			prec;
 	int			length;
 	char		spec;
 }				t_options;

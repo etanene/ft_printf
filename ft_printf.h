@@ -6,14 +6,13 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/05 19:13:06 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:45:09 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft.h"
 # include <stdarg.h>
 
 # define UNSIGN 1
@@ -40,5 +39,7 @@ typedef struct	s_options
 }				t_options;
 
 int		ft_printf(const char *format, ...);
+void	ft_putchar(char c);
+int		ft_atoi(const char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/05 20:27:05 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:28:54 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,24 +106,15 @@ t_options	ft_set_options(const char **format)
 		ft_set_flags(format, &options);
 		ft_set_width(format, &options);
 		ft_set_length(format, &options);
-		(*format)++;
 	}
 	return (options);
 }
 
-void		ft_printnum(long long int num, int type)
+void		ft_printnum(unsigned long long int num)
 {
-	unsigned long long	unum;
-
-	if (type == SIGN)
-		unum = num < 0 ? -num : num;
-	else
-		unum = num;
-	if (type == SIGN && num < 0)
-		ft_putchar('-');
-	if (unum >= 10)
-		ft_printnum(unum / 10, type);
-	ft_putchar(unum % 10 + '0');
+	if (num >= 10)
+		ft_printnum(num / 10);
+	ft_putchar(num % 10 + '0');
 }
 
 int			ft_sum_flags(char *flags)
@@ -134,7 +125,7 @@ int			ft_sum_flags(char *flags)
 	sum = 0;
 	i = 0;
 	while (i < 5)
-		sum += flags[i];
+		sum += flags[i++];
 	return (sum);
 }
 
@@ -151,13 +142,35 @@ void		ft_parse_options(t_options options, long long int num, int type)
 		options.flags[1] = FLAG_PLUS;
 	}
 	len = ft_numlen(unum);
-	flags_sum = ft_sum_flags(options.flags);
 	if (options.flags[1] == FLAG_PLUS)
+		options.flags[2] = 0;
+	if (options.flags[0] == FLAG_MINUS)
+		options.flags[4] = 0;
+	flags_sum = ft_sum_flags(options.flags);
+	if (options.flags[2] == FLAG_SP || options.flags[1] == FLAG_PLUS)
 	{
 		len += 1;
-		ft_putchar(num < 0 ? '-' : '+');
+		if (options.flags[2] == FLAG_SP)
+			ft_putchar(' ');
+		else if (options.flags[4] == FLAG_NULL || options.flags[0] == FLAG_MINUS)
+			ft_putchar(num < 0 ? '-' : '+');
 	}
-
+	while (options.flags[0] != FLAG_MINUS && options.width > len)
+	{
+		if (options.flags[4])
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
+		options.width--;
+	}
+	if (flags_sum == FLAG_PLUS)
+		ft_putchar(num < 0 ? '-' : '+');
+	ft_printnum(unum);
+	while (options.flags[0] == FLAG_MINUS && options.width > len)
+	{
+		ft_putchar(' ');
+		options.width--;
+	}
 }
 
 void		ft_parse_num(t_options options, long long int num, int type)

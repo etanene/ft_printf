@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/05 18:38:43 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:22:07 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,36 @@ int     main(void)
 	int		d = 21;
 	printf("flags && width\n");
 	printf("original: %d hello\n", d);
+	ft_printf("customft: %d hello\n\n", d);
 	printf("original: % d hello\n", d);
+	ft_printf("customft: % d hello\n\n", d);
 	printf("original: % d hello\n", -d);
+	ft_printf("customft: % d hello\n\n", -d);
 	printf("original: %+d hello\n", d);
+	ft_printf("customft: %+d hello\n\n", d);
 	printf("original: % +d hello\n", d);
+	ft_printf("customft: % +d hello\n\n", d);
 	printf("original: %+ d hello\n", d);
+	ft_printf("customft: %+ d hello\n\n", d);
 
 	printf("original: %10d hello\n", d);
+	ft_printf("customft: %10d hello\n\n", d);
 	printf("original: % 10d hello\n", d);
+	ft_printf("customft: % 10d hello\n\n", d);
 	printf("original: % 10d hello\n", -d);
+	ft_printf("customft: % 10d hello\n\n", -d);
 	printf("original: %+10d hello\n", d);
+	ft_printf("customft: %+10d hello\n\n", d);
 	printf("original: %010d hello\n", d);
+	ft_printf("customft: %010d hello\n\n", d);
 	printf("original: %-10d hello\n", d);
+	ft_printf("customft: %-10d hello\n\n", d);
 	printf("original: %+-10d hello\n", d);
+	ft_printf("customft: %+-10d hello\n\n", d);
 	printf("original: %0010d hello\n", -d);
-	printf("original: %-010d hello\n", d);
+	ft_printf("customft: %0010d hello\n\n", -d);
+	printf("original: %- 010d hello\n", d);
+	ft_printf("customft: %- 010d hello\n\n", d);
 /*
 	int						d = 21;
 	printf("\n%%d\n");

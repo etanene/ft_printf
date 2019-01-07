@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/07 13:47:09 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/07 16:17:16 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			ft_handle_spec(t_options options, va_list ap)
 	len = 0;
 	if (options.spec == 'd' || options.spec == 'i')
 		len = ft_parse_num(options, va_arg(ap, long long int), SIGN);
-	else if (options.spec == 'u')
+	else if (options.spec == 'u' || options.spec == 'o' || options.spec == 'x' || options.spec == 'X')
 		len = ft_parse_unum(options, va_arg(ap, long long int), UNSIGN);
 	return (len);
 }

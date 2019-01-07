@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/07 13:59:37 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/07 16:14:18 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void			ft_set_width(const char **format, t_options *options);
 void			ft_set_flags(const char **format, t_options *options);
 int				ft_set_spec(char c, t_options *options);
 int				ft_atoi(const char *str);
-int				ft_unumlen(unsigned long long int num);
+int				ft_unumlen(unsigned long long int num, char spec);
 int				ft_handle_spec(t_options options, va_list ap);
 int				ft_parse_num(t_options options, long long int num, int type);
 int				ft_parse_unum(t_options options, long long int num, int type);
 int				ft_print_diuoxX(t_options options, long long int num, int type);
 int				ft_sum_flags(char *flags);
-void			ft_printnum(unsigned long long int num);
+void			ft_printnum(unsigned long long int num, char spec);
 void			ft_putchar(char c);
 
 #endif

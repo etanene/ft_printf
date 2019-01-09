@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/07 17:46:09 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/09 17:49:15 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 int     main(void)
 {
+/*
 	long int		ld = 3124141;
 	int				d = 2142;
 	long long int	lld = 234234242424242;
@@ -134,6 +135,131 @@ int     main(void)
 	printf("len: %d\n", len);
 	len = ft_printf("customft27: %-010.5d hello\n", d, d);
 	printf("len: %d\n\n", len);
+*/
+/*
+	long int		lu = 3124141;
+	int				u = 2142;
+	long long int	llu = 234234242424242;
+	int				len = 0;
+
+	printf("\nFLAGS\n");
+	len = printf("original1: %lu worlu %u hello %llu\n", lu, u, llu);
+	printf("len: %u\n", len);
+	len = ft_printf("customft1: %lu worlu %u hello %llu\n", lu, u, llu);
+	printf("len: %u\n\n", len);
+	len = printf("original2: % u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft2: % u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original3: % u hello\n", -u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft3: % u hello\n", -u);
+	printf("len: %u\n\n", len);
+	len = printf("original4: %+u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft4: %+u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original5: % +u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft5: % +u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original6: %+ u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft6: %+ u hello\n", u);
+	printf("len: %u\n\n", len);
+
+	printf("\nWIDTH\n");
+	len = printf("original7: %10u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft7: %10u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original8: % 10u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft8: % 10u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original9: % 10u hello\n", -u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft9: % 10u hello\n", -u);
+	printf("len: %u\n\n", len);
+	len = printf("original10: %+10u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft10: %+10u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original11: %010u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft11: %010u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original12: %-10u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft12: %-10u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original13: %+-10u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft13: %+-10u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original14: %- 010u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft14: %- 010u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original15: %0010u hello\n", -u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft15: %0010u hello\n", -u);
+	printf("len: %u\n\n", len);
+
+	printf("\nPRECISION\n");
+	len = printf("original16: %.u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft16: %.u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original17: %.5u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft17: %.5u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original18: %0.5u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft18: %0.5u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original19: %-.5u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft19: %-.5u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original20: % .5u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft20: % .5u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original21: %10.5u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft21: %10.5u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original22: %5.10u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft22: %5.10u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original23: %+5.10u hello\n", u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft23: %+5.10u hello\n", u);
+	printf("len: %u\n\n", len);
+	len = printf("original24: %5.10u hello\n", -u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft24: %5.10u hello\n", -u);
+	printf("len: %u\n\n", len);
+	len = printf("original25: %010.5u hello\n", u, u, u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft25: %010.5u hello\n", u, u, u);
+	printf("len: %u\n\n", len);
+	len = printf("original26: %05.10u hello\n", u, u, u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft26: %05.10u hello\n", u, u, u);
+	printf("len: %u\n\n", len);
+	len = printf("original27: %-010.5u hello\n", u, u);
+	printf("len: %u\n", len);
+	len = ft_printf("customft27: %-010.5u hello\n", u, u);
+	printf("len: %u\n\n", len);
+*/
+	long int		ld = 3124141;
+	int				d = 2142;
+	long long int	lld = 234234242424242;
+	int				len = 0;
 
 	printf("\noxX\n");
 	len = printf("original28: %010.5X hello\n", d);
@@ -144,21 +270,25 @@ int     main(void)
 	printf("len: %d\n", len);
 	len = ft_printf("customft29: %+010.5X hello\n", d);
 	printf("len: %d\n\n", len);
-	len = printf("original30: %-010.5X hello\n", d);
+	len = printf("original30: %-010.5x hello\n", d);
 	printf("len: %d\n", len);
-	len = ft_printf("customft30: %-010.5X hello\n", d);
+	len = ft_printf("customft30: %-010.5x hello\n", d);
 	printf("len: %d\n\n", len);
 	len = printf("original31: % #10.5X hello\n", d);
 	printf("len: %d\n", len);
 	len = ft_printf("customft31: % #10.5X hello\n", d);
 	printf("len: %d\n\n", len);
-	len = printf("original32: %+#10.5X hello\n", d);
+	len = printf("original32: %+#10.5x hello\n", d);
 	printf("len: %d\n", len);
-	len = ft_printf("customft32: %+#10.5X hello\n", d);
+	len = ft_printf("customft32: %+#10.5x hello\n", d);
 	printf("len: %d\n\n", len);
 	len = printf("original33: % #10.5X hello\n", d);
 	printf("len: %d\n", len);
 	len = ft_printf("customft33: % #10.5X hello\n", d);
+	printf("len: %d\n\n", len);
+	len = printf("original34: % #010X hello\n", d);
+	printf("len: %d\n", len);
+	len = ft_printf("customft34: % #010X hello\n", d);
 	printf("len: %d\n\n", len);
 	len = printf("original35: % #10.5o hello\n", d);
 	printf("len: %d\n", len);
@@ -184,7 +314,14 @@ int     main(void)
 	printf("len: %d\n", len);
 	len = ft_printf("customft40: %#10o hello\n", d);
 	printf("len: %d\n\n", len);
-
+	len = printf("original41: %#10o hello\n", d);
+	printf("len: %d\n", len);
+	len = ft_printf("customft41: %#10o hello\n", d);
+	printf("len: %d\n\n", len);
+	len = printf("original42: %-#010.5x hello\n", d);
+	printf("len: %d\n", len);
+	len = ft_printf("customft42: %-#010.5x hello\n", d);
+	printf("len: %d\n", len);
 /*
 	int						d = 21;
 	printf("\n%%d\n");

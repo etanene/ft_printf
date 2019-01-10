@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:35:21 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/09 19:58:47 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/10 13:06:33 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ int		ft_prefnum_uoxX(t_options options, int len)
 	int		temp;
 
 	count = 0;
-	if (options.flags[F_SHARP] && options.spec != 'u')
+	if (options.flags[F_SHARP])
 	{
-		count += (options.spec == 'x' || options.spec == 'X') ? 2 : 1;
+		if (options.spec != 'o')
+			count += 2;
+		else
+			count++;
 		if (options.flags[F_MINUS] || options.flags[F_NULL])
 		{
 			ft_putchar('0');
@@ -29,7 +32,7 @@ int		ft_prefnum_uoxX(t_options options, int len)
 		}
 	}
 	temp = MAX(len, options.prec);
-	while (!options.flags[F_MINUS] && options.width - temp > count - (options.prec == 'o' && options.flags[F_SHARP]))
+	while (!options.flags[F_MINUS] && options.width - temp > count - (options.spec == 'o' && options.prec - len == 1))
 	{
 		if (options.flags[F_NULL] && !options.prec)
 			ft_putchar('0');
@@ -39,11 +42,12 @@ int		ft_prefnum_uoxX(t_options options, int len)
 	}
 	if (options.flags[F_SHARP] && !(options.flags[F_MINUS] || options.flags[F_NULL]))
 	{
-		ft_putchar('0');
+		if (!(options.spec == 'o' && options.prec - len == 1))
+			ft_putchar('0');
 		if (options.spec == 'x' || options.spec == 'X')
 			ft_putchar(options.spec);
 	}
-	return (temp + count);
+	return (temp + count - (options.spec == 'o' && options.prec - len == 1));
 }
 
 int		ft_print_uoxX(t_options options, unsigned long long int unum)
@@ -62,6 +66,8 @@ int		ft_print_uoxX(t_options options, unsigned long long int unum)
 	len = ft_unumlen(unum, base);
 	if (options.flags[F_MINUS])
 		options.flags[F_NULL] = 0;
+	if (options.spec == 'u')
+		options.flags[F_SHARP] = 0;
 	count = ft_prefnum_uoxX(options, len);
 	while (options.prec-- > len)
 		ft_putchar('0');

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/09 17:49:15 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/10 13:45:04 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,9 +256,10 @@ int     main(void)
 	len = ft_printf("customft27: %-010.5u hello\n", u, u);
 	printf("len: %u\n\n", len);
 */
-	long int		ld = 3124141;
-	int				d = 2142;
-	long long int	lld = 234234242424242;
+/*
+	long int		lo = 3124141;
+	int				o = 2142;
+	long long int	llo = 234234242424242;
 	int				len = 0;
 
 	printf("\noxX\n");
@@ -322,6 +323,10 @@ int     main(void)
 	printf("len: %d\n", len);
 	len = ft_printf("customft42: %-#010.5x hello\n", d);
 	printf("len: %d\n", len);
+*/
+	int		c = 100;
+	printf("%c\n", c);
+	ft_printf("%c\n", c);
 /*
 	int						d = 21;
 	printf("\n%%d\n");

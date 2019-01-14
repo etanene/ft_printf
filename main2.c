@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 20:42:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/10 20:52:59 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/14 14:58:45 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,82 +14,129 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <locale.h>
-#include "ft_printf.h"
+//#include "ft_printf.h"
 
-int		ft_checkbit(int n, int pos)
-{
-	return ((n & (1 << pos)) != 0);
-}
+// void	ft_putchar(char c)
+// {
+// 	write(1, &c, 1);
+// }
 
-void	ft_printbits(int n, int count)
-{
-	while (count--)
-	{
-		ft_putchar(ft_checkbit(n, count) + '0');
-		if (!(count % 8) && count)
-			ft_putchar(' ');
-	}
-}
+// int		ft_checkbit(int n, int pos)
+// {
+// 	return ((n & (1 << pos)) != 0);
+// }
 
-void	ft_print_c(int c)
-{
-	char	*p;
+// void	ft_printbits(int n, int count)
+// {
+// 	while (count--)
+// 	{
+// 		ft_putchar(ft_checkbit(n, count) + '0');
+// 		if (!(count % 8) && count)
+// 			ft_putchar(' ');
+// 	}
+// }
 
-	ft_printbits(c, 32);
-	ft_putchar('\n');
-	p = (char*)&c;
-	write(1, p, 2);
-	ft_putchar('\n');
-	ft_printbits(*p, 8);
-	ft_putchar('\n');
-	ft_printbits(*(p + 1), 8);
-	ft_putchar('\n');
-	if (!ft_checkbit(*p, 3) && ft_checkbit(*p, 4) && ft_checkbit(*p, 5) && ft_checkbit(*p, 6) && ft_checkbit(*p, 7))
-	{
-		if (!ft_checkbit(*(p + 1), 6) && ft_checkbit(*(p + 1), 7))
-		{
-			if (!ft_checkbit(*(p + 2), 6) && ft_checkbit(*(p + 2), 7))
-			{
-				if (!ft_checkbit(*(p + 3), 6) && ft_checkbit(*(p + 3), 7))
-				{
-					write(1, p, 4);
-				}
-			}
-		}
-	}
-	else if (!ft_checkbit(*p, 4) && ft_checkbit(*p, 5) && ft_checkbit(*p, 6) && ft_checkbit(*p, 7))
-	{
-		if (!ft_checkbit(*(p + 1), 6) && ft_checkbit(*(p + 1), 7))
-		{
-			if (!ft_checkbit(*(p + 2), 6) && ft_checkbit(*(p + 2), 7))
-			{
-				write(1, p, 3);
-			}
-		}
-	}
-	else if (!ft_checkbit(*p, 5) && ft_checkbit(*p, 6) && ft_checkbit(*p, 7))
-	{
-		if (!ft_checkbit(*(p + 1), 6) && ft_checkbit(*(p + 1), 7))
-		{
-			write(1, p, 2);
-		}
-	}
-	else
-		write(1, p, 1);
-	
-}
+// int		ft_check_endian(void)
+// {
+// 	short int	x;
+
+// 	x = 1;
+// 	return (*((char*)&x) == 0 ? 0 : 1);
+// }
+
+// int		ft_swap_bytes(int n)
+// {
+// 	int		count;
+// 	int		i;
+// 	int		res;
+// 	char	temp;
+// 	char	*p;
+
+// 	res = n;
+// 	p = (char*)&res;
+// 	i = 0;
+// 	count = 0;
+// 	while (i < 4)
+// 	{
+// 		if (*(p + i) != 0)
+// 			count++;
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (--count > i)
+// 	{
+// 		temp = *(p + count);
+// 		*(p + count) = *(p + i);
+// 		*(p + i) = temp;
+// 		i++;
+// 	}
+// 	return (res);
+// }
+
+// int		ft_convert_utf32_utf8(int utf32, char *p)
+// {
+// 	if (utf32 <= 0x7F)
+// 	{
+// 		*p = utf32;
+// 		return (1);
+// 	}
+// 	else if (utf32 <= 0x7FF)
+// 	{
+// 		*p = 0xC0 | (utf32 >> 6);
+// 		*(p + 1) = 0x80 | (utf32 & 0x3F);
+// 		return (2);
+// 	}
+// 	else if (utf32 <= 0xFFFF)
+// 	{
+// 		*p = 0xE0 | (utf32 >> 12);
+// 		*(p + 1) = 0x80 | ((utf32 >> 6) & 0x3F);
+// 		*(p + 2) = 0x80 | (utf32 & 0x3F);
+// 		return (3);
+// 	}
+// 	else if (utf32 <= 0x10FFFF)
+// 	{
+// 		*p = 0xF0 | (utf32 >> 18);
+// 		*(p + 1) = 0x80 | ((utf32 >> 12) & 0x3F);
+// 		*(p + 2) = 0x80 | ((utf32 >> 6) & 0x3F);
+// 		*(p + 3) = 0x80 | (utf32 & 0x3F);
+// 		return (4);
+// 	}
+// 	return (0);
+// }
+
+// void	ft_print_c(int c)
+// {
+// 	int		bytes;
+// 	int		utf;
+
+// 	utf = 0;
+// 	bytes = 0;
+// 	bytes = ft_convert_utf32_utf8(c, (char*)&utf);
+// 	if (!ft_check_endian())
+// 		utf = ft_swap_bytes(utf);
+// 	write(1, (char*)&utf, bytes);
+// }
 
 int		main(void)
 {
-	int		c;
-	char	s[2] = {194, 162};
+	// int		c;
+	// char	s[2] = {194, 162};
+	// int		str[3] = {36817, 46790, 45773};
+	// short int	x = 1;
 
+	// printf("%s\n", *((char*)&x) == 0 ? "big-endian" : "little-endian");
 	setlocale(LC_ALL, "");
-	c = 41666;
-	//write(1, &c, 1);
-	write(1, s, 2);
-	printf("\n%C\n", L'δ');
-	ft_print_c(c);
-	
+	// ft_printbits(27, 8);
+	// ft_putchar('\n');
+	// c = 4036993206;
+	// c = 14788256;
+	// c = 51852;
+	// c = 1421;
+	// printf("%C\n", c);
+	// printf("%C\n", L'ʌ');
+	// ft_print_c(L'ʌ');
+	// ft_print_c(c);
+	printf("hello: %-10.5C\n", L'ʌ');
+
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:09:50 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/09 15:43:02 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/14 15:07:58 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int		ft_set_spec(char c, t_options *options)
 {
 	if (c == 'd' || c == 'i' || c == 'u' || c == 'o' || c == 'x' || \
-		c == 'X' || c == 'f' || c == 'c' || c == 's' || c == 'p')
+		c == 'X' || c == 'f' || c == 'c' || c == 's' || c == 'p' || \
+		c == 'C')
 	{
 		options->spec = c;
 		return (1);

@@ -6,13 +6,14 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/10 13:45:04 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/14 19:06:43 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 #include <limits.h>
+#include <locale.h>
 
 int     main(void)
 {
@@ -324,9 +325,46 @@ int     main(void)
 	len = ft_printf("customft42: %-#010.5x hello\n", d);
 	printf("len: %d\n", len);
 */
+
 	int		c = 100;
-	printf("%c\n", c);
-	ft_printf("%c\n", c);
+	int		len;
+
+	setlocale(LC_ALL, "");
+	len = printf("original: %10.5c world\n", c);
+	printf("len: %d\n", len);
+	len = ft_printf("customft: %10.5c world\n", c);
+	printf("len: %d\n", len);
+	len = printf("original: %10.5C world\n", c);
+	printf("len: %d\n", len);
+	len = ft_printf("customft: %10.5C world\n", c);
+	printf("len: %d\n", len);
+	c = 6512;
+	len = printf("original: %10.5C world\n", c);
+	printf("len: %d\n", len);
+	len = ft_printf("customft: %10.5C world\n", c);
+	printf("len: %d\n", len);
+	len = printf("original: %10.5C world\n", L'֍');
+	printf("len: %d\n", len);
+	len = ft_printf("customft: %10.5C world\n", L'֍');
+	printf("len: %d\n", len);
+	len = printf("original: %-10.5C world\n", L'֍');
+	printf("len: %d\n", len);
+	len = ft_printf("customft: %-10.5C world\n", L'֍');
+	printf("len: %d\n", len);
+
+/*
+	int		len;
+
+	setlocale(LC_ALL, "");
+	len = printf("original: %s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = ft_printf("customft: %s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = printf("original: %10.3s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = ft_printf("customft: %10.3s world\n", "hellO");
+	printf("len: %d\n", len);
+*/
 /*
 	int						d = 21;
 	printf("\n%%d\n");

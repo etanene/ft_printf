@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/09 17:33:48 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/14 15:55:56 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-
+# include <unistd.h>
 
 
 # include <stdio.h>
@@ -66,5 +66,7 @@ int				ft_sum_flags(char *flags);
 void			ft_printnum(unsigned long long int num, unsigned long long int base);
 void			ft_printnumX(unsigned long long int num, unsigned long long int base);
 void			ft_putchar(char c);
+int				ft_print_c(t_options options, int c);
+int				ft_print_s(t_options options, int *str);
 
 #endif

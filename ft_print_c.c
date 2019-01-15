@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 13:15:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/14 20:50:59 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/15 16:09:54 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,30 @@ int		ft_swap_bytes(int n)
 
 int		ft_convert_utf32_utf8(int utf32, char *p)
 {
-	if (utf32 <= 0x7F)
-	{
+	int		bytes;
+
+	bytes = 0;
+	if (utf32 <= 0x7F && ++bytes)
 		*p = utf32;
-		return (1);
-	}
-	else if (utf32 <= 0x7FF)
+	else if (utf32 <= 0x7FF && ++bytes)
 	{
 		*p = 0xC0 | (utf32 >> 6);
 		*(p + 1) = 0x80 | (utf32 & 0x3F);
-		return (2);
 	}
-	else if (utf32 <= 0xFFFF)
+	else if (utf32 <= 0xFFFF && ++bytes)
 	{
 		*p = 0xE0 | (utf32 >> 12);
 		*(p + 1) = 0x80 | ((utf32 >> 6) & 0x3F);
 		*(p + 2) = 0x80 | (utf32 & 0x3F);
-		return (3);
 	}
-	else if (utf32 <= 0x10FFFF)
+	else if (utf32 <= 0x10FFFF && ++bytes)
 	{
 		*p = 0xF0 | (utf32 >> 18);
 		*(p + 1) = 0x80 | ((utf32 >> 12) & 0x3F);
 		*(p + 2) = 0x80 | ((utf32 >> 6) & 0x3F);
 		*(p + 3) = 0x80 | (utf32 & 0x3F);
-		return (4);
 	}
-	return (0);
+	return (bytes);
 }
 
 void	ft_print_unicode(int num, int bytes)

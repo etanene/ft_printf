@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/14 15:48:14 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/15 16:16:53 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int			ft_handle_spec(t_options options, va_list ap)
 	int		len;
 
 	len = 0;
+	if (options.flags[F_WIDTH_STAR])
+		options.width = va_arg(ap, int);
+	if (options.flags[F_PREC_STAR])
+		options.prec = va_arg(ap, int);
 	if (options.spec == 'd' || options.spec == 'i')
 		len = ft_parse_num(options, va_arg(ap, long long int));
 	else if (options.spec == 'u' || options.spec == 'o' || options.spec == 'x' || options.spec == 'X')
@@ -34,7 +38,7 @@ t_options	ft_set_options(const char **format)
 	int			i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 7)
 		options.flags[i++] = 0;
 	options.width = 0;
 	options.prec = 0;

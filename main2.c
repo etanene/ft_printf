@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 20:42:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/14 14:58:45 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/15 20:37:02 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
 #include <locale.h>
 //#include "ft_printf.h"
 
-// void	ft_putchar(char c)
-// {
-// 	write(1, &c, 1);
-// }
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
-// int		ft_checkbit(int n, int pos)
-// {
-// 	return ((n & (1 << pos)) != 0);
-// }
+int		ft_checkbit(long n, int pos)
+{
+	return ((n & (1UL << pos)) != 0);
+}
 
-// void	ft_printbits(int n, int count)
-// {
-// 	while (count--)
-// 	{
-// 		ft_putchar(ft_checkbit(n, count) + '0');
-// 		if (!(count % 8) && count)
-// 			ft_putchar(' ');
-// 	}
-// }
+void	ft_printbits(long n, int count)
+{
+	while (count--)
+	{
+		ft_putchar(ft_checkbit(n, count) + '0');
+		if (!(count % 8) && count)
+			ft_putchar(' ');
+	}
+}
 
 // int		ft_check_endian(void)
 // {
@@ -125,7 +125,7 @@ int		main(void)
 	// short int	x = 1;
 
 	// printf("%s\n", *((char*)&x) == 0 ? "big-endian" : "little-endian");
-	setlocale(LC_ALL, "");
+	// setlocale(LC_ALL, "");
 	// ft_printbits(27, 8);
 	// ft_putchar('\n');
 	// c = 4036993206;
@@ -136,7 +136,12 @@ int		main(void)
 	// printf("%C\n", L'ʌ');
 	// ft_print_c(L'ʌ');
 	// ft_print_c(c);
-	printf("hello: %-10.5C\n", L'ʌ');
+	// printf("hello: %-10.5C\n", L'ʌ');
+	unsigned long r = 241241;
+	printf("size: %zu\n", sizeof(long long));
+	ft_printbits(r, 64);
+	
+	//printf("\nnum: %d\n", r);
 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:09:50 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/14 15:07:58 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/15 19:02:28 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void	ft_set_width(const char **format, t_options *options)
 	options->width = ft_atoi(*format);
 	if (options->width)
 		*format += ft_unumlen(options->width, 10);
+	else if (**format == '*')
+	{
+		options->flags[F_WIDTH_STAR] = 1;
+		(*format)++;
+	}
 }
 
 void	ft_set_prec(const char **format, t_options *options)
@@ -59,6 +64,18 @@ void	ft_set_prec(const char **format, t_options *options)
 		options->prec = ft_atoi(*format);
 		if (options->prec)
 			*format += ft_unumlen(options->prec, 10);
+		else if (**format == '*')
+		{
+			options->flags[F_PREC_STAR] = 1;
+			(*format)++;
+		}
+		else if (**format == '0')
+		{
+			options->prec = 0;
+			(*format)++;
+		}
+		else
+			options->prec = -1;
 	}
 }
 

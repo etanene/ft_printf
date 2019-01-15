@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/14 15:55:56 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/15 19:48:54 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@
 # define F_SP 2
 # define F_SHARP 3
 # define F_NULL 4
+# define F_WIDTH_STAR 5
+# define F_PREC_STAR 6
 
 # define MAX(a, b) (a > b ? a : b)
 
 typedef struct	s_options
 {
-	char		flags[5];
+	char		flags[7];
 	int			width;
 	int			prec;
 	int			length;
@@ -68,5 +70,10 @@ void			ft_printnumX(unsigned long long int num, unsigned long long int base);
 void			ft_putchar(char c);
 int				ft_print_c(t_options options, int c);
 int				ft_print_s(t_options options, int *str);
+void			ft_print_unicode(int num, int bytes);
+int				ft_convert_utf32_utf8(int utf32, char *p);
+void			ft_reset_options(t_options *options, int *len);
+int				ft_print_width(int width, int len, int c);
+int				ft_print_prec(int prec);
 
 #endif

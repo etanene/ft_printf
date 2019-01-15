@@ -6,7 +6,7 @@
 #    By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/28 19:13:21 by afalmer-          #+#    #+#              #
-#    Updated: 2019/01/14 15:56:08 by afalmer-         ###   ########.fr        #
+#    Updated: 2019/01/15 18:27:57 by afalmer-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,10 @@ NAME = libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror
 
-OBJ =	ft_printf.o ft_putchar.o ft_atoi.o ft_set_options.o ft_parse_nums.o \
-		ft_num_base.o ft_print_di.o ft_print_uoxX.o ft_print_c.o ft_print_s.o
+OBJ =	obj/ft_printf.o obj/ft_putchar.o obj/ft_atoi.o obj/ft_set_options.o \
+		obj/ft_parse_nums.o obj/ft_num_base.o obj/ft_print_di.o \
+		obj/ft_print_uoxX.o obj/ft_print_c.o obj/ft_print_s.o \
+		obj/ft_print_options.o
 
 HEADER = ft_printf.h
 
@@ -25,7 +27,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-%.o: %.c $(HEADER)
+obj/%.o: %.c $(HEADER)
 	gcc $(FLAGS) -c $< -o $@ -g
 
 ex: $(NAME)

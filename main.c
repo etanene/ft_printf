@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/14 19:06:43 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/15 17:20:56 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int     main(void)
 {
-/*
+
 	long int		ld = 3124141;
 	int				d = 2142;
 	long long int	lld = 234234242424242;
@@ -136,7 +136,7 @@ int     main(void)
 	printf("len: %d\n", len);
 	len = ft_printf("customft27: %-010.5d hello\n", d, d);
 	printf("len: %d\n\n", len);
-*/
+
 /*
 	long int		lu = 3124141;
 	int				u = 2142;
@@ -325,44 +325,64 @@ int     main(void)
 	len = ft_printf("customft42: %-#010.5x hello\n", d);
 	printf("len: %d\n", len);
 */
-
+/*
 	int		c = 100;
 	int		len;
 
 	setlocale(LC_ALL, "");
-	len = printf("original: %10.5c world\n", c);
+	len = printf("original43: %10.5c world\n", c);
 	printf("len: %d\n", len);
-	len = ft_printf("customft: %10.5c world\n", c);
+	len = ft_printf("customft43: %10.5c world\n", c);
 	printf("len: %d\n", len);
-	len = printf("original: %10.5C world\n", c);
+	len = printf("original44: %10.5C world\n", c);
 	printf("len: %d\n", len);
-	len = ft_printf("customft: %10.5C world\n", c);
+	len = ft_printf("customft44: %10.5C world\n", c);
+	printf("len: %d\n", len);
+	len = printf("original45: %-10.5C world\n", c);
+	printf("len: %d\n", len);
+	len = ft_printf("customft45: %-10.5C world\n", c);
 	printf("len: %d\n", len);
 	c = 6512;
-	len = printf("original: %10.5C world\n", c);
+	len = printf("original46: %10.5C world\n", c);
 	printf("len: %d\n", len);
-	len = ft_printf("customft: %10.5C world\n", c);
+	len = ft_printf("customft46: %10.5C world\n", c);
 	printf("len: %d\n", len);
-	len = printf("original: %10.5C world\n", L'֍');
+	len = printf("original47: %10.5C world\n", L'֍');
 	printf("len: %d\n", len);
-	len = ft_printf("customft: %10.5C world\n", L'֍');
+	len = ft_printf("customft47: %10.5C world\n", L'֍');
 	printf("len: %d\n", len);
-	len = printf("original: %-10.5C world\n", L'֍');
+	len = printf("original48: %-10.5C world\n", L'֍');
 	printf("len: %d\n", len);
-	len = ft_printf("customft: %-10.5C world\n", L'֍');
+	len = ft_printf("customft48: %-10.5C world\n", L'֍');
 	printf("len: %d\n", len);
-
+*/
 /*
 	int		len;
 
 	setlocale(LC_ALL, "");
-	len = printf("original: %s world\n", "hellO");
+	len = printf("original49: %s world\n", "hellO");
 	printf("len: %d\n", len);
-	len = ft_printf("customft: %s world\n", "hellO");
+	len = ft_printf("customft49: %s world\n", "hellO");
 	printf("len: %d\n", len);
-	len = printf("original: %10.3s world\n", "hellO");
+	len = printf("original50: %10.3s world\n", "hellO");
 	printf("len: %d\n", len);
-	len = ft_printf("customft: %10.3s world\n", "hellO");
+	len = ft_printf("customft50: %10.3s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = printf("original51: %10.0s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = ft_printf("customft51: %10.0s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = printf("original52: %0.3s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = ft_printf("customft52: %0.3s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = printf("original53: %.0s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = ft_printf("customft53: %.0s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = printf("original54: %0s world\n", "hellO");
+	printf("len: %d\n", len);
+	len = ft_printf("customft54: %0s world\n", "hellO");
 	printf("len: %d\n", len);
 */
 /*

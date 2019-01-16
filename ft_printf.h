@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/15 19:48:54 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/16 19:26:27 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				ft_atoi(const char *str);
 int				ft_unumlen(unsigned long long int num, int base);
 int				ft_handle_spec(t_options options, va_list ap);
 int				ft_parse_num(t_options options, long long int num);
-int				ft_parse_unum(t_options options, long long int num);
+int				ft_parse_unum(t_options options, long long num, int (*ft_print)(t_options, unsigned long long));
 int				ft_print_di(t_options options, long long int num);
 int				ft_print_uoxX(t_options options, unsigned long long int unum);
 int				ft_sum_flags(char *flags);
@@ -73,7 +73,10 @@ int				ft_print_s(t_options options, int *str);
 void			ft_print_unicode(int num, int bytes);
 int				ft_convert_utf32_utf8(int utf32, char *p);
 void			ft_reset_options(t_options *options, int *len);
-int				ft_print_width(int width, int len, int c);
+int				ft_print_width(int width, int c);
 int				ft_print_prec(int prec);
+int				ft_print_u(t_options opt, unsigned long long unum);
+int				ft_print_o(t_options opt, unsigned long long unum);
+int				ft_print_x(t_options opt, unsigned long long unum);
 
 #endif

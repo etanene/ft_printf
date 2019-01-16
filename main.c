@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/15 17:20:56 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/16 18:31:53 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int     main(void)
 {
-
+/*
 	long int		ld = 3124141;
 	int				d = 2142;
 	long long int	lld = 234234242424242;
@@ -136,7 +136,7 @@ int     main(void)
 	printf("len: %d\n", len);
 	len = ft_printf("customft27: %-010.5d hello\n", d, d);
 	printf("len: %d\n\n", len);
-
+*/
 /*
 	long int		lu = 3124141;
 	int				u = 2142;
@@ -257,9 +257,9 @@ int     main(void)
 	len = ft_printf("customft27: %-010.5u hello\n", u, u);
 	printf("len: %u\n\n", len);
 */
-/*
+
 	long int		lo = 3124141;
-	int				o = 2142;
+	int				d = 2142;
 	long long int	llo = 234234242424242;
 	int				len = 0;
 
@@ -292,6 +292,12 @@ int     main(void)
 	printf("len: %d\n", len);
 	len = ft_printf("customft34: % #010X hello\n", d);
 	printf("len: %d\n\n", len);
+	len = printf("original42: %-#010.5x hello\n", d);
+	printf("len: %d\n", len);
+	len = ft_printf("customft42: %-#010.5x hello\n", d);
+	printf("len: %d\n", len);
+
+/*
 	len = printf("original35: % #10.5o hello\n", d);
 	printf("len: %d\n", len);
 	len = ft_printf("customft35: % #10.5o hello\n", d);
@@ -320,10 +326,6 @@ int     main(void)
 	printf("len: %d\n", len);
 	len = ft_printf("customft41: %#10o hello\n", d);
 	printf("len: %d\n\n", len);
-	len = printf("original42: %-#010.5x hello\n", d);
-	printf("len: %d\n", len);
-	len = ft_printf("customft42: %-#010.5x hello\n", d);
-	printf("len: %d\n", len);
 */
 /*
 	int		c = 100;

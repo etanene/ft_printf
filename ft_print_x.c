@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_di.c                                      :+:      :+:    :+:   */
+/*   ft_print_x.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/09 15:20:23 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/16 17:34:32 by afalmer-         ###   ########.fr       */
+/*   Created: 2019/01/16 17:52:03 by afalmer-          #+#    #+#             */
+/*   Updated: 2019/01/16 19:12:05 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_print_di(t_options opt, long long int num)
+int		ft_print_x(t_options opt, unsigned long long unum)
 {
-	unsigned long long int	unum;
-	int						len;
+	int		len;
 
-	unum = num;
-	if (num < 0)
-	{
-		unum = -num;
-		opt.flags[F_PLUS] = 1;
-	}
-	len = ft_unumlen(unum, 10);
+	len = ft_unumlen(unum, 16);
 	ft_reset_options(&opt, &len);
-	if (opt.flags[F_SP])
-		ft_putchar(' ');
-	else if (opt.flags[F_PLUS] && (opt.flags[F_NULL] || opt.flags[F_MINUS]))
-		ft_putchar(num < 0 ? '-' : '+');
+	if (opt.flags[F_SHARP] && (opt.flags[F_MINUS] || opt.flags[F_NULL]))
+	{
+		ft_putchar('0');
+		ft_putchar(opt.spec);
+	}
 	if (opt.flags[F_NULL] && opt.prec < 0)
 		len += ft_print_width(opt.width, '0');
 	else if (!opt.flags[F_MINUS])
 		len += ft_print_width(opt.width, ' ');
-	if (opt.flags[F_PLUS] && !(opt.flags[F_NULL] || opt.flags[F_MINUS]))
-		ft_putchar(num < 0 ? '-' : '+');
+	if (opt.flags[F_SHARP] && !(opt.flags[F_MINUS] || opt.flags[F_NULL]))
+	{
+		ft_putchar('0');
+		ft_putchar(opt.spec);
+	}
 	len += ft_print_prec(opt.prec);
-	ft_printnum(unum, 10);
+	if (opt.spec == 'x')
+		ft_printnum(unum, 16);
+	else
+		ft_printnumX(unum, 16);
 	if (opt.flags[F_MINUS])
 		len += ft_print_width(opt.width, ' ');
 	return (len);

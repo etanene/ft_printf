@@ -6,11 +6,25 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 15:48:31 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/15 12:42:37 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:07:45 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int		ft_strlen_unicode(int *str)
+{
+	int		len;
+	int		utf;
+
+	len = 0;
+	utf = 0;
+	while (*str)
+	{
+		len += ft_convert_utf32_utf8(*str++, (char*)&utf);
+	}
+	return (len);
+}
 
 int		ft_print_s(t_options options, int *str)
 {
@@ -19,30 +33,29 @@ int		ft_print_s(t_options options, int *str)
 	int		bytes;
 	int		utf;
 
-	len = 0;
+	s = (char*)str;
 	bytes = 0;
 	utf = 0;
-	while (options.width - options.prec > len)
-	{
-		ft_putchar(' ');
-		len++;
-	}
+	len = 0;
+	printf("\nprec: %d\n", options.prec);
 	if (options.spec == 's')
 	{
-		s = (char*)str;
+		len = ft_strlen(s);
+		if (!options.flags[F_MINUS])
+			len += ft_print_width(options.width, ' ');
 		while (*s && options.prec--)
-		{
-			len++;
 			ft_putchar(*s++);
-		}
+		if (options.flags[F_MINUS])
+			len += ft_print_width(options.width, ' ');
 	}
 	else
 	{
-		while (*str)
-		{
-			bytes = ft_convert_utf32_utf8(*str++, (char*)&utf);
-			ft_print_unicode(utf, bytes);
-		}
+		bytes = ft_strlen_unicode(str);
+		if (!options.flags[F_MINUS])
+			len += ft_print_width(options.width, ' ');
+		write(1, (char*)str, bytes);
+		if (options.flags[F_MINUS])
+			len += ft_print_width(options.width, ' ');
 	}
-	return (len);
+	return (len + bytes);
 }

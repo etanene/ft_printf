@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/16 19:26:27 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/17 18:56:37 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ int				ft_print_prec(int prec);
 int				ft_print_u(t_options opt, unsigned long long unum);
 int				ft_print_o(t_options opt, unsigned long long unum);
 int				ft_print_x(t_options opt, unsigned long long unum);
+size_t			ft_strlen(const char *s);
 
 #endif

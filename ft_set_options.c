@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:09:50 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/15 19:02:28 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:24:36 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ft_set_spec(char c, t_options *options)
 {
 	if (c == 'd' || c == 'i' || c == 'u' || c == 'o' || c == 'x' || \
 		c == 'X' || c == 'f' || c == 'c' || c == 's' || c == 'p' || \
-		c == 'C')
+		c == 'C' || c == 'S')
 	{
 		options->spec = c;
 		return (1);
@@ -62,7 +62,7 @@ void	ft_set_prec(const char **format, t_options *options)
 	{
 		(*format)++;
 		options->prec = ft_atoi(*format);
-		if (options->prec)
+		if (options->prec > 0)
 			*format += ft_unumlen(options->prec, 10);
 		else if (**format == '*')
 		{
@@ -75,7 +75,10 @@ void	ft_set_prec(const char **format, t_options *options)
 			(*format)++;
 		}
 		else
+		{
+			printf("HELLO\n");
 			options->prec = -1;
+		}
 	}
 }
 

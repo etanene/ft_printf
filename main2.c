@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 20:42:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/18 15:37:32 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/19 18:05:39 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,27 @@
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
+}
+
+int		ft_checkbit_double(double n, int pos)
+{
+	unsigned long	*f;
+
+	f = (unsigned long*)&n;
+	return ((*f & (1UL << pos)) != 0);
+}
+
+void	ft_printbits_double(double n)
+{
+	int		count;
+
+	count = 64;
+	while (count--)
+	{
+		ft_putchar(ft_checkbit_double(n, count) + '0');
+		if ((count == 63 || count == 52 || (count < 52 && count % 8 == 0)) && count)
+			ft_putchar(' ');
+	}
 }
 
 int		ft_checkbit(long n, int pos)
@@ -142,14 +163,25 @@ int		main(void)
 	// ft_printbits(r, 64);
 	
 	//printf("\nnum: %d\n", r);
+	printf("f: %zu Lf: %zu\n", sizeof(double), sizeof(long double));
+	printf("f: %zu Lf: %zu\n", sizeof(21.21), sizeof(21.21L));
+	printf("ll: %zu\n", sizeof(long long));
 
-	size_t	bytes;
-	char 	buff[255];
+	double			f = -818.375;
+	unsigned long	*p;
+	int				exp;
+	double			inum;
 
-	while ((read(5, buff, 10)) > 0)
-	{
-		printf("HELLO\n");
-	}
-	printf("%zu\n", read(5, buff, 10));
+	p = (unsigned long*)&f;
+	ft_printbits_double(f);
+	ft_putchar('\n');
+	exp = ((*p >> 52) ^ 0x800);
+	inum = *p << 12;
+	ft_printbits_double(inum);
+	ft_putchar('\n');
+	inum >>= 63 - exp;
+	printf("num: %d", inum);
+	ft_printbits_double(f);
+	ft_putchar('\n');
 	return (0);
 }

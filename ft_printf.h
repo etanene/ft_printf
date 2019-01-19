@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/17 18:56:37 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:42:50 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			ft_printnum(unsigned long long int num, unsigned long long int base);
 void			ft_printnumX(unsigned long long int num, unsigned long long int base);
 void			ft_putchar(char c);
 int				ft_print_c(t_options options, int c);
-int				ft_print_s(t_options options, int *str);
+int				ft_print_s(t_options opt, int *str, int (*ft_len)(int*), void (*ft_print)(int*, int));
 void			ft_print_unicode(int num, int bytes);
 int				ft_convert_utf32_utf8(int utf32, char *p);
 void			ft_reset_options(t_options *options, int *len);
@@ -78,6 +78,9 @@ int				ft_print_prec(int prec);
 int				ft_print_u(t_options opt, unsigned long long unum);
 int				ft_print_o(t_options opt, unsigned long long unum);
 int				ft_print_x(t_options opt, unsigned long long unum);
-size_t			ft_strlen(const char *s);
+int				ft_strlen_unicode(int *str);
+int				ft_strlen_s(int *str);
+void			ft_puts(int *str, int prec);
+void			ft_puts_unicode(int *str, int prec);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 13:15:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/17 15:59:27 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:45:24 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ int		ft_print_c(t_options options, int c)
 	bytes = ft_convert_utf32_utf8(c, (char*)&utf);
 	if (!options.flags[F_MINUS])
 		len += ft_print_width(options.width - bytes, ' ');
-	if (options.spec == 'C')
-		ft_print_unicode(utf, bytes);
-	else
+	if (options.spec == 'c')
 		ft_putchar(c);
+	else
+		ft_print_unicode(utf, bytes);
 	if (options.flags[F_MINUS])
 		len += ft_print_width(options.width - bytes, ' ');
 	return (options.spec == 'C' ? len + bytes : len + 1);

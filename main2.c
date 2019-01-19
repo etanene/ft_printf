@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 20:42:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/15 20:37:02 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:37:32 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,11 +137,19 @@ int		main(void)
 	// ft_print_c(L'ʌ');
 	// ft_print_c(c);
 	// printf("hello: %-10.5C\n", L'ʌ');
-	unsigned long r = 241241;
-	printf("size: %zu\n", sizeof(long long));
-	ft_printbits(r, 64);
+	// unsigned long r = 241241;
+	// printf("size: %zu\n", sizeof(long long));
+	// ft_printbits(r, 64);
 	
 	//printf("\nnum: %d\n", r);
 
+	size_t	bytes;
+	char 	buff[255];
+
+	while ((read(5, buff, 10)) > 0)
+	{
+		printf("HELLO\n");
+	}
+	printf("%zu\n", read(5, buff, 10));
 	return (0);
 }

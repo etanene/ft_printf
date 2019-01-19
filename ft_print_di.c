@@ -6,11 +6,24 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:20:23 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/16 17:34:32 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/18 17:30:05 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_reset_options_di(t_options *opt, int *len, unsigned long long unum)
+{
+	*len = ft_unumlen(unum, 10);
+	if (opt->flags[F_PLUS])
+		opt->flags[F_SP] = 0;
+	if (opt->flags[F_PLUS] || opt->flags[F_SP])
+		*len += 1;
+	if (opt->flags[F_MINUS])
+		opt->flags[F_NULL] = 0;
+	opt->width -= MAX(*len, opt->prec);
+	opt->prec -= *len - (opt->flags[F_PLUS] || opt->flags[F_SP]);
+}
 
 int		ft_print_di(t_options opt, long long int num)
 {
@@ -23,8 +36,7 @@ int		ft_print_di(t_options opt, long long int num)
 		unum = -num;
 		opt.flags[F_PLUS] = 1;
 	}
-	len = ft_unumlen(unum, 10);
-	ft_reset_options(&opt, &len);
+	ft_reset_options_di(&opt, &len, unum);
 	if (opt.flags[F_SP])
 		ft_putchar(' ');
 	else if (opt.flags[F_PLUS] && (opt.flags[F_NULL] || opt.flags[F_MINUS]))

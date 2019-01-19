@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/17 19:06:45 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:52:55 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,8 +296,8 @@ int     main(void)
 	printf("len: %d\n", len);
 	len = ft_printf("customft42: %-#010.5x hello\n", d);
 	printf("len: %d\n", len);
-*/
-/*
+
+
 	len = printf("original35: % #10.5o hello\n", d);
 	printf("len: %d\n", len);
 	len = ft_printf("customft35: % #10.5o hello\n", d);

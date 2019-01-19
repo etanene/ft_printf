@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:09:50 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/17 19:24:36 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:48:18 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ void	ft_set_prec(const char **format, t_options *options)
 			(*format)++;
 		}
 		else
-		{
-			printf("HELLO\n");
 			options->prec = -1;
-		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/16 18:31:15 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:16:17 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int			ft_handle_spec(t_options options, va_list ap)
 		len = ft_parse_unum(options, va_arg(ap, long long int), ft_print_x);
 	else if (options.spec == 'c' || options.spec == 'C')
 		len = ft_print_c(options, va_arg(ap, int));
-	else if (options.spec == 's' || options.spec == 'S')
-		len = ft_print_s(options, va_arg(ap, int*));
+	else if (options.spec == 's')
+		len = ft_print_s(options, va_arg(ap, int*), ft_strlen_s, ft_puts);
+	else if (options.spec == 'S')
+		len = ft_print_s(options, va_arg(ap, int*), ft_strlen_unicode, ft_puts_unicode);
 	return (len);
 }
 
@@ -45,7 +47,7 @@ t_options	ft_set_options(const char **format)
 	while (i < 7)
 		options.flags[i++] = 0;
 	options.width = 0;
-	options.prec = 0;
+	options.prec = -1;
 	options.length = 0;
 	options.spec = 0;
 	while (**format)

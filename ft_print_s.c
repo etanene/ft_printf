@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 15:48:31 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/17 19:07:45 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:24:18 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,71 @@
 int		ft_strlen_unicode(int *str)
 {
 	int		len;
-	int		utf;
 
 	len = 0;
-	utf = 0;
 	while (*str)
 	{
-		len += ft_convert_utf32_utf8(*str++, (char*)&utf);
+		if (*str <= 0x7F)
+			len += 1;
+		else if (*str <= 0x7FF)
+			len += 2;
+		else if (*str <= 0xFFFF)
+			len += 3;
+		else if (*str <= 0x10FFFF)
+			len += 4;
+		str++;
 	}
 	return (len);
 }
 
-int		ft_print_s(t_options options, int *str)
+int		ft_strlen_s(int *str)
 {
-	int		len;
 	char	*s;
+	int		len;
+
+	s = (char*)str;
+	len = 0;
+	while (*s)
+	{
+		len++;
+		s++;
+	}
+	return (len);
+}
+
+void	ft_puts(int *str, int prec)
+{
+	char	*s;
+
+	s = (char*)str;
+	while (*s && prec--)
+		ft_putchar(*s++);
+}
+
+void	ft_puts_unicode(int *str, int prec)
+{
 	int		bytes;
 	int		utf;
 
-	s = (char*)str;
 	bytes = 0;
-	utf = 0;
-	len = 0;
-	printf("\nprec: %d\n", options.prec);
-	if (options.spec == 's')
+	while (*str && prec)
 	{
-		len = ft_strlen(s);
-		if (!options.flags[F_MINUS])
-			len += ft_print_width(options.width, ' ');
-		while (*s && options.prec--)
-			ft_putchar(*s++);
-		if (options.flags[F_MINUS])
-			len += ft_print_width(options.width, ' ');
+		bytes = ft_convert_utf32_utf8(*str++, (char*)&utf);
+		ft_print_unicode(utf, bytes);
+		prec -= bytes;
 	}
-	else
-	{
-		bytes = ft_strlen_unicode(str);
-		if (!options.flags[F_MINUS])
-			len += ft_print_width(options.width, ' ');
-		write(1, (char*)str, bytes);
-		if (options.flags[F_MINUS])
-			len += ft_print_width(options.width, ' ');
-	}
-	return (len + bytes);
+}
+
+int		ft_print_s(t_options opt, int *str, int (*ft_len)(int*), void (*ft_print)(int*, int))
+{
+	int		len;
+
+	len = opt.prec < 0 ? ft_len(str) : opt.prec;
+	opt.width = opt.prec < 0 ? opt.width : opt.width - opt.prec;
+	if (!opt.flags[F_MINUS])
+		len += ft_print_width(opt.width, ' ');
+	ft_print(str, opt.prec);
+	if (opt.flags[F_MINUS])
+		len += ft_print_width(opt.width, ' ');
+	return (len);
 }

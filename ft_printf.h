@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/18 19:42:50 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/22 16:47:27 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ int				ft_strlen_unicode(int *str);
 int				ft_strlen_s(int *str);
 void			ft_puts(int *str, int prec);
 void			ft_puts_unicode(int *str, int prec);
+int				ft_print_f(t_options opt, double num);
+int				ft_parse_fnum(t_options options, long double num);
 
 #endif

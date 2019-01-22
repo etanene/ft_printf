@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 20:42:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/21 20:36:52 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/22 21:12:43 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <unistd.h>
 #include <locale.h>
 #include <math.h>
+#include <fcntl.h>
+#include <float.h>
 //#include "ft_printf.h"
 
 void	ft_putchar(char c)
@@ -42,6 +44,8 @@ void	ft_printbits_double(double n)
 			ft_putchar(' ');
 	}
 }
+
+
 
 int		ft_checkbit(long n, int pos)
 {
@@ -177,9 +181,7 @@ double	ft_pow(int num, int pow)
 
 	res = 1;
 	while (pow--)
-	{
 		res *= num;
-	}
 	return (res);
 }
 
@@ -224,111 +226,27 @@ void	ft_print_f(double num)
 
 int		main(void)
 {
-	// int		c;
-	// char	s[2] = {194, 162};
-	// int		str[3] = {36817, 46790, 45773};
-	// short int	x = 1;
-
-	// printf("%s\n", *((char*)&x) == 0 ? "big-endian" : "little-endian");
-	// setlocale(LC_ALL, "");
-	// ft_printbits(-100, 8);
-	// ft_putchar('\n');
-	// c = 4036993206;
-	// c = 14788256;
-	// c = 51852;
-	// c = 1421;
-	// printf("%C\n", c);
-	// printf("%C\n", L'ʌ');
-	// ft_print_c(L'ʌ');
-	// ft_print_c(c);
-	// printf("hello: %-10.5C\n", L'ʌ');
-	// unsigned long r = 241241;
-	// printf("size: %zu\n", sizeof(long long));
-	// ft_printbits(r, 64);
-	
-	//printf("\nnum: %d\n", r);
-
-	// ssize_t byte;
-	// char buf[255];
-
-	// byte = read(43, buf, 10);
-	// printf("byte: %z", byte);
-
-	ft_print_f(-818.375);
-	// printf("f: %zu Lf: %zu\n", sizeof(double), sizeof(long double));
-	// printf("f: %zu Lf: %zu\n", sizeof(21.21), sizeof(21.21L));
-	// printf("ll: %zu\n", sizeof(long long));
-
-	// double			f = -818.375;
-	// unsigned long	*ip;
-	// unsigned long	*fp;
-	// int				exp;
-	// double			fres;
-	// double			ipart;
-	// double			fpart;
-	// int				order;
-	// unsigned long	temp;
-	// int				sign;
-
-
-	// ipart = f;
-	// fpart = f;
-	// ip = (unsigned long*)&ipart;
-	// fp = (unsigned long*)&fpart;
-	// ft_printbits(*fp, 64);
-	// ft_putchar('\n');
-	// ft_printbits(ft_reversebits(*fp), 64);
-	// ft_putchar('\n');
-	// ft_printbits(1UL, 64);
-	// ft_putchar('\n');
-	// sign = ft_reversebits(*fp) & 1UL;
-	// printf("sign: %d\n", sign);
-	// ft_printbits_double(ipart);
-	// ft_putchar('\n');
-	// exp = ((*ip >> 52) ^ 0x800) - 1023;
-	// printf("exp: %d\n", exp);
-	// *ip <<= 12;
-	// ft_printbits_double(ipart);
-	// ft_putchar('\n');
-	// *ip >>= 64 - exp;
-	// *ip |= 1UL << exp;
-	// ft_printbits_double(ipart);
-	// ft_putchar('\n');
-	// printf("ipart: %d\n\n", *ip);
-	
-	// *fp <<= 12 + exp;
-	// ft_printbits_double(fpart);
-	// ft_putchar('\n');
-	// ft_printbits(*fp, 64);
-	// ft_putchar('\n');
-	// *fp = ft_reversebits(*fp);
-	// // while (!ft_checkbit(*fp, 0))
-	// // {
-	// // 	*fp >>= 1;
-	// // }
-	// ft_printbits_double(fpart);
-	// ft_putchar('\n');
-	// printf("fpart: %d\n", *fp);
-	// order = 1;
-	// temp = *fp;
-	// while (*fp /= 2)
-	// {
-	// 	order++;
-	// }
-	// printf("order: %d\n", order);
-	// exp = order;
-	// while (order)
-	// {
-	// 	fres += (1 / (pow(2, order--))) * ft_checkbit(temp, order);
-	// }
-	// printf("fpart: %d\n", *fp);
-	// printf("fres: %f\n", fres);
-	// while (exp--)
-	// {
-	// 	fres *= 10;
-	// }
-	// printf("fres: %f\n", fres);
-	// temp = fres;
-	// printf("res: %d\n", temp);
-	// return (0);
+	long double lf = LDBL_MIN;
+	ft_printbits(*((unsigned long*)&lf + 1), 64);
+	ft_putchar(' ');
+	ft_printbits(*((unsigned long*)&lf), 64);
+	ft_putchar('\n');
+	lf = LDBL_MAX;
+	ft_printbits(*((unsigned long*)&lf + 1), 64);
+	ft_putchar(' ');
+	ft_printbits(*((unsigned long*)&lf), 64);
+	ft_putchar('\n');
+	lf = -5.5;
+	ft_printbits(*((unsigned long*)&lf + 1), 64);
+	ft_putchar(' ');
+	ft_printbits(*((unsigned long*)&lf), 64);
+	ft_putchar('\n');
+	lf = 5.5;
+	ft_printbits(*((unsigned long*)&lf + 1), 64);
+	ft_putchar(' ');
+	ft_printbits(*((unsigned long*)&lf), 64);
+	ft_putchar('\n');
+//	printf("lf: %Lf\nmax: %Lf\n", lf, LDBL_MAX);
+	printf("fe: %Lf\n", LDBL_MIN);
+	printf("fe: %Lf\n", LDBL_MAX);
 }

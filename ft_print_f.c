@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 12:21:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/23 21:34:17 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/24 20:22:40 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef union	u_fnum
 {
 	double				f;
 	unsigned long long	ll;
+	float				fl;
 }				t_fnum;
 
 int		ft_print_f(t_options opt, double num)
@@ -177,37 +178,29 @@ int		ft_print_f(t_options opt, double num)
 	unsigned long long	fpart;
 	int					exponent;
 	t_fnum				fnum;
-	int					prec;
 
-	opt.width = 1;
 	fnum.f = num;
-	printf("num: %lld\n", fnum.ll);
-	ft_printbits(fnum.ll, 64);
-	ft_putchar('\n');
 	exponent = ((fnum.ll >> 52) & 0x7FF) - 1023;
-	printf("exp: %d\n", exponent);
-	ft_printbits(exponent, 64);
-	ft_putchar('\n');
-	mantissa = (fnum.ll & 0xFFFFFFFFFFFFF) | 0x8000000000000;
-	printf("mantissa: %lld\n", mantissa);
-	ft_printbits(mantissa, 64);
-	ft_putchar('\n');
+	mantissa = (fnum.ll & 0x1FFFFFFFFFFFFF) | 0x10000000000000;
 	ipart = 0;
 	fpart = 0;
-	ipart = mantissa >> (52 - exponent);
-	printf("ipart: %lld\n", ipart);
-	ft_printbits(ipart, 64);
-	ft_putchar('\n');
-	fpart = (mantissa << (exponent + 1)) & 0xFFFFFFFFFFFFF;
-	printf("fpart: %lld\n", fpart);
-	ft_printbits(fpart, 64);
-	ft_putchar('\n');
-	prec = 6;
-	while (prec--)
+	if (exponent >= 52)
+		ipart = mantissa << (exponent - 23);
+	else if (exponent >= 0)
+	{
+		ipart = mantissa >> (52 - exponent);
+		fpart = (mantissa << (exponent + 1)) & 0x1FFFFFFFFFFFFF;
+	}
+	else
+		fpart = (mantissa & 0x1FFFFFFFFFFFFF) >> -(exponent + 1);
+	ft_printnum(ipart, 10);
+	ft_putchar('.');
+	opt.prec = 6;
+	while (opt.prec--)
 	{
 		fpart *= 10;
-		printf("%llu", fpart >> 53);
-		fpart &= 0xFFFFFFFFFFFFF;
+		ft_putchar((fpart >> 53) + '0');
+		fpart &= 0x1FFFFFFFFFFFFF;
 	}
 	return (1);
 }

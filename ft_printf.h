@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/22 16:47:27 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/25 19:30:26 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ typedef struct	s_options
 	char		spec;
 }				t_options;
 
+typedef union	u_fnum
+{
+	double				f;
+	unsigned long long	ll;
+}				t_fnum;
+
 int				ft_printf(const char *format, ...);
 t_options		ft_set_options(const char **format);
 void			ft_set_length(const char **format, t_options *options);
@@ -84,5 +90,6 @@ void			ft_puts(int *str, int prec);
 void			ft_puts_unicode(int *str, int prec);
 int				ft_print_f(t_options opt, double num);
 int				ft_parse_fnum(t_options options, long double num);
+void			ft_printnum_f(double num);
 
 #endif

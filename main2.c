@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 20:42:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/22 21:12:43 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/25 19:01:53 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,27 +226,35 @@ void	ft_print_f(double num)
 
 int		main(void)
 {
-	long double lf = LDBL_MIN;
-	ft_printbits(*((unsigned long*)&lf + 1), 64);
-	ft_putchar(' ');
-	ft_printbits(*((unsigned long*)&lf), 64);
-	ft_putchar('\n');
-	lf = LDBL_MAX;
-	ft_printbits(*((unsigned long*)&lf + 1), 64);
-	ft_putchar(' ');
-	ft_printbits(*((unsigned long*)&lf), 64);
-	ft_putchar('\n');
-	lf = -5.5;
-	ft_printbits(*((unsigned long*)&lf + 1), 64);
-	ft_putchar(' ');
-	ft_printbits(*((unsigned long*)&lf), 64);
-	ft_putchar('\n');
-	lf = 5.5;
-	ft_printbits(*((unsigned long*)&lf + 1), 64);
-	ft_putchar(' ');
-	ft_printbits(*((unsigned long*)&lf), 64);
-	ft_putchar('\n');
-//	printf("lf: %Lf\nmax: %Lf\n", lf, LDBL_MAX);
-	printf("fe: %Lf\n", LDBL_MIN);
-	printf("fe: %Lf\n", LDBL_MAX);
+	// double lf = -818.375;
+	// // ft_printbits(*((unsigned long*)&lf + 1), 64);
+	// // ft_putchar(' ');
+	// ft_printbits(*((unsigned long*)&lf), 64);
+	// ft_putchar('\n');
+	// lf = DBL_MAX;
+	// // ft_printbits(*((unsigned long*)&lf + 1), 64);
+	// // ft_putchar(' ');
+	// ft_printbits(*((unsigned long*)&lf), 64);
+	// ft_putchar('\n');
+	// lf = -5.5;
+	// // ft_printbits(*((unsigned long*)&lf + 1), 64);
+	// // ft_putchar(' ');
+	// ft_printbits(*((unsigned long*)&lf), 64);
+	// ft_putchar('\n');
+	// lf = 5.5;
+	// // ft_printbits(*((unsigned long*)&lf + 1), 64);
+	// // ft_putchar(' ');
+	// ft_printbits(*((unsigned long*)&lf), 64);
+	// ft_putchar('\n');
+	// printf("lf: %f\n", lf);
+	// printf("le: %e\n", lf);
+	// // printf("fe: %Lf\n", LDBL_MAX);
+	printf("f: %.3f\n", 818.37446742);
+	printf("f: % f\n", 818.375);
+	printf("f: %-f\n", -818.375);
+	printf("f: %f\n", -818.375);
+	printf("f: %0f\n", -818.375);
+	printf("f: %020f\n", -818.375);
+	printf("f: %20f\n", -818.375);
+	printf("f: %-20f dsafafa\n", -818.375);
 }

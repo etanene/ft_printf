@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 12:21:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/25 19:30:14 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:45:17 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int		ft_print_f(t_options opt, double num)
 	ipart = 0;
 	fpart = 0;
 	if (exponent >= 52)
+	{
+		// printf("HELLO\n");
 		ipart = mantissa << (exponent - 23);
+	}
 	else if (exponent >= 0)
 	{
 		ipart = mantissa >> (52 - exponent);

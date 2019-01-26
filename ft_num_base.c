@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:44:24 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/25 19:29:51 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/26 16:19:39 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,23 @@ void	ft_printnum_f(double num)
 	double	limit;
 	double	curr;
 
-	limit = 1;
-	while (num < limit)
+	limit = 1.0;
+	// printf("\nnum: %f\n", num);
+	// printf("limit: %f\n", limit);
+	while (num > limit)
 	{
-		limit *= 10;
+		// printf("limit: %f\n", limit);
+		limit *= 10.0;
 	}
-	while (limit)
+	// printf("limit: %f\n", limit / 10);
+	limit /= 10.0;
+	while (limit > 0.1)
 	{
-		curr = num / limit;
+		curr = (int)(num / limit);
+		// printf("curr: %f, num: %f, limit: %f\n", curr, num, limit);
 		ft_putchar(curr + '0');
 		num = num - limit * curr;
-		limit /= 10;
+		limit /= 10.0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 20:42:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/25 19:01:53 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/26 20:12:57 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,12 +249,12 @@ int		main(void)
 	// printf("lf: %f\n", lf);
 	// printf("le: %e\n", lf);
 	// // printf("fe: %Lf\n", LDBL_MAX);
-	printf("f: %.3f\n", 818.37446742);
-	printf("f: % f\n", 818.375);
-	printf("f: %-f\n", -818.375);
-	printf("f: %f\n", -818.375);
-	printf("f: %0f\n", -818.375);
-	printf("f: %020f\n", -818.375);
-	printf("f: %20f\n", -818.375);
-	printf("f: %-20f dsafafa\n", -818.375);
+	// printf("f: %.3f\n", 818.37446742);
+	// printf("f: % f\n", 818.375);
+	// printf("f: %-f\n", -818.375);
+	// printf("f: %f\n", -818.375);
+	// printf("f: %0f\n", -818.375);
+	// printf("f: %020f\n", -818.375);
+	// printf("f: %20f\n", -818.375);
+	// printf("f: %-20f dsafafa\n", -818.375);
 }

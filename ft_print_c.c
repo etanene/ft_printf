@@ -6,48 +6,11 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 13:15:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/18 19:45:24 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/29 13:38:56 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int		ft_check_endian(void)
-{
-	short int	x;
-
-	x = 1;
-	return (*((char*)&x) == 0 ? 0 : 1);
-}
-
-int		ft_swap_bytes(int n)
-{
-	int		count;
-	int		i;
-	int		res;
-	char	temp;
-	char	*p;
-
-	res = n;
-	p = (char*)&res;
-	i = 0;
-	count = 0;
-	while (i < 4)
-	{
-		if (*(p + i) != 0)
-			count++;
-		i++;
-	}
-	i = 0;
-	while (--count > i)
-	{
-		temp = *(p + count);
-		*(p + count) = *(p + i);
-		*(p + i) = temp;
-		i++;
-	}
-	return (res);
-}
 
 int		ft_convert_utf32_utf8(int utf32, char *p)
 {

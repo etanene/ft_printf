@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/27 17:45:32 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/29 20:09:41 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,44 @@
 # define F_WIDTH_STAR 5
 # define F_PREC_STAR 6
 
+#define COUNT_BITS 64
+#define MAX_POWER 15
+#define MAX_NUM 100000000000000UL
+#define MAX_INDEX 128
+
 # define MAX(a, b) (a > b ? a : b)
 
-typedef struct	s_options
+typedef struct			s_options
 {
-	char		flags[7];
-	int			width;
-	int			prec;
-	int			length;
-	char		spec;
-}				t_options;
+	char				flags[7];
+	int					width;
+	int					prec;
+	int					length;
+	char				spec;
+}						t_options;
 
-typedef union	u_fnum
+typedef union			u_fnum
 {
 	double				f;
 	unsigned long long	ll;
-}				t_fnum;
+}						t_fnum;
+
+typedef struct			s_fnum_div
+{
+	t_fnum				fnum;
+	char				sign;
+	int					exponent;
+	unsigned long long	mantissa;
+	unsigned long long	ipart;
+	unsigned long long	fpart;
+}						t_fnum_div;
+
+typedef struct			s_bigint
+{
+	unsigned long long	num[MAX_INDEX];
+	int					size;
+}						t_bigint;
+
 
 int				ft_printf(const char *format, ...);
 t_options		ft_set_options(const char **format);
@@ -88,8 +110,16 @@ int				ft_strlen_unicode(int *str);
 int				ft_strlen_s(int *str);
 void			ft_puts(int *str, int prec);
 void			ft_puts_unicode(int *str, int prec);
-int				ft_print_f(t_options opt, double num);
+int				ft_parse_f(t_options opt, double num);
 int				ft_parse_fnum(t_options options, long double num);
-void			ft_printnum_f(double num);
+int				ft_print_bigint(t_bigint *bigint);
+void			ft_bigint_sum_bigint(t_bigint *bigint1, t_bigint *bigint2);
+void			ft_bigint_multi_int(t_bigint *bigint, int num);
+int				ft_checkbit(long long n, int pos);
+void			ft_printbits(long long n, int count);
+unsigned long	ft_reversebits(unsigned long num);
+int				ft_check_endian(void);
+int				ft_swap_bytes(int n);
+unsigned long long	ft_pow(int num, int pow);
 
 #endif

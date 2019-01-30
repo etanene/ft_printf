@@ -6,31 +6,41 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 12:51:47 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/29 20:24:58 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/30 14:02:21 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_print_bigint(t_bigint *bigint)
+int		ft_numlen_bigint(t_bigint *bigint)
+{
+	int		len;
+	int		width;
+	int		i;
+
+	width = ft_unumlen(MAX_NUM, 10) - 1;
+	i = bigint->size - 1;
+	len = ft_unumlen(bigint->num[i], 10);
+	while (i--)
+		len += width;
+	return (len);
+}
+
+void	ft_print_bigint(t_bigint *bigint)
 {
 	int		i;
-	int		len;
 	int		width;
 	int		numlen;
 
 	width = ft_unumlen(MAX_NUM, 10) - 1;
 	i = bigint->size;
-	len = 0;
 	while (i--)
 	{
 		numlen = ft_unumlen(bigint->num[i], 10);
 		if (i != bigint->size - 1)
-		len += ft_print_width(width - numlen, '0');
-		len += numlen;
+			ft_print_width(width - numlen, '0');
 		ft_printnum(bigint->num[i], 10);
 	}
-	return (len);
 }
 
 void	ft_bigint_sum_int(unsigned long long *bigint, unsigned long long num, \

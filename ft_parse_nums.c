@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:31:04 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/29 14:20:27 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/30 14:36:47 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,5 @@ int		ft_parse_unum(t_options options, long long num, \
 		len = ft_print(options, (unsigned long int)num);
 	else if (options.length == LEN_LL)
 		len = ft_print(options, (unsigned long long int)num);
-	return (len);
-}
-
-int		ft_parse_fnum(t_options options, long double num)
-{
-	int		len;
-
-	len = 0;
-	if (options.length != LEN_LL)
-		len = ft_parse_f(options, (double)num);
-	// else
-	// 	len = ft_print_lf(options, (long double)num);
 	return (len);
 }

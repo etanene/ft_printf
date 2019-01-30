@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:09:50 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/25 14:08:05 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/30 15:11:41 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,15 @@ void	ft_set_length(const char **format, t_options *options)
 		}
 		else if (**format == 'h' && options->length != LEN_HH)
 			options->length = LEN_H;
-		else if ((**format == 'l' && *(*format + 1) == 'l') || **format == 'L')
+		else if (**format == 'l' && *(*format + 1) == 'l')
 		{
 			options->length = LEN_LL;
 			(*format)++;
 		}
 		else if (**format == 'l' && options->length != LEN_LL)
 			options->length = LEN_L;
+		else if (**format == 'L')
+			options->length = LEN_LL;
 		else
 			break;
 		(*format)++;

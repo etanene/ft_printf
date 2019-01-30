@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/29 20:09:41 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/30 17:49:04 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@
 # define F_PREC_STAR 6
 
 #define COUNT_BITS 64
+#define COUNT_BITS_LF 80
 #define MAX_POWER 15
 #define MAX_NUM 100000000000000UL
-#define MAX_INDEX 128
+#define MAX_INDEX 256
 
 # define MAX(a, b) (a > b ? a : b)
 
@@ -58,6 +59,7 @@ typedef struct			s_options
 typedef union			u_fnum
 {
 	double				f;
+	long double			lf;
 	unsigned long long	ll;
 }						t_fnum;
 
@@ -111,8 +113,9 @@ int				ft_strlen_s(int *str);
 void			ft_puts(int *str, int prec);
 void			ft_puts_unicode(int *str, int prec);
 int				ft_parse_f(t_options opt, double num);
+int				ft_parse_lf(t_options opt, long double num);
 int				ft_parse_fnum(t_options options, long double num);
-int				ft_print_bigint(t_bigint *bigint);
+void			ft_print_bigint(t_bigint *bigint);
 void			ft_bigint_sum_bigint(t_bigint *bigint1, t_bigint *bigint2);
 void			ft_bigint_multi_int(t_bigint *bigint, int num);
 int				ft_checkbit(long long n, int pos);
@@ -121,5 +124,6 @@ unsigned long	ft_reversebits(unsigned long num);
 int				ft_check_endian(void);
 int				ft_swap_bytes(int n);
 unsigned long long	ft_pow(int num, int pow);
+int				ft_numlen_bigint(t_bigint *bigint);
 
 #endif

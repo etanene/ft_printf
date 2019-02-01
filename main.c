@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/31 20:46:19 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/01 15:25:59 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,14 +458,14 @@ int     main(void)
 	// printf("len: %d\n", len);
 	// len = ft_printf("customft68: %lf world\n", 2131231144141.123456123);
 	// printf("len: %d\n", len);
-	len = printf("original69: %lf world\n", DBL_MAX);
-	printf("len: %d\n", len);
-	len = ft_printf("customft69: %lf world\n", DBL_MAX);
-	printf("len: %d\n", len);
-	len = printf("original70: %lf world\n", DBL_MIN);
-	printf("len: %d\n", len);
-	len = ft_printf("customft70: %lf world\n", DBL_MIN);
-	printf("len: %d\n", len);
+	// len = printf("original69: %lf world\n", DBL_MAX);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft69: %lf world\n", DBL_MAX);
+	// printf("len: %d\n", len);
+	// len = printf("original70: %lf world\n", DBL_MIN);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft70: %lf world\n", DBL_MIN);
+	// printf("len: %d\n", len);
 	// len = printf("original71: %Lf world\n", -818.375L);
 	// printf("len: %d\n", len);
 	// len = ft_printf("customft71: %Lf world\n", -818.375L);

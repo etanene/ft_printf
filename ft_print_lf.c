@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 16:35:23 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/31 20:51:10 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/01 16:20:50 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,36 @@
 
 int		ft_print_prec_lf(int prec, t_fnum_div fnum_div)
 {
-	int		len;
-	int		temp;
+	int			len;
+	t_bigint	fpart_bigint;
 
 	len = 0;
-	temp = 0;
-	prec = 20;
+	prec = 10;
 	ft_putchar('.');
-	fnum_div.fpart >>= (fnum_div.exponent + 1);
+	// printf("\nfpartdo: %llu\n", fnum_div.fpart);
+	// ft_printbits(fnum_div.fpart, 64);
+	// ft_putchar('\n');
+	// fnum_div.fpart >>= (fnum_div.exponent + 1);
+	// printf("\nfpartposle: %llu\n", fnum_div.fpart);
+	// ft_printbits(fnum_div.fpart, 64);
+	// ft_putchar('\n');
+	// while (prec--)
+	// {
+		// printf("\nfpart: %llu\n", fnum_div.fpart);
+		// ft_printbits(fnum_div.fpart, 64);
+		// ft_putchar('\n');
+		// fnum_div.fpart *= 10;
+		// printf("\nfpart*10: %llu\n", fnum_div.fpart);
+		// ft_printbits(fnum_div.fpart, 64);
+		// ft_putchar('\n');
+		// ft_putchar((fnum_div.fpart >> (63 - fnum_div.exponent)) + '0');
+		// fnum_div.fpart &= (~0UL >> (fnum_div.exponent + 1));
+		// len++;
+	// }
+	fpart_bigint = ft_get_bigint(fnum_div.fpart, 0);
 	while (prec--)
 	{
-		printf("\nfpart: %llu\n", fnum_div.fpart);
-		ft_printbits(fnum_div.fpart, 64);
-		ft_putchar('\n');
-		fnum_div.fpart *= 10;
-		ft_putchar((fnum_div.fpart >> (63 - fnum_div.exponent)) + '0');
-		fnum_div.fpart &= (~0UL >> (fnum_div.exponent + 1));
-		len++;
+		ft_bigint_multi_int(&fpart_bigint, 10);
 	}
 	return (len + 1);
 }
@@ -39,9 +52,6 @@ int		ft_parse_lf(t_options opt, long double num)
 {
 	t_fnum_div	fnum_div;
 	int			len;
-	int			powers[COUNT_BITS_LF];
-
-	powers[1] = 0;
 
 	len = 0;
 	fnum_div.fnum.lf = num;

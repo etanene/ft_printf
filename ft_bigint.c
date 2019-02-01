@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 12:51:47 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/30 14:02:21 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/01 21:07:36 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,19 @@ void	ft_bigint_multi_int(t_bigint *bigint, int num)
 		i++;
 		if (div && i == bigint->size)
 			bigint->size++;
+	}
+}
+
+void	ft_bigint_div_int(t_bigint *bigint, int num)
+{
+	int					i;
+	unsigned long long	temp;
+	unsigned long long	div;
+
+	div = 0;
+	i = bigint->size;
+	while (i)
+	{
+		temp = bigint->num[i] + div * ;
 	}
 }

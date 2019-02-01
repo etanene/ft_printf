@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/31 17:32:12 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/01 16:17:13 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ typedef struct			s_bigint
 	int					size;
 }						t_bigint;
 
-
 int				ft_printf(const char *format, ...);
 t_options		ft_set_options(const char **format);
 void			ft_set_length(const char **format, t_options *options);
@@ -126,5 +125,6 @@ int				ft_swap_bytes(int n);
 unsigned long long	ft_pow(int num, int pow);
 int				ft_numlen_bigint(t_bigint *bigint);
 int				ft_print_ipart_fpart(t_options opt, t_fnum_div fnum_div, int (*ft_print_prec)(int, t_fnum_div));
+t_bigint		ft_get_bigint(unsigned long long num, unsigned long long shift);
 
 #endif

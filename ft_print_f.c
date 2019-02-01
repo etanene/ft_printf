@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 12:21:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/31 17:32:40 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/01 21:08:03 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	ft_set_bigint(t_bigint *bigint, int power)
 		ft_bigint_multi_int(bigint, 1ULL << last_pow);
 }
 
-t_bigint	ft_get_bigint(unsigned long long mantissa, unsigned long long exp)
+t_bigint	ft_get_bigint(unsigned long long num, unsigned long long shift)
 {
 	t_bigint	res_bigint;
 	t_bigint	temp_bigint;
@@ -130,9 +130,9 @@ t_bigint	ft_get_bigint(unsigned long long mantissa, unsigned long long exp)
 	power = 0;
 	while (power < COUNT_BITS)
 	{
-		if (ft_checkbit(mantissa, power))
+		if (ft_checkbit(num, power))
 		{
-			ft_set_bigint(&temp_bigint, exp - 52 + power);
+			ft_set_bigint(&temp_bigint, shift + power);
 			ft_bigint_sum_bigint(&res_bigint, &temp_bigint);
 			ft_reset_bigint(&temp_bigint);
 		}
@@ -146,7 +146,7 @@ int		ft_print_ipart_bigint(t_options opt, t_fnum_div fnum_div)
 	int			len;
 	t_bigint	bigint;
 
-	bigint = ft_get_bigint(fnum_div.mantissa, fnum_div.exponent);
+	bigint = ft_get_bigint(fnum_div.mantissa, fnum_div.exponent - 52);
 	if (fnum_div.fnum.f < 0)
 		opt.flags[F_PLUS] = 1;
 	len = ft_numlen_bigint(&bigint);

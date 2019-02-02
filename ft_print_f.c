@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 12:21:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/01 21:08:03 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/02 22:28:47 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,10 @@ int		ft_print_ipart_bigint(t_options opt, t_fnum_div fnum_div)
 	int			len;
 	t_bigint	bigint;
 
-	bigint = ft_get_bigint(fnum_div.mantissa, fnum_div.exponent - 52);
-	if (fnum_div.fnum.f < 0)
+	bigint = ft_get_bigint(fnum_div.mantissa, fnum_div.exponent - 63);
+	if (opt.length != LEN_LL && fnum_div.fnum.f < 0)
+		opt.flags[F_PLUS] = 1;
+	else if (opt.length == LEN_LL && fnum_div.fnum.lf < 0)
 		opt.flags[F_PLUS] = 1;
 	len = ft_numlen_bigint(&bigint);
 	ft_reset_options_f(&opt, &len);

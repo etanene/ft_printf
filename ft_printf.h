@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/02 22:20:22 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/04 20:26:15 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ int					ft_print_prec(int prec);
 int					ft_print_u(t_options opt, unsigned long long unum);
 int					ft_print_o(t_options opt, unsigned long long unum);
 int					ft_print_x(t_options opt, unsigned long long unum);
+int					ft_print_b(t_options opt, unsigned long long unum);
 int					ft_strlen_unicode(int *str);
 int					ft_strlen_s(int *str);
 void				ft_puts(int *str, int prec);
 void				ft_puts_unicode(int *str, int prec);
-int					ft_parse_f(t_options opt, double num);
 int					ft_parse_lf(t_options opt, long double num);
 int					ft_parse_fnum(t_options options, long double num);
 void				ft_print_bigint(t_bigint *bigint);
@@ -130,6 +130,8 @@ t_bigint			ft_get_bigint(unsigned long long num, unsigned long long shift);
 void				ft_bigint_div_int(t_bigint *bigint, int num);
 long long			ft_bigint_compare(t_bigint *bigint1, t_bigint *bigint2);
 void				ft_bigint_minus_bigint(t_bigint *bigint1, t_bigint *bigint2);
-int					ft_print_ipart_bigint(t_options opt, t_fnum_div fnum_div);
+int					ft_print_ipart_bigint(t_options opt, t_fnum_div fnum_div, int shift);
+int					ft_print_p(t_options opt, void	*pointer);
+int					ft_parse_f(t_options opt, double num);
 
 #endif

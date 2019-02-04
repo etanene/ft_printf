@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 12:21:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/02 22:28:47 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/04 19:30:37 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int		ft_print_prec_f(int prec, t_fnum_div fnum_div)
 	int		len;
 
 	len = 0;
-	ft_putchar('.');
 	while (prec--)
 	{
 		fnum_div.fpart *= 10;
@@ -44,7 +43,7 @@ int		ft_print_prec_f(int prec, t_fnum_div fnum_div)
 	return (len + 1);
 }
 
-int		ft_print_pref_double(t_options opt, double num)
+int		ft_print_pref_double(t_options opt, char sign)
 {
 	int len;
 
@@ -52,13 +51,13 @@ int		ft_print_pref_double(t_options opt, double num)
 	if (opt.flags[F_SP])
 		ft_putchar(' ');
 	else if (opt.flags[F_PLUS] && (opt.flags[F_NULL] || opt.flags[F_MINUS]))
-		ft_putchar(num < 0 ? '-' : '+');       
+		ft_putchar(sign ? '-' : '+');       
 	if (opt.flags[F_NULL])
 		len += ft_print_width(opt.width, '0');
 	else if (!opt.flags[F_MINUS])
 		len += ft_print_width(opt.width, ' ');
 	if (opt.flags[F_PLUS] && !(opt.flags[F_NULL] || opt.flags[F_MINUS]))
-		ft_putchar(num < 0 ? '-' : '+');
+		ft_putchar(sign ? '-' : '+');
 	return (len);
 }
 
@@ -67,16 +66,17 @@ int		ft_print_ipart_fpart(t_options opt, t_fnum_div fnum_div,
 {
 	int		len;
 
-	if (opt.length != LEN_LL && fnum_div.fnum.f < 0)
-		opt.flags[F_PLUS] = 1;
-	else if (opt.length == LEN_LL && fnum_div.fnum.lf < 0)
+	if (fnum_div.sign)
 		opt.flags[F_PLUS] = 1;
 	len = ft_unumlen(fnum_div.ipart, 10);
 	ft_reset_options_f(&opt, &len);
-	len += ft_print_pref_double(opt, fnum_div.fnum.f);
+	len += ft_print_pref_double(opt, fnum_div.sign);
 	ft_printnum(fnum_div.ipart, 10);
 	if (opt.prec)
+	{
+		ft_putchar('.');
 		len += ft_print_prec(opt.prec, fnum_div);
+	}
 	if (opt.flags[F_MINUS])
 		len += ft_print_width(opt.width, ' ');
 	return (len);
@@ -141,22 +141,23 @@ t_bigint	ft_get_bigint(unsigned long long num, unsigned long long shift)
 	return (res_bigint);
 }
 
-int		ft_print_ipart_bigint(t_options opt, t_fnum_div fnum_div)
+int		ft_print_ipart_bigint(t_options opt, t_fnum_div fnum_div, int shift)
 {
 	int			len;
 	t_bigint	bigint;
 
-	bigint = ft_get_bigint(fnum_div.mantissa, fnum_div.exponent - 63);
-	if (opt.length != LEN_LL && fnum_div.fnum.f < 0)
-		opt.flags[F_PLUS] = 1;
-	else if (opt.length == LEN_LL && fnum_div.fnum.lf < 0)
+	bigint = ft_get_bigint(fnum_div.mantissa, fnum_div.exponent - shift);
+	if (fnum_div.sign)
 		opt.flags[F_PLUS] = 1;
 	len = ft_numlen_bigint(&bigint);
 	ft_reset_options_f(&opt, &len);
 	len += ft_print_pref_double(opt, fnum_div.fnum.f);
 	ft_print_bigint(&bigint);
 	if (opt.prec)
+	{
+		ft_putchar('.');
 		len += ft_print_prec_f(opt.prec, fnum_div);
+	}
 	if (opt.flags[F_MINUS])
 		len += ft_print_width(opt.width, ' ');
 	return (len);
@@ -168,13 +169,14 @@ int		ft_parse_f(t_options opt, double num)
 	int			len;
 
 	fnum_div.fnum.f = num;
+	fnum_div.sign = ft_checkbit(fnum_div.fnum.ll, 63);
 	fnum_div.exponent = ((fnum_div.fnum.ll >> 52) & 0x7FF) - 1023;
 	fnum_div.mantissa = (fnum_div.fnum.ll & 0x1FFFFFFFFFFFFF) | 0x10000000000000;
 	fnum_div.ipart = 0;
 	fnum_div.fpart = 0;
 	len = 0;
 	if (fnum_div.exponent >= 52)
-		len = ft_print_ipart_bigint(opt, fnum_div);
+		len = ft_print_ipart_bigint(opt, fnum_div, 52);
 	else if (fnum_div.exponent >= 0)
 	{
 		fnum_div.ipart = fnum_div.mantissa >> (52 - fnum_div.exponent);

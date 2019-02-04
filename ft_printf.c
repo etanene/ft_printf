@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/30 15:11:48 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/04 20:25:30 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int			ft_handle_spec(t_options options, va_list ap)
 		len = ft_parse_lf(options, va_arg(ap, long double));
 	else if (options.spec == 'f')
 		len = ft_parse_f(options, va_arg(ap, double));
+	else if (options.spec == 'p')
+		len = ft_print_p(options, va_arg(ap, void*));
+	else if (options.spec == 'b')
+		len = ft_parse_unum(options, va_arg(ap, long long int), ft_print_b);
 	return (len);
 }
 
@@ -54,15 +58,15 @@ t_options	ft_set_options(const char **format)
 	options.prec = -1;
 	options.length = 0;
 	options.spec = 0;
-	while (**format)
-	{
-		if (ft_set_spec(**format, &options))
-			break;
+	// while (**format)
+	// {
 		ft_set_flags(format, &options);
 		ft_set_width(format, &options);
 		ft_set_prec(format, &options);
 		ft_set_length(format, &options);
-	}
+		ft_set_spec(**format, &options);
+	// 		break;
+	// }
 	return (options);
 }
 
@@ -76,7 +80,7 @@ int			ft_printf(const char *format, ...)
 	len = 0;
 	while (*format)
 	{
-		if (*format == '%')
+		if (*format == '%' && *(format + 1) != '%')
 		{
 			format++;
 			options = ft_set_options(&format);
@@ -84,6 +88,8 @@ int			ft_printf(const char *format, ...)
 		}
 		else
 		{
+			if (*format == '%')
+				format++;
 			ft_putchar(*format);
 			len++;
 		}

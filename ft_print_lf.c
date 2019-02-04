@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 16:35:23 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/02 22:19:20 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/04 19:28:53 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int		ft_print_prec_lf(int prec, t_fnum_div fnum_div)
 	t_bigint	temp_bigint;
 
 	len = 0;
-	ft_putchar('.');
 	fpart_bigint = ft_get_bigint(fnum_div.fpart, 0);
 	while (prec--)
 	{
@@ -76,24 +75,23 @@ int		ft_parse_lf(t_options opt, long double num)
 
 	len = 0;
 	fnum_div.fnum.lf = num;
+	fnum_div.sign = ft_checkbit(*(&fnum_div.fnum.ll + 1), 15);
 	fnum_div.exponent = (*(&fnum_div.fnum.ll + 1) & 0x7FFF) - 16383;
 	fnum_div.mantissa = fnum_div.fnum.ll;
 	fnum_div.ipart = 0;
 	fnum_div.fpart = 0;
 	if (fnum_div.exponent >= 64)
-	{
-		len = ft_print_ipart_bigint(opt, fnum_div);
-	}
+		len = ft_print_ipart_bigint(opt, fnum_div, 63);
 	else if (fnum_div.exponent >= 0)
 	{
 		fnum_div.ipart = fnum_div.mantissa >> (63 - fnum_div.exponent);
 		fnum_div.fpart = fnum_div.mantissa << (fnum_div.exponent + 1);
 		len = ft_print_ipart_fpart(opt, fnum_div, ft_print_prec_lf);
 	}
-	// else if (fnum_div.exponent == 0)
-	// {
-
-	// }
-	
+	else
+	{
+		fnum_div.fpart = fnum_div.mantissa >> -(fnum_div.exponent + 1);
+		len = ft_print_ipart_fpart(opt, fnum_div, ft_print_prec_lf);
+	}
 	return (len);
 }

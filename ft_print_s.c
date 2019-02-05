@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 15:48:31 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/18 19:24:18 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:21:35 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,16 @@ int		ft_print_s(t_options opt, int *str, int (*ft_len)(int*), void (*ft_print)(i
 {
 	int		len;
 
-	len = opt.prec < 0 ? ft_len(str) : opt.prec;
-	opt.width = opt.prec < 0 ? opt.width : opt.width - opt.prec;
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	if ((len = ft_len(str)))
+	{
+		len = opt.prec < 0 ? len : opt.prec;
+		opt.width = opt.prec < 0 ? opt.width - len : opt.width - opt.prec;
+	}
 	if (!opt.flags[F_MINUS])
 		len += ft_print_width(opt.width, ' ');
 	ft_print(str, opt.prec);

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:09:50 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/04 20:50:37 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:00:41 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int		ft_set_spec(char c, t_options *options)
 {
 	if (c == 'd' || c == 'i' || c == 'u' || c == 'o' || c == 'x' || \
 		c == 'X' || c == 'f' || c == 'c' || c == 's' || c == 'p' || \
-		c == 'C' || c == 'S' || c == 'b')
+		c == 'C' || c == 'S' || c == 'b' || c == 'k' || c == 'r' || \
+		c == '%')
 	{
 		options->spec = c;
 		return (1);
@@ -69,14 +70,14 @@ void	ft_set_prec(const char **format, t_options *options)
 			options->flags[F_PREC_STAR] = 1;
 			(*format)++;
 		}
-		else if (**format == '0')
+		else
 		{
 			options->prec = 0;
-			(*format)++;
+			if (**format == '0')
+				(*format)++;
 		}
-		else
-			options->prec = -1;
 	}
+
 }
 
 void	ft_set_length(const char **format, t_options *options)
@@ -99,6 +100,12 @@ void	ft_set_length(const char **format, t_options *options)
 			options->length = LEN_L;
 		else if (**format == 'L')
 			options->length = LEN_LL;
+		else if (**format == 't')
+			options->length = LEN_TIME;
+		else if (**format == 'z')
+			options->length = LEN_Z;
+		else if (**format == 'j')
+			options->length = LEN_J;
 		else
 			break;
 		(*format)++;

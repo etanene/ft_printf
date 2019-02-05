@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 13:15:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/29 13:38:56 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:29:02 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_convert_utf32_utf8(int utf32, char *p)
 		*(p + 2) = 0x80 | ((utf32 >> 6) & 0x3F);
 		*(p + 3) = 0x80 | (utf32 & 0x3F);
 	}
-	return (*((int*)p) == 0 ? 0 : bytes);
+	return (*((int*)p) == 0 ? 1 : bytes);
 }
 
 void	ft_print_unicode(int num, int bytes)

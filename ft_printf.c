@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/04 20:25:30 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:30:11 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ int			ft_handle_spec(t_options options, va_list ap)
 		len = ft_print_p(options, va_arg(ap, void*));
 	else if (options.spec == 'b')
 		len = ft_parse_unum(options, va_arg(ap, long long int), ft_print_b);
+	else if (options.spec == 'k')
+		len = ft_print_k(options, va_arg(ap, unsigned long long));
+	else if (options.spec == 'r')
+		len = ft_print_r(options, va_arg(ap , char*));
+	else if (options.spec == '%')
+		len = ft_print_perc(options, '%');
 	return (len);
 }
 
@@ -80,7 +86,7 @@ int			ft_printf(const char *format, ...)
 	len = 0;
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) != '%')
+		if (*format == '%')
 		{
 			format++;
 			options = ft_set_options(&format);
@@ -88,8 +94,6 @@ int			ft_printf(const char *format, ...)
 		}
 		else
 		{
-			if (*format == '%')
-				format++;
 			ft_putchar(*format);
 			len++;
 		}

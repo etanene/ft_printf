@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/04 20:26:15 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/05 16:41:53 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <float.h>
+# include <stdlib.h>
 
 
 
@@ -31,6 +32,9 @@
 # define LEN_H 2
 # define LEN_L 4
 # define LEN_LL 8
+# define LEN_J 16
+# define LEN_Z 32
+# define LEN_TIME 64
 
 # define F_MINUS 0
 # define F_PLUS 1
@@ -133,5 +137,9 @@ void				ft_bigint_minus_bigint(t_bigint *bigint1, t_bigint *bigint2);
 int					ft_print_ipart_bigint(t_options opt, t_fnum_div fnum_div, int shift);
 int					ft_print_p(t_options opt, void	*pointer);
 int					ft_parse_f(t_options opt, double num);
+char				*ft_itoa(unsigned long long n);
+int					ft_print_k(t_options opt, unsigned long long unum);
+int					ft_print_r(t_options opt, char *str);
+int					ft_print_perc(t_options opt, char c);
 
 #endif

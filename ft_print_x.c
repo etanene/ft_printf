@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 17:52:03 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/18 19:50:27 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:02:28 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 void	ft_reset_options_x(t_options *opt, int *len, unsigned long long unum)
 {
 	*len = ft_unumlen(unum, 16);
+	if (!unum)
+	{
+		opt->flags[F_SHARP] = 0;
+		if (!opt->prec)
+			*len -= 1;
+	}
 	if (opt->flags[F_SHARP])
 		opt->width -= 2;
 	if (opt->flags[F_MINUS])
 		opt->flags[F_NULL] = 0;
 	opt->width -= MAX(*len, opt->prec);
-	opt->prec -= *len;
+	if (unum)
+		opt->prec -= *len;
 	if (opt->flags[F_SHARP])
 		*len += 2;
 }
@@ -45,9 +52,9 @@ int		ft_print_x(t_options opt, unsigned long long unum)
 		ft_putchar(opt.spec);
 	}
 	len += ft_print_prec(opt.prec);
-	if (opt.spec == 'x')
+	if (opt.spec == 'x' && opt.prec)
 		ft_printnum(unum, 16);
-	else
+	else if (opt.prec)
 		ft_printnumX(unum, 16);
 	if (opt.flags[F_MINUS])
 		len += ft_print_width(opt.width, ' ');

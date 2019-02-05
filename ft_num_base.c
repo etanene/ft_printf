@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:44:24 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/29 14:19:38 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/05 16:05:20 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_printnumX(unsigned long long int num, unsigned long long int base)
 	char	*strX = "0123456789ABCDEF";
 
 	if (num >= base)
-		ft_printnum(num / base, base);
+		ft_printnumX(num / base, base);
 	ft_putchar(strX[num % base]);
 }
 

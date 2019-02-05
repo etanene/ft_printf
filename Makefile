@@ -6,7 +6,7 @@
 #    By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/28 19:13:21 by afalmer-          #+#    #+#              #
-#    Updated: 2019/02/04 20:49:06 by afalmer-         ###   ########.fr        #
+#    Updated: 2019/02/05 15:38:54 by afalmer-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ OBJ =	obj/ft_printf.o obj/ft_putchar.o obj/ft_atoi.o obj/ft_set_options.o \
 		obj/ft_print_c.o obj/ft_print_s.o \
 		obj/ft_print_options.o obj/ft_print_u.o obj/ft_print_o.o \
 		obj/ft_print_x.o obj/ft_print_f.o obj/ft_bigint.o obj/ft_bits.o \
-		obj/ft_print_lf.o obj/ft_print_p.o obj/ft_print_b.o
+		obj/ft_print_lf.o obj/ft_print_p.o obj/ft_print_b.o obj/ft_itoa.o \
+		obj/ft_print_k.o obj/ft_print_r.o obj/ft_print_perc.o
 
 HEADER = ft_printf.h
 

@@ -6,14 +6,21 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 16:51:45 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/18 17:32:23 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:50:23 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_reset_options_o(t_options *opt, int *len)
+void	ft_reset_options_o(t_options *opt, int *len, unsigned long long unum)
 {
+	*len = ft_unumlen(unum, 8);
+	if (!unum)
+	{
+		opt->flags[F_SHARP] = 0;
+		// if (!opt->prec)
+		// 	*len -= 1;
+	}
 	if (opt->flags[F_SHARP])
 		*len += 1;
 	if (opt->flags[F_MINUS])
@@ -26,8 +33,7 @@ int		ft_print_o(t_options opt, unsigned long long unum)
 {
 	int		len;
 
-	len = ft_unumlen(unum, 8);
-	ft_reset_options_o(&opt, &len);
+	ft_reset_options_o(&opt, &len, unum);
 	if (opt.flags[F_SHARP] && (opt.flags[F_MINUS] || opt.flags[F_NULL]))
 		ft_putchar('0');
 	if (opt.flags[F_NULL] && opt.prec < 0)
@@ -37,7 +43,8 @@ int		ft_print_o(t_options opt, unsigned long long unum)
 	if (opt.flags[F_SHARP] && !(opt.flags[F_MINUS] || opt.flags[F_NULL]))
 		ft_putchar('0');
 	len += ft_print_prec(opt.prec);
-	ft_printnum(unum, 8);
+	// if (opt.prec)
+		ft_printnum(unum, 8);
 	if (opt.flags[F_MINUS])
 		len += ft_print_width(opt.width, ' ');
 	return (len);

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:31:04 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/05 16:46:33 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/06 13:32:57 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int		ft_parse_num(t_options options, long long num)
 		len = ft_print_di(options, (long long int)num);
 	else if (options.length == LEN_J)
 		len = ft_print_di(options, (intmax_t)num);
+	else if (options.length == LEN_Z)
+		len = ft_print_di(options, (ssize_t)num);
 	return (len);
 }
 
@@ -38,7 +40,9 @@ int		ft_parse_unum(t_options options, long long num, \
 	int		len;
 
 	len = 0;
-	if (options.length == 0)
+	if (options.spec == 'U')
+		len = ft_print(options, (unsigned long int)num);
+	else if (options.length == 0)
 		len = ft_print(options, (unsigned int)num);
 	else if (options.length == LEN_HH)
 		len = ft_print(options, (unsigned char)num);

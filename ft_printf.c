@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/05 15:30:11 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:52:55 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			ft_handle_spec(t_options options, va_list ap)
 		options.prec = va_arg(ap, int);
 	if (options.spec == 'd' || options.spec == 'i')
 		len = ft_parse_num(options, va_arg(ap, long long int));
-	else if (options.spec == 'u')
+	else if (options.spec == 'u' || options.spec == 'U')
 		len = ft_parse_unum(options, va_arg(ap, long long int), ft_print_u);
 	else if (options.spec == 'o')
 		len = ft_parse_unum(options, va_arg(ap, long long int), ft_print_o);
@@ -49,6 +49,11 @@ int			ft_handle_spec(t_options options, va_list ap)
 		len = ft_print_r(options, va_arg(ap , char*));
 	else if (options.spec == '%')
 		len = ft_print_perc(options, '%');
+	else if (options.spec)
+	{
+		ft_putchar(options.spec);
+		len++;
+	}
 	return (len);
 }
 
@@ -56,6 +61,7 @@ t_options	ft_set_options(const char **format)
 {
 	t_options	options;
 	int			i;
+	char		temp;
 
 	i = 0;
 	while (i < 7)
@@ -64,15 +70,20 @@ t_options	ft_set_options(const char **format)
 	options.prec = -1;
 	options.length = 0;
 	options.spec = 0;
-	// while (**format)
-	// {
+	while (**format)
+	{
+		temp = **format;
 		ft_set_flags(format, &options);
 		ft_set_width(format, &options);
 		ft_set_prec(format, &options);
 		ft_set_length(format, &options);
-		ft_set_spec(**format, &options);
-	// 		break;
-	// }
+		if (ft_set_spec(**format, &options))
+			break;
+		if (temp == **format)
+			break;
+		// if (**format)
+		// 	(*format)++;
+	}
 	return (options);
 }
 
@@ -97,7 +108,8 @@ int			ft_printf(const char *format, ...)
 			ft_putchar(*format);
 			len++;
 		}
-		format++;
+		if (*format)
+			format++;
 	}
 	va_end(ap);
 	return (len);

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/05 19:05:05 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/06 20:33:47 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -504,23 +504,42 @@ int     main(void)
 	// printf("len: %d\n", len);
 
 	int		len;
-	len = printf("original82: %#x world\n", 0);
+	// len = printf("original82: %#x world\n", 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft82: %#x world\n", 0);
+	// printf("len: %d\n", len);
+	// len = printf("original83: %#.x %#.0x world\n", 0, 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft83: %#.x %#.0x world\n", 0, 0);
+	// printf("len: %d\n", len);
+	// len = printf("original84: %#.x %#.0x world\n", 21, 21);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft84: %#.x %#.0x world\n", 21, 21);
+	// printf("len: %d\n", len);
+	// len = printf("original85: %#5.x %#5.0x world\n", 0, 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft85: %#5.x %#5.0x world\n", 0, 0);
+	// printf("len: %d\n", len);
+	// len = printf("original86: % hZ");
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft86: % hZ");
+	// printf("len: %d\n", len);
+	// len = printf("original87: %Y");
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft87: %Y");
+	// printf("len: %d\n", len);
+	// len = printf("original88: %ll#x", 9223372036854775807);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft88: %ll#x", 9223372036854775807);
+	// printf("len: %d\n", len);
+	// len = printf("original86: {%}");
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft86: {%}");
+	// printf("len: %d\n", len);
+	len = printf("original87: %ll#x", 9223372036854775807);
 	printf("len: %d\n", len);
-	len = ft_printf("customft82: %#x world\n", 0);
+	len = ft_printf("customft87: %ll#x", 9223372036854775807);
 	printf("len: %d\n", len);
-	len = printf("original83: %#.x %#.0x world\n", 0, 0);
-	printf("len: %d\n", len);
-	len = ft_printf("customft83: %#.x %#.0x world\n", 0, 0);
-	printf("len: %d\n", len);
-	len = printf("original84: %#.x %#.0x world\n", 21, 21);
-	printf("len: %d\n", len);
-	len = ft_printf("customft84: %#.x %#.0x world\n", 21, 21);
-	printf("len: %d\n", len);
-	len = printf("original85: %#5.x %#5.0x world\n", 0, 0);
-	printf("len: %d\n", len);
-	len = ft_printf("customft85: %#5.x %#5.0x world\n", 0, 0);
-	printf("len: %d\n", len);
-	
 
 	//int		len;
 	// int		num;

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:09:50 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/05 19:00:41 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/06 20:27:57 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 int		ft_set_spec(char c, t_options *options)
 {
-	if (c == 'd' || c == 'i' || c == 'u' || c == 'o' || c == 'x' || \
-		c == 'X' || c == 'f' || c == 'c' || c == 's' || c == 'p' || \
-		c == 'C' || c == 'S' || c == 'b' || c == 'k' || c == 'r' || \
-		c == '%')
+	char	*nospec;
+
+	nospec = "-+ #0*.hlLtzj";
+	options->spec = 0;
+	if ((c >= 0 && c <= 127))
 	{
+		while (*nospec)
+		{
+			if (c == *nospec)
+				return (0);
+			nospec++;
+		}
 		options->spec = c;
 		return (1);
 	}

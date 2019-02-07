@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/06 17:52:55 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:55:32 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ int			ft_handle_spec(t_options options, va_list ap)
 		options.width = va_arg(ap, int);
 	if (options.flags[F_PREC_STAR])
 		options.prec = va_arg(ap, int);
-	if (options.spec == 'd' || options.spec == 'i')
+	if (options.spec == 'd' || options.spec == 'i' || options.spec == 'D')
 		len = ft_parse_num(options, va_arg(ap, long long int));
 	else if (options.spec == 'u' || options.spec == 'U')
 		len = ft_parse_unum(options, va_arg(ap, long long int), ft_print_u);
-	else if (options.spec == 'o')
+	else if (options.spec == 'o' || options.spec == 'O')
 		len = ft_parse_unum(options, va_arg(ap, long long int), ft_print_o);
 	else if (options.spec == 'x' || options.spec == 'X')
 		len = ft_parse_unum(options, va_arg(ap, long long int), ft_print_x);
 	else if (options.spec == 'c' || options.spec == 'C')
 		len = ft_print_c(options, va_arg(ap, int));
-	else if (options.spec == 's')
+	else if (options.spec == 's' && options.length != LEN_L)
 		len = ft_print_s(options, va_arg(ap, int*), ft_strlen_s, ft_puts);
-	else if (options.spec == 'S')
+	else if (options.spec == 'S' || (options.spec == 's' && options.length == LEN_L))
 		len = ft_print_s(options, va_arg(ap, int*), ft_strlen_unicode, ft_puts_unicode);
 	else if (options.spec == 'f' && options.length == LEN_LL)
 		len = ft_parse_lf(options, va_arg(ap, long double));
@@ -50,10 +50,7 @@ int			ft_handle_spec(t_options options, va_list ap)
 	else if (options.spec == '%')
 		len = ft_print_perc(options, '%');
 	else if (options.spec)
-	{
-		ft_putchar(options.spec);
-		len++;
-	}
+		len = ft_print_rand(options);
 	return (len);
 }
 
@@ -61,7 +58,7 @@ t_options	ft_set_options(const char **format)
 {
 	t_options	options;
 	int			i;
-	char		temp;
+	char		*temp;
 
 	i = 0;
 	while (i < 7)
@@ -72,14 +69,14 @@ t_options	ft_set_options(const char **format)
 	options.spec = 0;
 	while (**format)
 	{
-		temp = **format;
+		temp = (char*)*format;
 		ft_set_flags(format, &options);
 		ft_set_width(format, &options);
 		ft_set_prec(format, &options);
 		ft_set_length(format, &options);
 		if (ft_set_spec(**format, &options))
 			break;
-		if (temp == **format)
+		if (temp == *format)
 			break;
 		// if (**format)
 		// 	(*format)++;

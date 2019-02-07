@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:09:50 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/06 20:27:57 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/07 17:47:50 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,35 @@ void	ft_set_flags(const char **format, t_options *options)
 
 void	ft_set_width(const char **format, t_options *options)
 {
-	options->width = ft_atoi(*format);
-	if (options->width)
-		*format += ft_unumlen(options->width, 10);
-	else if (**format == '*')
+	if (!options->width)
 	{
-		options->flags[F_WIDTH_STAR] = 1;
-		(*format)++;
+		options->width = ft_atoi(*format);
+		if (options->width)
+			*format += ft_unumlen(options->width, 10);
+		else if (**format == '*')
+		{
+			options->flags[F_WIDTH_STAR] = 1;
+			(*format)++;
+		}
 	}
 }
 
-void	ft_set_prec(const char **format, t_options *options)
+void	ft_set_prec(const char **format, t_options *opt)
 {
 	if (**format == '.')
 	{
 		(*format)++;
-		options->prec = ft_atoi(*format);
-		if (options->prec > 0)
-			*format += ft_unumlen(options->prec, 10);
+		opt->prec = ft_atoi(*format);
+		if (opt->prec > 0)
+			*format += ft_unumlen(opt->prec, 10);
 		else if (**format == '*')
 		{
-			options->flags[F_PREC_STAR] = 1;
+			opt->flags[F_PREC_STAR] = 1;
 			(*format)++;
 		}
 		else
 		{
-			options->prec = 0;
+			opt->prec = 0;
 			if (**format == '0')
 				(*format)++;
 		}
@@ -87,32 +90,26 @@ void	ft_set_prec(const char **format, t_options *options)
 
 }
 
-void	ft_set_length(const char **format, t_options *options)
+void	ft_set_length(const char **format, t_options *opt)
 {
 	while (**format)
 	{
-		if (**format == 'h' && *(*format + 1) == 'h')
-		{
-			options->length = LEN_HH;
-			(*format)++;
-		}
-		else if (**format == 'h' && options->length != LEN_HH)
-			options->length = LEN_H;
-		else if (**format == 'l' && *(*format + 1) == 'l')
-		{
-			options->length = LEN_LL;
-			(*format)++;
-		}
-		else if (**format == 'l' && options->length != LEN_LL)
-			options->length = LEN_L;
+		if (**format == 'h' && *(*format + 1) == 'h' && (*format)++)
+			opt->length = opt->length < LEN_HH ? LEN_HH : opt->length;
+		else if (**format == 'h' && opt->length != LEN_HH)
+			opt->length = opt->length < LEN_H ? LEN_H : opt->length;
+		else if (**format == 'l' && *(*format + 1) == 'l' && (*format)++)
+			opt->length = opt->length < LEN_LL ? LEN_LL : opt->length;
+		else if (**format == 'l' && opt->length != LEN_LL)
+			opt->length = opt->length < LEN_L ? LEN_L : opt->length;
 		else if (**format == 'L')
-			options->length = LEN_LL;
+			opt->length = opt->length < LEN_LL ? LEN_LL : opt->length;
 		else if (**format == 't')
-			options->length = LEN_TIME;
+			opt->length = opt->length < LEN_TIME ? LEN_TIME : opt->length;
 		else if (**format == 'z')
-			options->length = LEN_Z;
+			opt->length = opt->length < LEN_Z ? LEN_Z : opt->length;
 		else if (**format == 'j')
-			options->length = LEN_J;
+			opt->length = opt->length < LEN_J ? LEN_J : opt->length;
 		else
 			break;
 		(*format)++;

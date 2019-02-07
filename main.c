@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/06 20:33:47 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/07 20:18:13 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -504,6 +504,8 @@ int     main(void)
 	// printf("len: %d\n", len);
 
 	int		len;
+	char	c;
+	setlocale(LC_ALL, "");
 	// len = printf("original82: %#x world\n", 0);
 	// printf("len: %d\n", len);
 	// len = ft_printf("customft82: %#x world\n", 0);
@@ -536,9 +538,49 @@ int     main(void)
 	// printf("len: %d\n", len);
 	// len = ft_printf("customft86: {%}");
 	// printf("len: %d\n", len);
-	len = printf("original87: %ll#x", 9223372036854775807);
+	// len = printf("original87: %ll#x", 9223372036854775807);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft87: %ll#x", 9223372036854775807);
+	// printf("len: %d\n", len);
+	// len = printf("original88: %5+d", 42);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft88: %5+d", 42);
+	// printf("len: %d\n", len);
+	// len = printf("original89: %zhd", 4294967296);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft89: %zhd", 4294967296);
+	// printf("len: %d\n", len);
+	// len = printf("original90: %###-#0000 33...12..#0+0d\n", 256);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft90: %###-#0000 33...12..#0+0d\n", 256);
+	// printf("len: %d\n", len);
+	// len = printf("original91: %s%d%p%%%S%D%i%o%O%u%U%x%X%c%C\n", "bonjour", 42, &c, L"暖炉", LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플');
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft91: %s%d%p%%%S%D%i%o%O%u%U%x%X%c%C\n", "bonjour", 42, &c, L"暖炉", LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플');
+	// printf("len: %d\n", len);
+	// len = printf("original91: %ls, %ls", L"暖炉", L"لحم خنزير");
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft91: %ls, %ls", L"暖炉", L"لحم خنزير");
+	// printf("len: %d\n", len);
+	// len = printf("original92: %lc, %lc", L'ÊM-^ZM-^V', L'ÿ≠');
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft92: %lc, %lc", L'ÊM-^ZM-^V', L'ÿ≠');
+	// printf("len: %d\n", len);
+	// len = printf("original93: {%10R}");
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft93: {%10R}");
+	// printf("len: %d\n", len);
+	// len = printf("original94: %#o", 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft94: %#o", 0);
+	// printf("len: %d\n", len);
+	// len = printf("original95: %4.8x", 424242424);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft95: %4.8x", 424242424);
+	// printf("len: %d\n", len);
+	len = printf("original96: %.4S", L"我是一只猫。");
 	printf("len: %d\n", len);
-	len = ft_printf("customft87: %ll#x", 9223372036854775807);
+	len = ft_printf("customft96: %.4S", L"我是一只猫。");
 	printf("len: %d\n", len);
 
 	//int		len;

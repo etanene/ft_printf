@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:20:23 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/06 13:22:46 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/07 17:50:11 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_reset_options_di(t_options *opt, int *len, unsigned long long unum)
 		opt->flags[F_SP] = 0;
 	if (opt->flags[F_PLUS] || opt->flags[F_SP])
 		opt->width -= 1;
-	if (opt->flags[F_MINUS])
+	if (opt->flags[F_MINUS] || opt->prec >= 0)
 		opt->flags[F_NULL] = 0;
 	opt->width -= MAX(*len, opt->prec);
 	opt->prec -= *len;

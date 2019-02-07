@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 17:52:03 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/05 19:02:28 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/07 19:46:10 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int		ft_print_x(t_options opt, unsigned long long unum)
 		ft_putchar(opt.spec);
 	}
 	len += ft_print_prec(opt.prec);
-	if (opt.spec == 'x' && opt.prec)
+	if (opt.spec == 'x' && (unum || opt.prec))
 		ft_printnum(unum, 16);
-	else if (opt.prec)
+	else if (unum || opt.prec)
 		ft_printnumX(unum, 16);
 	if (opt.flags[F_MINUS])
 		len += ft_print_width(opt.width, ' ');

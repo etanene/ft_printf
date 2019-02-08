@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:01 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/07 18:55:32 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/08 18:48:47 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ int			ft_handle_spec(t_options options, va_list ap)
 	int		len;
 
 	len = 0;
-	if (options.flags[F_WIDTH_STAR])
-		options.width = va_arg(ap, int);
+	// if (options.flags[F_WIDTH_STAR])
+	// {
+	// 	if (!options.width)
+	// 		options.width = va_arg(ap, int);
+	// 	if (options.width < 0)
+	// 	{
+	// 		options.flags[F_MINUS] = 1;
+	// 		options.width = -options.width;
+	// 	}
+	// }
 	if (options.flags[F_PREC_STAR])
 		options.prec = va_arg(ap, int);
 	if (options.spec == 'd' || options.spec == 'i' || options.spec == 'D')
@@ -37,7 +45,7 @@ int			ft_handle_spec(t_options options, va_list ap)
 		len = ft_print_s(options, va_arg(ap, int*), ft_strlen_unicode, ft_puts_unicode);
 	else if (options.spec == 'f' && options.length == LEN_LL)
 		len = ft_parse_lf(options, va_arg(ap, long double));
-	else if (options.spec == 'f')
+	else if (options.spec == 'f' || options.spec == 'F')
 		len = ft_parse_f(options, va_arg(ap, double));
 	else if (options.spec == 'p')
 		len = ft_print_p(options, va_arg(ap, void*));
@@ -46,7 +54,7 @@ int			ft_handle_spec(t_options options, va_list ap)
 	else if (options.spec == 'k')
 		len = ft_print_k(options, va_arg(ap, unsigned long long));
 	else if (options.spec == 'r')
-		len = ft_print_r(options, va_arg(ap , char*));
+		len = ft_print_r(options, va_arg(ap, char*));
 	else if (options.spec == '%')
 		len = ft_print_perc(options, '%');
 	else if (options.spec)
@@ -54,7 +62,7 @@ int			ft_handle_spec(t_options options, va_list ap)
 	return (len);
 }
 
-t_options	ft_set_options(const char **format)
+t_options	ft_set_options(const char **format, va_list ap)
 {
 	t_options	options;
 	int			i;
@@ -71,7 +79,7 @@ t_options	ft_set_options(const char **format)
 	{
 		temp = (char*)*format;
 		ft_set_flags(format, &options);
-		ft_set_width(format, &options);
+		ft_set_width(format, &options, ap);
 		ft_set_prec(format, &options);
 		ft_set_length(format, &options);
 		if (ft_set_spec(**format, &options))
@@ -97,7 +105,7 @@ int			ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			options = ft_set_options(&format);
+			options = ft_set_options(&format, ap);
 			len += ft_handle_spec(options, ap);
 		}
 		else

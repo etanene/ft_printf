@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 13:09:50 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/07 17:47:50 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/08 18:43:53 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_set_spec(char c, t_options *options)
 
 	nospec = "-+ #0*.hlLtzj";
 	options->spec = 0;
-	if ((c >= 0 && c <= 127))
+	if ((c >= 0 && c <= 127) && !(c >= '0' && c <= '9'))
 	{
 		while (*nospec)
 		{
@@ -52,18 +52,24 @@ void	ft_set_flags(const char **format, t_options *options)
 	}
 }
 
-void	ft_set_width(const char **format, t_options *options)
+void	ft_set_width(const char **format, t_options *options, va_list ap)
 {
-	if (!options->width)
+	if (!options->width || (**format >= '1' && **format <= '9'))
 	{
 		options->width = ft_atoi(*format);
 		if (options->width)
 			*format += ft_unumlen(options->width, 10);
-		else if (**format == '*')
+	}
+	if (**format == '*')
+	{
+		options->width = va_arg(ap, int);
+		if (options->width < 0)
 		{
-			options->flags[F_WIDTH_STAR] = 1;
-			(*format)++;
+			options->flags[F_MINUS] = 1;
+			options->width = -options->width;
 		}
+		options->flags[F_WIDTH_STAR] = 1;
+		(*format)++;
 	}
 }
 

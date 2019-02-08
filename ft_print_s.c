@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 15:48:31 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/07 20:29:36 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:03:57 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,28 @@
 int		ft_strlen_unicode(int *str, int prec)
 {
 	int		len;
-	int		i;
+	int		bytes;
 
 	len = 0;
 	while (*str && prec)
 	{
-		i = 0;
-		if (*str <= 0x7F && prec >= 1)
-			i = 1;
-		else if (*str <= 0x7FF && prec >= 2)
-			i = 2;
-		else if (*str <= 0xFFFF && prec >= 3)
-			i = 3;
-		else if (*str <= 0x10FFFF && prec >= 4)
-			i = 4;
-		if (prec < i)
+		bytes = 0;
+		if (*str <= 0x7F)
+			bytes = 1;
+		else if (*str <= 0x7FF)
+			bytes = 2;
+		else if (*str <= 0xFFFF)
+			bytes = 3;
+		else if (*str <= 0x10FFFF)
+			bytes = 4;
+		if (prec >= bytes || prec < 0)
 		{
-			while (prec < i)
-				i--;
-			len += i;
-			break;
+			len += bytes;
+			prec -= bytes;
+			str++;
 		}
-		len += i;
-		prec -= i;
-		str++;
+		else
+			break ;
 	}
 	return (len);
 }
@@ -76,7 +74,7 @@ void	ft_puts_unicode(int *str, int prec)
 	while (*str && prec)
 	{
 		bytes = ft_convert_utf32_utf8(*str++, (char*)&utf);
-		if (prec >= bytes)
+		if (prec >= bytes || prec < 0)
 		{
 			ft_print_unicode(utf, bytes);
 			prec -= bytes;
@@ -92,8 +90,10 @@ int		ft_print_s(t_options opt, int *str, int (*ft_len)(int*, int), void (*ft_pri
 
 	if (!str)
 	{
-		write(1, "(null)", 6);
-		return (6);
+		if (opt.spec == 's' && opt.length != LEN_L)
+			str = (int*)"(null)";
+		else
+			str = L"(null)";
 	}
 	if ((len = ft_len(str, opt.prec)))
 	{

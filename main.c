@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:43:48 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/07 20:18:13 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/08 18:51:39 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -578,10 +578,75 @@ int     main(void)
 	// printf("len: %d\n", len);
 	// len = ft_printf("customft95: %4.8x", 424242424);
 	// printf("len: %d\n", len);
-	len = printf("original96: %.4S", L"我是一只猫。");
+	// len = printf("original96: %S", L"Á±≥");
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft96: %S", L"Á±≥");
+	// printf("len: %d\n", len);
+	// len = printf("original96: %.0p, %.p", 0, 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft96: %.0p, %.p", 0, 0);
+	// printf("len: %d\n", len);
+	// len = printf("original97: %.5p", 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft97: %.5p", 0);
+	// printf("len: %d\n", len);
+	// len = printf("original98: %2.9p", 1234);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft98: %2.9p", 1234);
+	// printf("len: %d\n", len);
+	// len = printf("original99: %2.9p", 1234567);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft99: %2.9p", 1234567);
+	// printf("len: %d\n", len);
+	// len = printf("original100: %p", 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft100: %p", 0);
+	// printf("len: %d\n", len);
+	// len = printf("original101: %p", &c);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft101: %p", &c);
+	// printf("len: %d\n", len);
+	// len = printf("original102: {%5p}", 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft102: {%5p}", 0);
+	// printf("len: %d\n", len);
+	// len = printf("original103: {%S}", NULL);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft103: {%S}", NULL);
+	// printf("len: %d\n", len);
+	// len = printf("original104: {%s}", NULL);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft104: {%s}", NULL);
+	// printf("len: %d\n", len);
+	// len = printf("original105: %#.3o", 1);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft105: %#.3o", 1);
+	// printf("len: %d\n", len);
+	// len = printf("original106: {%*3d}", 0, 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft106: {%*3d}", 0, 0);
+	// printf("len: %d\n", len);
+	// len = printf("original107: {%*3d}", 5, 0);
+	// printf("len: %d\n", len);
+	// len = ft_printf("customft107: {%*3d}", 5, 0);
+	// printf("len: %d\n", len);
+	len = printf("original108: {%f}{%F}", 1.42, 1.42);
 	printf("len: %d\n", len);
-	len = ft_printf("customft96: %.4S", L"我是一只猫。");
+	len = ft_printf("customft108: {%f}{%F}", 1.42, 1.42);
 	printf("len: %d\n", len);
+	len = printf("original109: {%f}{%F}", -1.42, -1.42);
+	printf("len: %d\n", len);
+	len = ft_printf("customft109: {%f}{%F}", -1.42, -1.42);
+	printf("len: %d\n", len);
+	len = printf("original110: {%f}{%F}", 1444565444646.6465424242242, 1444565444646.6465424242242);
+	printf("len: %d\n", len);
+	len = ft_printf("customft110: {%f}{%F}", 1444565444646.6465424242242, 1444565444646.6465424242242);
+	printf("len: %d\n", len);
+	len = printf("original111: {%f}{%F}", -1444565444646.6465424242242454654, -1444565444646.6465424242242454654);
+	printf("len: %d\n", len);
+	len = ft_printf("customft111: {%f}{%F}", -1444565444646.6465424242242454654, -1444565444646.6465424242242454654);
+	printf("len: %d\n", len);
+
 
 	//int		len;
 	// int		num;

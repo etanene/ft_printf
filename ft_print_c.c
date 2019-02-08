@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 13:15:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/07 18:45:23 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:17:49 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_print_unicode(int num, int bytes)
 	write(1, (char*)&num, bytes);
 }
 
-int		ft_print_c(t_options options, int c)
+int		ft_print_c(t_options opt, int c)
 {
 	int		bytes;
 	int		utf;
@@ -56,18 +56,19 @@ int		ft_print_c(t_options options, int c)
 	utf = 0;
 	bytes = 0;
 	len = 0;
-	if (options.flags[F_MINUS])
-		options.flags[F_NULL] = 0;
-	bytes = ft_convert_utf32_utf8(c, (char*)&utf);
-	if (options.flags[F_NULL])
-		len += ft_print_width(options.width - bytes, '0');
-	else if (!options.flags[F_MINUS])
-		len += ft_print_width(options.width - bytes, ' ');
-	if (options.spec == 'c' && options.length != LEN_L)
+	if (opt.flags[F_MINUS])
+		opt.flags[F_NULL] = 0;
+	bytes = (opt.spec == 'c' && opt.length != LEN_L) ? \
+			1 : ft_convert_utf32_utf8(c, (char*)&utf);
+	if (opt.flags[F_NULL])
+		len += ft_print_width(opt.width - bytes, '0');
+	else if (!opt.flags[F_MINUS])
+		len += ft_print_width(opt.width - bytes, ' ');
+	if (opt.spec == 'c' && opt.length != LEN_L)
 		ft_putchar(c);
 	else
 		ft_print_unicode(utf, bytes);
-	if (options.flags[F_MINUS])
-		len += ft_print_width(options.width - bytes, ' ');
+	if (opt.flags[F_MINUS])
+		len += ft_print_width(opt.width - bytes, ' ');
 	return (len + bytes);
 }

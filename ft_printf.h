@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 19:45:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/07 20:22:12 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/08 18:06:15 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ typedef struct			s_bigint
 }						t_bigint;
 
 int					ft_printf(const char *format, ...);
-t_options			ft_set_options(const char **format);
+t_options			ft_set_options(const char **format, va_list ap);
 void				ft_set_length(const char **format, t_options *options);
 void				ft_set_prec(const char **format, t_options *options);
-void				ft_set_width(const char **format, t_options *options);
+void				ft_set_width(const char **format, t_options *options, va_list ap);
 void				ft_set_flags(const char **format, t_options *options);
 int					ft_set_spec(char c, t_options *options);
 int					ft_atoi(const char *str);

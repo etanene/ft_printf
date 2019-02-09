@@ -17,16 +17,6 @@ int			ft_handle_spec(t_options options, va_list ap)
 	int		len;
 
 	len = 0;
-	// if (options.flags[F_WIDTH_STAR])
-	// {
-	// 	if (!options.width)
-	// 		options.width = va_arg(ap, int);
-	// 	if (options.width < 0)
-	// 	{
-	// 		options.flags[F_MINUS] = 1;
-	// 		options.width = -options.width;
-	// 	}
-	// }
 	if (options.flags[F_PREC_STAR])
 		options.prec = va_arg(ap, int);
 	if (options.spec == 'd' || options.spec == 'i' || options.spec == 'D')
@@ -86,8 +76,6 @@ t_options	ft_set_options(const char **format, va_list ap)
 			break;
 		if (temp == *format)
 			break;
-		// if (**format)
-		// 	(*format)++;
 	}
 	return (options);
 }

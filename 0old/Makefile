@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+         #
+#    By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/10 16:37:58 by aleksandr         #+#    #+#              #
-#    Updated: 2019/02/11 00:59:04 by aleksandr        ###   ########.fr        #
+#    Created: 2018/12/28 19:13:21 by afalmer-          #+#    #+#              #
+#    Updated: 2019/02/07 18:56:03 by afalmer-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,16 @@ NAME = libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror
 
-SRCDIR = src/
-SRC = ft_printf.c ft_utils.c ft_buff_manage.c ft_set_options.c ft_parse_nums.c \
-		ft_print_di.c
+OBJ =	obj/ft_printf.o obj/ft_putchar.o obj/ft_atoi.o obj/ft_set_options.o \
+		obj/ft_parse_nums.o obj/ft_num_base.o obj/ft_print_di.o \
+		obj/ft_print_c.o obj/ft_print_s.o \
+		obj/ft_print_options.o obj/ft_print_u.o obj/ft_print_o.o \
+		obj/ft_print_x.o obj/ft_print_f.o obj/ft_bigint.o obj/ft_bits.o \
+		obj/ft_print_lf.o obj/ft_print_p.o obj/ft_print_b.o obj/ft_itoa.o \
+		obj/ft_print_k.o obj/ft_print_r.o obj/ft_print_perc.o \
+		obj/ft_print_rand.o
 
-OBJDIR := obj/
-OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
-
-INCLUDES = includes/
-HEADER = $(addprefix $(INCLUDES), ft_printf.h)
+HEADER = ft_printf.h
 
 all: $(NAME)
 
@@ -30,14 +31,11 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-$(OBJDIR)%.o: $(SRCDIR)%.c $(HEADER)
-	gcc $(FLAGS) -c $< -o $@ -I $(INCLUDES)
+obj/%.o: %.c $(HEADER)
+	gcc $(FLAGS) -c $< -o $@ -g
 
-main.o: main.c
-	gcc $(FLAGS) -c $< -o $@
-
-ex: main.c $(NAME)
-	gcc $(FLAGS) $< $(NAME)
+ex: $(NAME)
+	gcc main.c $(NAME) -g
 
 clean:
 	rm -rf $(OBJ)

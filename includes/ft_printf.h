@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 15:55:00 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 16:45:37 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void			ft_parse_unum(t_options *opt, t_buff *buffer, \
 void			ft_print_di(t_options *opt, t_buff *buffer, long long num);
 void			ft_print_uoxb(t_options *opt, t_buff *buffer, \
 					unsigned long long unum);
+void			ft_print_c(t_options *opt, t_buff *buffer, unsigned char c);
 
 
 void			ft_print_width(t_buff *buffer, int *width, char c);

@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 20:49:04 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 13:58:45 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 19:35:54 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,47 @@ int		ft_itoa_base(unsigned long long num, char *str, int base, char lower)
 	while (num /= base)
 		*str-- = (digits[num % base] | lower);
 	return (len);
+}
+
+int		ft_strnlen(char *str, int n)
+{
+	int		len;
+
+	len = 0;
+	while (n--)
+	{
+		if (*str)
+			break ;
+		len++:
+		str++;
+	}
+	return (len);
+}
+
+int		ft_wstrnlen(wchar_t *str, int n)
+{
+	int		len;
+	int		bytes;
+
+	len = 0;
+	while (n)
+	{
+		bytes = 0;
+		if (*str <= 0x7F)
+			bytes = 1;
+		else if (*str <= 0x7FF)
+			bytes = 2;
+		else if (*str <= 0xFFFF)
+			bytes = 3;
+		else if (*str <= 0x10FFFF)
+			bytes = 4;
+		if (n >= bytes || n < 0)
+		{
+			len += bytes;
+			n -= bytes;
+			str++;
+		}
+		else
+			break ;
+	}
 }

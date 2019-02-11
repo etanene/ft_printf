@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 16:45:37 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 19:55:49 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int				ft_atoi(const char *str);
 int				ft_unumlen(unsigned long long num, int base);
 int				ft_itoa_base(unsigned long long num, char *str, int base, \
 					char lower);
+int				ft_strnlen(char *str, int n);
+int				ft_wstrnlen(wchar_t *str, int n);
 
 void			ft_set_options(t_options *opt, char **format, va_list ap);
 void			ft_set_flags(const char **format, t_options *opt);
@@ -84,7 +86,9 @@ void			ft_print_di(t_options *opt, t_buff *buffer, long long num);
 void			ft_print_uoxb(t_options *opt, t_buff *buffer, \
 					unsigned long long unum);
 void			ft_print_c(t_options *opt, t_buff *buffer, unsigned char c);
-
+void			ft_print_lc(t_options *opt, t_buff *buffer, wchar_t c);
+void			ft_print_s(t_options *opt, t_buff *buffer, char *str);
+void			ft_print_ls(t_options *opt, t_buff *buffer, wchar_t *str);
 
 void			ft_print_width(t_buff *buffer, int *width, char c);
 void			ft_print_prec(t_buff *buffer, int prec, int len);

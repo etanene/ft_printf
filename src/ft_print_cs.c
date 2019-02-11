@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_c.c                                       :+:      :+:    :+:   */
+/*   ft_print_cs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:05:27 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 18:49:41 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 19:53:53 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_print_c(t_options *opt, t_buff *buffer, unsigned char c)
 		ft_print_width(buffer, &opt->width, ' ');
 }
 
-int		ft_convert_to_utf8(wint_t c, char *lc)
+int		ft_convert_to_utf8(wchar_t c, char *lc)
 {
 	int		bytes;
 
@@ -52,7 +52,7 @@ int		ft_convert_to_utf8(wint_t c, char *lc)
 	return (c <= 0x10FFFF ? bytes : 0);
 }
 
-void	ft_print_lc(t_options *opt, t_buff *buffer, wint_t c)
+void	ft_print_lc(t_options *opt, t_buff *buffer, wchar_t c)
 {
 	int		bytes;
 	char	lc[4];
@@ -63,6 +63,46 @@ void	ft_print_lc(t_options *opt, t_buff *buffer, wint_t c)
 		ft_print_width(buffer, &opt->width, (opt->flags & F_NULL) ? '0' : ' ');
 	while (bytes--)
 		ft_in_buff(buffer, *lc++);
+	if (opt->flags & F_MINUS)
+		ft_print_width(buffer, &opt->width, ' ');
+}
+
+void	ft_print_s(t_options *opt, t_buff *buffer, char *str)
+{
+	int		len;
+
+	if (!str)
+		str = "(null)";
+	len = ft_strnlen(str, opt->prec);
+	opt->width -= len;
+	if (!(opt->flags & F_MINUS))
+		ft_print_width(buffer, &opt->width, (opt->flags & F_NULL) ? '0' : ' ');
+	while (len--)
+		ft_in_buff(buffer, *str++);
+	if (opt->flags & F_MINUS)
+		ft_print_width(buffer, &opt->width, ' ');
+}
+
+void	ft_print_ls(t_options *opt, t_buff *buffer, wchar_t *str)
+{
+	int		len;
+	int		bytes;
+	char	lc[4];
+	char	*temp;
+
+	if (!str)
+		str = L"(null)";
+	len = ft_wstrnlen(str, opt->prec);
+	opt->width -= len;
+	if (!(opt->flags & F_MINUS))
+		ft_print_width(buffer, &opt->width, (opt->flags & F_NULL) ? '0' : ' ');
+	while (len--)
+	{
+		bytes = ft_convert_to_utf8(*str++, lc)
+		temp = lc;
+		while (bytes--)
+			ft_in_buff(buffer, *temp++);
+	}
 	if (opt->flags & F_MINUS)
 		ft_print_width(buffer, &opt->width, ' ');
 }

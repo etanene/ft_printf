@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 16:37:31 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 19:01:10 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 20:09:16 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_handle_other(t_options *opt, t_buff *buffer, va_list ap)
 	if (opt->spec == 'c' && opt->length != LEN_L)
 		ft_print_c(opt, buffer, (unsigned char)va_arg(ap, int));
 	else if (opt->spec == 'C' || (opt->spec == 'c' && opt->length == LEN_L))
-		ft_print_lc(opt, buffer, va_arg(wchar_t)(ap, wint_t));
+		ft_print_lc(opt, buffer, (wchar_t)va_arg(ap, wint_t));
 	else if (opt->spec == 's' && opt->length != LEN_L)
 		ft_print_s(opt, buffer, va_arg(ap, char*));
 	else if (opt->spec == 'S' || (opt->spec == 's' && opt->length == LEN_L))
@@ -51,6 +51,8 @@ int		ft_handle_num(t_options *opt, t_buff *buffer, va_list ap)
 	else if (opt->spec == 'x' || opt->spec == 'X')
 	{
 		opt->base = 16;
+		if (opt->spec == 'x')
+			opt->flags |= F_LOWER;
 		ft_parse_unum(opt, buffer, va_arg(ap, long long));
 	}
 	else if (opt->spec == 'b')

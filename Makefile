@@ -6,7 +6,7 @@
 #    By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/10 16:37:58 by aleksandr         #+#    #+#              #
-#    Updated: 2019/02/11 19:54:05 by aleksandr        ###   ########.fr        #
+#    Updated: 2019/02/11 20:00:17 by aleksandr        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall -Wextra -Werror
 
 SRCDIR = src/
 SRC = ft_printf.c ft_utils.c ft_buff_manage.c ft_set_options.c ft_parse_nums.c \
-		ft_print_options.c ft_print_diuoxb.c ft_print_cs.c
+		ft_print_options.c ft_print_diuoxb.c ft_print_cs.c ft_print_prk.c
 
 OBJDIR := obj/
 OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))

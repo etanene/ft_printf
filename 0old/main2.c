@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 20:42:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/11 12:59:44 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 16:24:52 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <fcntl.h>
 #include <float.h>
 #include <limits.h>
+#include <wchar.h>
 //#include "ft_printf.h"
 
 // int		ft_checkbit_double(double n, int pos)
@@ -46,7 +47,7 @@ int		main(void)
 {
 	int		len;
 
-	len = printf("%lld\n", LLONG_MAX);
+	len = printf("%zu\n", sizeof(wchar_t));
 	printf("len: %d\n", len);
 	return (0);
 }

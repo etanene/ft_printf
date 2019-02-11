@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 20:49:04 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 19:35:54 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 21:52:22 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,11 @@ int		ft_itoa_base(unsigned long long num, char *str, int base, char lower)
 	len = ft_unumlen(num, base);
 	str += len;
 	*str-- = '\0';
-	while (num /= base)
+	while (num)
+	{
 		*str-- = (digits[num % base] | lower);
+		num /= base;
+	}
 	return (len);
 }
 

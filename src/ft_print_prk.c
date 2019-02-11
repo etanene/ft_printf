@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:00:27 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 20:51:12 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 22:05:57 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,38 @@ void	ft_print_r(t_options *opt, t_buff *buffer, char *str)
 		ft_print_width(buffer, &opt->width, ' ');
 }
 
+// hh:mm:ss	
+
 void	ft_print_k(t_options *opt, t_buff *buffer, unsigned long long unum)
 {
-	char	number[20];
+	char	str[20];
 	int		len;
+	int		sec;
+	int		minutes;
+	int		hours;
 
 	len = 0;
-	if (!unum)
-		number[len++] = '0';
-	else
-		len = ft_itoa_base(unum, number, 10, 0);
-	
+	// if (!unum)
+	// 	number[len++] = '0';
+	// else
+	// 	len = ft_itoa_base(unum, number, 10, 0);
+	sec = unum % 60;
+	unum /= 60;
+	minutes = unum % 60;
+	unum /= 60;
+	hours = unum;
+	while (len < 2)
+	{
+		str[len++] = sec % 10;
+		sec /= 10;
+	}
+	if (minutes)
+		str[len++] = ':';
+	while (len < 5)
+	{
+		str[len++] = minutes % 10;
+		minutes / 10;
+	}
+	if (hours)
+		str[len++] = ':';
 }

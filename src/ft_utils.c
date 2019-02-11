@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_util.c                                          :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 20:49:04 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/10 20:59:37 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 13:58:45 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,18 @@ int		ft_unumlen(unsigned long long num, int base)
 	while (num /= base)
 		len++;
 	return (len + 1);
+}
+
+int		ft_itoa_base(unsigned long long num, char *str, int base, char lower)
+{
+	char	*digits;
+	int		len;
+
+	digits = "0123456789ABCDEF"
+	len = ft_unumlen(num, base);
+	str += len;
+	*str-- = '\0';
+	while (num /= base)
+		*str-- = (digits[num % base] | lower);
+	return (len);
 }

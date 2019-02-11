@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 16:37:31 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/10 23:04:29 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 15:59:26 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int		ft_handle_other(t_options *opt, t_buff *buffer, va_list ap)
 		ft_print_s(opt, buffer, va_arg(ap, char*));
 	else if (opt->spec == 'S' || (opt->spec == 's' && opt->length == LEN_L))
 		ft_print_ls(opt, buffer, va_arg(ap, wchar_t*));
+	else if (opt->spec == 'f' && opt->length == LEN_LL)
+		ft_parse_lfnum(opt, buffer, va_arg(ap, long double));
+	else if (opt->spec == 'f' || opt->spec == 'F')
+		ft_parse_fnum(opt, buffer, va_arg(ap, double));
 	else if (opt->spec == 'p')
 		ft_print_p(opt, buffer, va_arg(ap, void*));
 	else if (opt->spec == 'r')
@@ -38,17 +42,22 @@ int		ft_handle_num(t_options *opt, t_buff *buffer, va_list ap)
 	if (opt->spec == 'd' || opt->spec == 'i' || opt->spec == 'D')
 		ft_parse_num(opt, buffer, va_arg(ap, long long));
 	else if (opt->spec == 'u' || opt->spec == 'U')
-		ft_parse_unum(opt, buffer, va_arg(ap, long long), ft_print_u);
+		ft_parse_unum(opt, buffer, va_arg(ap, long long));
 	else if (opt->spec == 'o' || opt->spec == 'O')
-		ft_parse_unum(opt, buffer, va_arg(ap, long long), ft_print_o);
+	{
+		opt->base = 8;
+		ft_parse_unum(opt, buffer, va_arg(ap, long long));
+	}
 	else if (opt->spec == 'x' || opt->spec == 'X')
-		ft_parse_unum(opt, buffer, va_arg(ap, long long), ft_print_x);
+	{
+		opt->base = 16;
+		ft_parse_unum(opt, buffer, va_arg(ap, long long));
+	}
 	else if (opt->spec == 'b')
-		ft_parse_unum(opt, buffer, va_arg(ap, long long), ft_print_b);
-	else if (opt->spec == 'f' && opt->length == LEN_LL)
-		ft_parse_lfnum(opt, buffer, va_arg(ap, long double));
-	else if (opt->spec == 'f' || opt->spec == 'F')
-		ft_parse_fnum(opt, buffer, va_arg(ap, double));
+	{
+		opt->base = 2;
+		ft_parse_unum(opt, buffer, va_arg(ap, long long));
+	}
 	else
 		return (0);
 	return (1);
@@ -74,6 +83,7 @@ void	ft_set_options(t_options *opt, char **format, va_list ap)
 	opt->width = -1;
 	opt->prec = -1;
 	opt->length = -1;
+	opt->base = 10;
 	opt->spec = 0;
 	while (**format)
 	{

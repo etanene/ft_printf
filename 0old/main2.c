@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 20:42:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/01/29 17:07:26 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/11 12:59:44 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <math.h>
 #include <fcntl.h>
 #include <float.h>
+#include <limits.h>
 //#include "ft_printf.h"
 
 // int		ft_checkbit_double(double n, int pos)
@@ -45,7 +46,7 @@ int		main(void)
 {
 	int		len;
 
-	len = printf("%f\n", DBL_MAX);
+	len = printf("%lld\n", LLONG_MAX);
 	printf("len: %d\n", len);
 	return (0);
 }

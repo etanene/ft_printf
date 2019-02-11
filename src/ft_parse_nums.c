@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 23:30:07 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/10 23:48:05 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 15:56:36 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,22 @@ void	ft_parse_num(t_options *opt, t_buff *buffer, long long num)
 		ft_print_di(opt, buffer, (ssize_t)num);
 }
 
-void	ft_parse_unum(t_options *opt, t_buff *buffer, unsigned long long unum, \
-					int (*ft_print)(t_options*, t_buff*, unsigned long long))
+void	ft_parse_unum(t_options *opt, t_buff *buffer, unsigned long long unum)
 {
 	if (opt.spec == 'U' || opt.spec == 'O')
-		ft_print(opt, buffer, (unsigned long)unum);
+		ft_print_uoxb(opt, buffer, (unsigned long)unum);
 	else if (opt.length == 0)
-		ft_print(opt, buffer, (unsigned int)unum);
+		ft_print_uoxb(opt, buffer, (unsigned int)unum);
 	else if (opt.length == LEN_HH)
-		ft_print(opt, buffer, (unsigned char)unum);
+		ft_print_uoxb(opt, buffer, (unsigned char)unum);
 	else if (opt.length == LEN_H)
-		ft_print(opt, buffer, (unsigned short)unum);
+		ft_print_uoxb(opt, buffer, (unsigned short)unum);
 	else if (opt.length == LEN_L)
-		ft_print(opt, buffer, (unsigned long)unum);
+		ft_print_uoxb(opt, buffer, (unsigned long)unum);
 	else if (opt.length == LEN_LL)
-		ft_print(opt, buffer, (unsigned long long)unum);
+		ft_print_uoxb(opt, buffer, (unsigned long long)unum);
 	else if (opt.length == LEN_J)
-		ft_print(opt, buffer, (uintmax_t)unum);
+		ft_print_uoxb(opt, buffer, (uintmax_t)unum);
 	else if (opt.length == LEN_Z)
-		ft_print(opt, buffer, (size_t)unum);
+		ft_print_uoxb(opt, buffer, (size_t)unum);
 }

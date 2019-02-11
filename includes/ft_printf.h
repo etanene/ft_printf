@@ -6,7 +6,7 @@
 /*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 01:09:29 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/11 15:55:00 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdarg.h>
 # include <unistd.h>
+# include <wchar.h>
 
 # define MAX_LEN 512
 
@@ -23,6 +24,7 @@
 # define F_SP 4
 # define F_SHARP 8
 # define F_NULL 16
+# define F_LOWER 32
 
 # define LEN_HH 1
 # define LEN_H 2
@@ -32,12 +34,16 @@
 # define LEN_Z 32
 # define LEN_TIME 64
 
+# define MAX_DEC 20
+# define MAX_BIN 65
+
 typedef struct	s_options
 {
 	int			flags;
 	int			width;
 	int			prec;
 	int			length;
+	int			base;
 	char		spec;
 }				t_options;
 
@@ -56,6 +62,8 @@ void			ft_in_buff(t_buff *buffer, unsigned char c);
 
 int				ft_atoi(const char *str);
 int				ft_unumlen(unsigned long long num, int base);
+int				ft_itoa_base(unsigned long long num, char *str, int base, \
+					char lower);
 
 void			ft_set_options(t_options *opt, char **format, va_list ap);
 void			ft_set_flags(const char **format, t_options *opt);
@@ -70,9 +78,15 @@ int				ft_handle_other(t_options *opt, t_buff *buffer, va_list ap);
 void			ft_parse_num(t_options *opt, t_buff *buffer, long long num);
 void			ft_parse_unum(t_options *opt, t_buff *buffer, \
 					unsigned long long unum, \
-					int (*ft_print)(t_options*, t_buff*, unsigned long long))
+					int (*ft_print)(t_options*, t_buff*, unsigned long long));
 
 void			ft_print_di(t_options *opt, t_buff *buffer, long long num);
+void			ft_print_uoxb(t_options *opt, t_buff *buffer, \
+					unsigned long long unum);
 
+
+void			ft_print_width(t_buff *buffer, int *width, char c);
+void			ft_print_prec(t_buff *buffer, int prec, int len);
+void			ft_print_sharp(t_buff *buffer, t_options *opt);
 
 #endif

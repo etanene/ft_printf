@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
+/*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 20:49:04 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 21:52:22 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/12 18:28:10 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		ft_itoa_base(unsigned long long num, char *str, int base, char lower)
 	char	*digits;
 	int		len;
 
-	digits = "0123456789ABCDEF"
+	digits = "0123456789ABCDEF";
 	len = ft_unumlen(num, base);
 	str += len;
 	*str-- = '\0';
@@ -72,9 +72,9 @@ int		ft_strnlen(char *str, int n)
 	len = 0;
 	while (n--)
 	{
-		if (*str)
+		if (!*str)
 			break ;
-		len++:
+		len++;
 		str++;
 	}
 	return (len);
@@ -86,7 +86,7 @@ int		ft_wstrnlen(wchar_t *str, int n)
 	int		bytes;
 
 	len = 0;
-	while (n)
+	while (*str && n)
 	{
 		bytes = 0;
 		if (*str <= 0x7F)
@@ -106,4 +106,5 @@ int		ft_wstrnlen(wchar_t *str, int n)
 		else
 			break ;
 	}
+	return (len);
 }

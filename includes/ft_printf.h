@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
+/*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/11 21:21:52 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/12 16:53:31 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <wchar.h>
+# include <inttypes.h>
 
 # define MAX_LEN 512
 
@@ -68,8 +69,9 @@ int				ft_strnlen(char *str, int n);
 int				ft_wstrnlen(wchar_t *str, int n);
 int				ft_rstrnlen(char *str, int n);
 
-void			ft_set_options(t_options *opt, char **format, va_list ap);
+void			ft_set_options(t_options *opt, const char **format, va_list ap);
 void			ft_set_flags(const char **format, t_options *opt);
+void			ft_set_width(const char **format, t_options *opt, va_list ap);
 void			ft_set_prec(const char **format, t_options *opt, va_list ap);
 void			ft_set_length(const char **format, t_options *opt);
 int				ft_set_spec(char c, t_options *opt);
@@ -80,8 +82,7 @@ int				ft_handle_other(t_options *opt, t_buff *buffer, va_list ap);
 
 void			ft_parse_num(t_options *opt, t_buff *buffer, long long num);
 void			ft_parse_unum(t_options *opt, t_buff *buffer, \
-					unsigned long long unum, \
-					int (*ft_print)(t_options*, t_buff*, unsigned long long));
+					unsigned long long unum);
 
 void			ft_print_di(t_options *opt, t_buff *buffer, long long num);
 void			ft_print_uoxb(t_options *opt, t_buff *buffer, \
@@ -92,6 +93,7 @@ void			ft_print_s(t_options *opt, t_buff *buffer, char *str);
 void			ft_print_ls(t_options *opt, t_buff *buffer, wchar_t *str);
 void			ft_print_p(t_options *opt, t_buff *buffer, void *pointer);
 void			ft_print_r(t_options *opt, t_buff *buffer, char *str);
+void			ft_print_rand(t_options *opt, t_buff *buffer);
 
 void			ft_print_width(t_buff *buffer, int *width, char c);
 void			ft_print_prec(t_buff *buffer, int prec, int len);

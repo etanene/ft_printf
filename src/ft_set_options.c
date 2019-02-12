@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_options.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
+/*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 20:27:24 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/10 21:24:32 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/12 17:17:54 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,16 @@ void	ft_set_prec(const char **format, t_options *opt, va_list ap)
 		if (**format >= '0' && **format <= '9')
 		{
 			opt->prec = ft_atoi(*format);
-			*format += ft_unumlen(opt->width, 10);
+			*format += ft_unumlen(opt->prec, 10);
 		}
 		else if (**format == '*')
 		{
 			opt->prec = va_arg(ap, int);
 			(*format)++;
 		}
-		if (opt->prec < 0)
+		else
 			opt->prec = 0;
+		// if (opt->prec < 0)
 	}
 }
 

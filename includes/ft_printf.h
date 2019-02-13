@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/12 16:53:31 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/13 22:07:04 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <wchar.h>
 # include <inttypes.h>
+# include <stdlib.h>
 
 # define MAX_LEN 512
 
@@ -38,6 +39,9 @@
 # define MAX_DEC 20
 # define MAX_BIN 65
 
+# define MAX_POWER 15
+# define MAX_NUM 100000000000000UL
+
 typedef struct	s_options
 {
 	int			flags;
@@ -54,6 +58,30 @@ typedef struct	s_buff
 	int			i;
 	int			len;
 }				t_buff;
+
+union					u_f
+{
+	double				f;
+	long double			lf;
+	unsigned long long	ll;
+};
+
+typedef struct			s_fnum
+{
+	union u_f			num;
+	char				sign;
+	int					exp;
+	unsigned long long	mantissa;
+	unsigned long long	ipart;
+	unsigned long long	fpart;
+}						t_fnum;
+
+typedef struct			s_bigint
+{
+	unsigned long long	num[1024];
+	int					size;
+}						t_bigint;
+
 
 int				ft_printf(const char *format, ...);
 
@@ -83,6 +111,7 @@ int				ft_handle_other(t_options *opt, t_buff *buffer, va_list ap);
 void			ft_parse_num(t_options *opt, t_buff *buffer, long long num);
 void			ft_parse_unum(t_options *opt, t_buff *buffer, \
 					unsigned long long unum);
+void			ft_parse_fnum(t_options *opt, t_buff *buffer, double num);
 
 void			ft_print_di(t_options *opt, t_buff *buffer, long long num);
 void			ft_print_uoxb(t_options *opt, t_buff *buffer, \
@@ -94,6 +123,15 @@ void			ft_print_ls(t_options *opt, t_buff *buffer, wchar_t *str);
 void			ft_print_p(t_options *opt, t_buff *buffer, void *pointer);
 void			ft_print_r(t_options *opt, t_buff *buffer, char *str);
 void			ft_print_rand(t_options *opt, t_buff *buffer);
+
+char			*ft_get_ipart(t_fnum *fnum, int shift);
+
+t_bigint		ft_get_bigint(unsigned long long num, unsigned long long shift);
+void			ft_reset_bigint(t_bigint *bigint);
+void			ft_set_bigint(t_bigint *bigint, int power);
+
+void			ft_bigint_sum_bigint(t_bigint *bigint1, t_bigint *bigint2);
+void			ft_bigint_multi_int(t_bigint *bigint, int num);
 
 void			ft_print_width(t_buff *buffer, int *width, char c);
 void			ft_print_prec(t_buff *buffer, int prec, int len);

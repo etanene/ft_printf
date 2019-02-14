@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 20:49:04 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/12 18:28:10 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/14 19:39:13 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,36 @@ int		ft_wstrnlen(wchar_t *str, int n)
 			break ;
 	}
 	return (len);
+}
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	unsigned char	*new_dst;
+	unsigned char	*new_src;
+
+	if (dst <= src)
+	{
+		new_dst = (unsigned char*)dst;
+		new_src = (unsigned char*)src;
+		while (len--)
+			*new_dst++ = *new_src++;
+	}
+	else
+	{
+		new_dst = (unsigned char*)dst + len - 1;
+		new_src = (unsigned char*)src + len - 1;
+		while (len--)
+			*new_dst-- = *new_src--;
+	}
+	return (dst);
+}
+
+int		ft_pow(int base, int power)
+{
+	int		res;
+
+	res = 1;
+	while (power--)
+		res *= base;
+	return (res);
 }

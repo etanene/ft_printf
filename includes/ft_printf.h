@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/13 22:07:04 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/14 19:38:58 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@
 # define MAX_DEC 20
 # define MAX_BIN 65
 
-# define MAX_POWER 15
+# define MAX_POWER 5
 # define MAX_NUM 100000000000000UL
+# define MAX_BIGINT 1024
 
 typedef struct	s_options
 {
@@ -72,13 +73,11 @@ typedef struct			s_fnum
 	char				sign;
 	int					exp;
 	unsigned long long	mantissa;
-	unsigned long long	ipart;
-	unsigned long long	fpart;
 }						t_fnum;
 
 typedef struct			s_bigint
 {
-	unsigned long long	num[1024];
+	unsigned long long	num[MAX_BIGINT];
 	int					size;
 }						t_bigint;
 
@@ -93,6 +92,8 @@ int				ft_atoi(const char *str);
 int				ft_unumlen(unsigned long long num, int base);
 int				ft_itoa_base(unsigned long long num, char *str, int base, \
 					char lower);
+void			*ft_memmove(void *dst, const void *src, size_t len);
+int				ft_pow(int base, int power);
 int				ft_strnlen(char *str, int n);
 int				ft_wstrnlen(wchar_t *str, int n);
 int				ft_rstrnlen(char *str, int n);
@@ -124,11 +125,11 @@ void			ft_print_p(t_options *opt, t_buff *buffer, void *pointer);
 void			ft_print_r(t_options *opt, t_buff *buffer, char *str);
 void			ft_print_rand(t_options *opt, t_buff *buffer);
 
-char			*ft_get_ipart(t_fnum *fnum, int shift);
+char			*ft_get_ipart(unsigned long long num, int shift, int base);
 
-t_bigint		ft_get_bigint(unsigned long long num, unsigned long long shift);
+t_bigint		ft_get_bigint(unsigned long long num, int shift, int base);
 void			ft_reset_bigint(t_bigint *bigint);
-void			ft_set_bigint(t_bigint *bigint, int power);
+void			ft_set_bigint(t_bigint *bigint, int power, int base);
 
 void			ft_bigint_sum_bigint(t_bigint *bigint1, t_bigint *bigint2);
 void			ft_bigint_multi_int(t_bigint *bigint, int num);

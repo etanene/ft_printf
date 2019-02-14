@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 16:27:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/13 17:20:53 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/14 19:47:49 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void		ft_reset_bigint(t_bigint *bigint)
 	int		i;
 
 	i = 0;
-	while (i < 1024)
+	while (i < MAX_BIGINT)
 		bigint->num[i++] = 0;
 	bigint->size = 0;
 }
 
-void		ft_set_bigint(t_bigint *bigint, int power)
+void		ft_set_bigint(t_bigint *bigint, int power, int base)
 {
 	int		num;
 	int		count;
@@ -30,7 +30,7 @@ void		ft_set_bigint(t_bigint *bigint, int power)
 	int		temp;
 
 	count = 0;
-	num = 1ULL << MAX_POWER;
+	num = ft_pow(base, MAX_POWER);
 	if (power >= MAX_POWER)
 		count = power / MAX_POWER;
 	last_pow = power % MAX_POWER;
@@ -41,15 +41,15 @@ void		ft_set_bigint(t_bigint *bigint, int power)
 		count--;
 	}
 	else
-		bigint->num[0] += 1ULL << last_pow;
+		bigint->num[0] += ft_pow(base, last_pow);
 	bigint->size = 1;
 	while (count--)
 		ft_bigint_multi_int(bigint, num);
 	if (temp)
-		ft_bigint_multi_int(bigint, 1ULL << last_pow);
+		ft_bigint_multi_int(bigint, ft_pow(base, last_pow));
 }
 
-t_bigint	ft_get_bigint(unsigned long long num, unsigned long long shift)
+t_bigint	ft_get_bigint(unsigned long long num, int shift, int base)
 {
 	t_bigint	res_bigint;
 	t_bigint	temp_bigint;
@@ -58,11 +58,14 @@ t_bigint	ft_get_bigint(unsigned long long num, unsigned long long shift)
 	power = 0;
 	ft_reset_bigint(&res_bigint);
 	ft_reset_bigint(&temp_bigint);
-	while (power < sizeof(num))
+	while (power < 64)
 	{
 		if (num & (1ULL << power))
 		{
-			ft_set_bigint(&temp_bigint, shift + power);
+			if (base == 2)
+				ft_set_bigint(&temp_bigint, shift + power, base);
+			else if (base == 5)
+				ft_set_bigint(&temp_bigint, 64 - power + shift, base);
 			ft_bigint_sum_bigint(&res_bigint, &temp_bigint);
 			ft_reset_bigint(&temp_bigint);
 		}

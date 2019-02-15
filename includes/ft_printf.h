@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/14 19:38:58 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:25:30 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 # define MAX_BIN 65
 
 # define MAX_POWER 5
-# define MAX_NUM 100000000000000UL
-# define MAX_BIGINT 1024
+# define MAX_NUM 100000000UL
+# define MAX_BIGINT 4096
 
 typedef struct	s_options
 {
@@ -80,7 +80,6 @@ typedef struct			s_bigint
 	unsigned long long	num[MAX_BIGINT];
 	int					size;
 }						t_bigint;
-
 
 int				ft_printf(const char *format, ...);
 
@@ -125,13 +124,16 @@ void			ft_print_p(t_options *opt, t_buff *buffer, void *pointer);
 void			ft_print_r(t_options *opt, t_buff *buffer, char *str);
 void			ft_print_rand(t_options *opt, t_buff *buffer);
 
-char			*ft_get_ipart(unsigned long long num, int shift, int base);
+char			*ft_get_part(unsigned long long num, int shift, \
+					t_bigint (*ft_get_bigint)(unsigned long long, int));
+t_bigint		ft_get_fpart(unsigned long long num, int shift);
+t_bigint		ft_get_ipart(unsigned long long num, int shift);
 
-t_bigint		ft_get_bigint(unsigned long long num, int shift, int base);
 void			ft_reset_bigint(t_bigint *bigint);
 void			ft_set_bigint(t_bigint *bigint, int power, int base);
 
 void			ft_bigint_sum_bigint(t_bigint *bigint1, t_bigint *bigint2);
+t_bigint		ft_bigint_multi_bigint(t_bigint *bigint1, t_bigint *bigint2);
 void			ft_bigint_multi_int(t_bigint *bigint, int num);
 
 void			ft_print_width(t_buff *buffer, int *width, char c);

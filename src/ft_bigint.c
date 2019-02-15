@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 16:27:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/14 19:47:49 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/15 18:20:12 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void		ft_set_bigint(t_bigint *bigint, int power, int base)
 	int		temp;
 
 	count = 0;
+	printf("power1: %d base: %d\n", power, base);
 	num = ft_pow(base, MAX_POWER);
 	if (power >= MAX_POWER)
 		count = power / MAX_POWER;
@@ -49,7 +50,38 @@ void		ft_set_bigint(t_bigint *bigint, int power, int base)
 		ft_bigint_multi_int(bigint, ft_pow(base, last_pow));
 }
 
-t_bigint	ft_get_bigint(unsigned long long num, int shift, int base)
+
+t_bigint	ft_get_fpart(unsigned long long num, int shift)
+{
+	t_bigint	res_bigint;
+	t_bigint	temp_bigint;
+	t_bigint	exp_bigint;
+	int			power;
+
+	power = 0;
+	ft_reset_bigint(&res_bigint);
+	ft_reset_bigint(&temp_bigint);
+	ft_reset_bigint(&exp_bigint);
+	exp_bigint.num[exp_bigint.size++] = 1;
+	while (power < 64)
+	{
+		if (num & (1ULL << power))
+		{
+			printf("powerdo: %d ", power);
+			ft_set_bigint(&temp_bigint, 64 - power + shift, 5);
+			temp_bigint = ft_bigint_multi_bigint(&temp_bigint, &exp_bigint);
+			ft_bigint_multi_int(&exp_bigint, 10);
+			ft_bigint_sum_bigint(&res_bigint, &temp_bigint);
+			ft_reset_bigint(&temp_bigint);
+		}
+		else if (!(exp_bigint.num[0] % 10))
+			ft_bigint_multi_int(&exp_bigint, 10);
+		power++;
+	}
+	return (res_bigint);
+}
+
+t_bigint	ft_get_ipart(unsigned long long num, int shift)
 {
 	t_bigint	res_bigint;
 	t_bigint	temp_bigint;
@@ -62,10 +94,7 @@ t_bigint	ft_get_bigint(unsigned long long num, int shift, int base)
 	{
 		if (num & (1ULL << power))
 		{
-			if (base == 2)
-				ft_set_bigint(&temp_bigint, shift + power, base);
-			else if (base == 5)
-				ft_set_bigint(&temp_bigint, 64 - power + shift, base);
+			ft_set_bigint(&temp_bigint, shift + power, 2);
 			ft_bigint_sum_bigint(&res_bigint, &temp_bigint);
 			ft_reset_bigint(&temp_bigint);
 		}
@@ -73,3 +102,37 @@ t_bigint	ft_get_bigint(unsigned long long num, int shift, int base)
 	}
 	return (res_bigint);
 }
+
+// t_bigint	ft_get_bigint(unsigned long long num, int shift, int base)
+// {
+// 	t_bigint	res_bigint;
+// 	t_bigint	temp_bigint;
+// 	t_bigint	exp_bigint;
+// 	int			power;
+
+// 	power = 0;
+// 	ft_reset_bigint(&res_bigint);
+// 	ft_reset_bigint(&temp_bigint);
+// 	ft_reset_bigint(&exp_bigint);
+// 	exp_bigint.num[exp_bigint.size++] = 1;
+// 	while (power < 64)
+// 	{
+// 		if (num & (1ULL << power))
+// 		{
+// 			if (base == 2)
+// 				ft_set_bigint(&temp_bigint, shift + power, base);
+// 			else if (base == 5)
+// 			{
+// 				ft_set_bigint(&temp_bigint, 64 - power + shift, base);
+// 				ft_bigint_multi_bigint(&temp_bigint, &exp_bigint);
+// 				ft_bigint_multi_int(&exp_bigint, 10);
+// 			}
+// 			ft_bigint_sum_bigint(&res_bigint, &temp_bigint);
+// 			ft_reset_bigint(&temp_bigint);
+// 		}
+// 		else if (exp_bigint.size > 1)
+// 			ft_bigint_multi_int(&exp_bigint, 10);
+// 		power++;
+// 	}
+// 	return (res_bigint);
+// }

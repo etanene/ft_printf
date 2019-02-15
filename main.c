@@ -6,13 +6,14 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 13:58:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/14 19:55:05 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/15 20:27:59 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <locale.h>
 #include <float.h>
+#include <limits.h>
 
 // typedef union			u_fnum
 // {
@@ -83,6 +84,8 @@ int		main(void)
 	
 	printf("%e\n", DBL_MIN);
 	printf("%e\n", DBL_MAX);
-	ft_printf("%f\n", 21.425);
+	printf("%f\n", DBL_MIN);
+	ft_printf("%f\n", 0.0025);
+	printf("len: %d\n", ft_unumlen(ULLONG_MAX, 10));
 	return (0);
 }

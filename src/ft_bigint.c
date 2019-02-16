@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 16:27:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/15 18:20:12 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/16 17:15:59 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void		ft_set_bigint(t_bigint *bigint, int power, int base)
 	int		temp;
 
 	count = 0;
-	printf("power1: %d base: %d\n", power, base);
 	num = ft_pow(base, MAX_POWER);
 	if (power >= MAX_POWER)
 		count = power / MAX_POWER;
@@ -67,7 +66,6 @@ t_bigint	ft_get_fpart(unsigned long long num, int shift)
 	{
 		if (num & (1ULL << power))
 		{
-			printf("powerdo: %d ", power);
 			ft_set_bigint(&temp_bigint, 64 - power + shift, 5);
 			temp_bigint = ft_bigint_multi_bigint(&temp_bigint, &exp_bigint);
 			ft_bigint_multi_int(&exp_bigint, 10);

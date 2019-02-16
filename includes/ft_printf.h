@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/15 19:25:30 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/16 18:59:37 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ typedef struct			s_fnum
 	union u_f			num;
 	char				sign;
 	int					exp;
-	unsigned long long	mantissa;
+	unsigned long long	man;
+	char				*ipart;
+	char				*fpart;
+	int					zero;
 }						t_fnum;
 
 typedef struct			s_bigint

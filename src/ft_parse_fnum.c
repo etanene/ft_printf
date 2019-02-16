@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 14:54:27 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/16 19:58:13 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/16 20:04:37 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ void	ft_print_f(t_options *opt, t_buff *buffer, t_fnum *fnum)
 	number = ft_get_fnum(fnum, opt->prec, len);
 	while (*number)
 		ft_in_buff(buffer, *number++);
+	free(number);
 	ft_print_width(buffer, &opt->width, ' ');
 }
 
@@ -218,4 +219,6 @@ void	ft_parse_fnum(t_options *opt, t_buff *buffer, double num)
 		fnum.zero = ft_get_zero(fnum.man << 11, -(fnum.exp + 1), fnum.fpart);
 	}
 	ft_print_f(opt, buffer, &fnum);
+	free(fnum.fpart);
+	free(fnum.fpart);
 }

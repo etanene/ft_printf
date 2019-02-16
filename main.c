@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 13:58:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/16 19:55:28 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/16 20:01:40 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		main(void)
 	printf("%e\n", DBL_MIN);
 	printf("%e\n", 0.00025);
 	printf("%-10f\n", 0.00025);
-	ft_printf("%.7f\n", 99.9999999);
+	ft_printf("%.1023f\n", DBL_MIN);
 	printf("len: %d\n", ft_unumlen(ULLONG_MAX, 10));
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bigint_operations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 17:07:49 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/15 17:50:12 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/18 22:15:48 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_bigint	ft_bigint_multi_bigint(t_bigint *bigint1, t_bigint *bigint2)
 	while (i < bigint1->size)
 	{
 		j = 0;
+		div = 0;
 		while (j < bigint2->size || div)
 		{
 			temp = result.num[i + j] + bigint1->num[i] * bigint2->num[j] + div;

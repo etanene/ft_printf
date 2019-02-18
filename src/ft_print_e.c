@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_e.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:00:27 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/18 19:01:23 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/18 22:55:26 by aleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_set_exp(char *number, t_fnum *fnum, char spec)
+{
+	int		numlen;
+
+	*number++ = spec;
+	*number++ = (fnum->fpart && !fnum->ipart) ? '-' : '+';
+	if (fnum->fpart && !fnum->ipart)
+	{
+		if ((numlen = ft_unumlen(fnum->zero, 10)) < 2)
+			*number++ = '0';
+		number += ft_itoa_base(fnum->zero + 1, number, 10, 0);
+	}
+	else
+	{
+		if (!fnum->ipart || ((numlen = ft_strnlen(fnum->ipart, -1)) < 11))
+			*number++ = '0';
+		if (!fnum->ipart || numlen == 1)
+			*number++ = '0';
+		else
+			number += ft_itoa_base(numlen - 1, number, 10, 0);
+	}
+	*number = '\0';
+}
 
 char	*ft_get_enum(t_fnum *fnum, int prec, int ilen, char spec)
 {
@@ -19,7 +43,6 @@ char	*ft_get_enum(t_fnum *fnum, int prec, int ilen, char spec)
 	char	*ipart;
 	char	*fpart;
 	char	*number;
-	int		numlen;
 
 	prec += prec ? 2 : 0;
 	number = (char*)malloc(ilen + prec + 2);
@@ -42,27 +65,9 @@ char	*ft_get_enum(t_fnum *fnum, int prec, int ilen, char spec)
 			number[i++] = *fpart++;
 		while (i < prec + 1)
 			number[i++] = '0';
-		ft_rounding(number, i - 1);
-		i--;
+		ft_rounding(number, --i);
 	}
-	number[i++] = spec;
-	number[i++] = (fnum->fpart && !fnum->ipart) ? '-' : '+';
-	if (fnum->fpart && !fnum->ipart)
-	{
-		if ((numlen = ft_unumlen(fnum->zero, 10)) < 2)
-			number[i++] = '0';
-		i+= ft_itoa_base(fnum->zero + 1, number + i, 10, 0);
-	}
-	else
-	{
-		if (!fnum->ipart || ((numlen = ft_strnlen(fnum->ipart, -1)) < 11))
-			number[i++] = '0';
-		if (!fnum->ipart || numlen == 1)
-			number[i++] = '0';
-		else
-			i += ft_itoa_base(numlen - 1, number + i, 10, 0);
-	}
-	number[i] = '\0';	
+	ft_set_exp(&number[i], fnum, spec);
 	return (number);
 }
 

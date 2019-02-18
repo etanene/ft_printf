@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 23:30:07 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/12 13:37:04 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/18 19:03:25 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,55 @@ void	ft_parse_unum(t_options *opt, t_buff *buffer, unsigned long long unum)
 		ft_print_uoxb(opt, buffer, (uintmax_t)unum);
 	else if (opt->length == LEN_Z)
 		ft_print_uoxb(opt, buffer, (size_t)unum);
+}
+
+int		ft_get_zero(unsigned long long num, int shift, char *fpart)
+{
+	int		len;
+	int		zero;
+	int		power;
+
+	len = ft_strnlen(fpart, -1);
+	zero = 0;
+	power = 0;
+	while (power < 64)
+	{
+		if (num & (1ULL << power))
+		{
+			zero = 64 - power + shift - len;
+			break;
+		}
+		power++;
+	}
+	return (zero);
+}
+
+void	ft_parse_fnum(t_options *opt, t_buff *buffer, double num, \
+				void (*ft_print)(t_options*, t_buff*, t_fnum*))
+{
+	t_fnum	fnum;
+
+	fnum.num.f = num;
+	fnum.sign = (fnum.num.ll & (1ULL << 63)) ? 1 : 0;
+	fnum.exp = ((fnum.num.ll >> 52) & 0x7FF) - 1023;
+	fnum.man = (fnum.num.ll & 0x1FFFFFFFFFFFFF) | 0x10000000000000;
+	fnum.ipart = NULL;
+	fnum.fpart = NULL;
+	fnum.zero = 0;
+	if (fnum.exp >= 52)
+		fnum.ipart = ft_get_part(fnum.man, fnum.exp - 52, ft_get_ipart);
+	else if (fnum.exp >= 0)
+	{
+		fnum.ipart = ft_get_part(fnum.man >> (52 - fnum.exp), 0, ft_get_ipart);
+		fnum.fpart = ft_get_part(fnum.man << (fnum.exp + 12), 0, ft_get_fpart);
+		fnum.zero = ft_get_zero(fnum.man << (fnum.exp + 12), 0, fnum.fpart);
+	}
+	else if (fnum.exp >= -1022)
+	{
+		fnum.fpart = ft_get_part(fnum.man << 11, -(fnum.exp + 1), ft_get_fpart);
+		fnum.zero = ft_get_zero(fnum.man << 11, -(fnum.exp + 1), fnum.fpart);
+	}
+	ft_print(opt, buffer, &fnum);
+	ft_strdel(&fnum.ipart);
+	ft_strdel(&fnum.fpart);
 }

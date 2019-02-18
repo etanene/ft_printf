@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/16 18:59:37 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/18 19:18:01 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,17 @@ void			ft_set_buff(t_buff *buffer);
 void			ft_out_buff(t_buff *buffer);
 void			ft_in_buff(t_buff *buffer, unsigned char c);
 
+void			ft_strdel(char **str);
+void			*ft_memmove(void *dst, const void *src, size_t len);
+int				ft_strnlen(char *str, int n);
+int				ft_wstrnlen(wchar_t *str, int n);
+int				ft_rstrnlen(char *str, int n);
+
+int				ft_pow(int base, int power);
 int				ft_atoi(const char *str);
 int				ft_unumlen(unsigned long long num, int base);
 int				ft_itoa_base(unsigned long long num, char *str, int base, \
 					char lower);
-void			*ft_memmove(void *dst, const void *src, size_t len);
-int				ft_pow(int base, int power);
-int				ft_strnlen(char *str, int n);
-int				ft_wstrnlen(wchar_t *str, int n);
-int				ft_rstrnlen(char *str, int n);
 
 void			ft_set_options(t_options *opt, const char **format, va_list ap);
 void			ft_set_flags(const char **format, t_options *opt);
@@ -114,7 +116,8 @@ int				ft_handle_other(t_options *opt, t_buff *buffer, va_list ap);
 void			ft_parse_num(t_options *opt, t_buff *buffer, long long num);
 void			ft_parse_unum(t_options *opt, t_buff *buffer, \
 					unsigned long long unum);
-void			ft_parse_fnum(t_options *opt, t_buff *buffer, double num);
+void			ft_parse_fnum(t_options *opt, t_buff *buffer, double num, \
+					void (*ft_print)(t_options*, t_buff*, t_fnum*));
 
 void			ft_print_di(t_options *opt, t_buff *buffer, long long num);
 void			ft_print_uoxb(t_options *opt, t_buff *buffer, \
@@ -125,7 +128,12 @@ void			ft_print_s(t_options *opt, t_buff *buffer, char *str);
 void			ft_print_ls(t_options *opt, t_buff *buffer, wchar_t *str);
 void			ft_print_p(t_options *opt, t_buff *buffer, void *pointer);
 void			ft_print_r(t_options *opt, t_buff *buffer, char *str);
+void			ft_print_f(t_options *opt, t_buff *buffer, t_fnum *fnum);
+void			ft_print_e(t_options *opt, t_buff *buffer, t_fnum *fnum);
 void			ft_print_rand(t_options *opt, t_buff *buffer);
+
+char			ft_get_sign_f(t_options *opt, char sign);
+void			ft_rounding(char *number, int len);
 
 char			*ft_get_part(unsigned long long num, int shift, \
 					t_bigint (*ft_get_bigint)(unsigned long long, int));

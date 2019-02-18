@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 16:27:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/16 17:15:59 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/18 19:02:33 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,36 +101,33 @@ t_bigint	ft_get_ipart(unsigned long long num, int shift)
 	return (res_bigint);
 }
 
-// t_bigint	ft_get_bigint(unsigned long long num, int shift, int base)
-// {
-// 	t_bigint	res_bigint;
-// 	t_bigint	temp_bigint;
-// 	t_bigint	exp_bigint;
-// 	int			power;
+char	*ft_get_part(unsigned long long num, int shift, \
+					t_bigint (*ft_get_bigint)(unsigned long long, int))
+{
+	t_bigint	bigint;
+	char		*result;
+	int			maxlen;
+	int			numlen;
+	int			size;
+	int			len;
 
-// 	power = 0;
-// 	ft_reset_bigint(&res_bigint);
-// 	ft_reset_bigint(&temp_bigint);
-// 	ft_reset_bigint(&exp_bigint);
-// 	exp_bigint.num[exp_bigint.size++] = 1;
-// 	while (power < 64)
-// 	{
-// 		if (num & (1ULL << power))
-// 		{
-// 			if (base == 2)
-// 				ft_set_bigint(&temp_bigint, shift + power, base);
-// 			else if (base == 5)
-// 			{
-// 				ft_set_bigint(&temp_bigint, 64 - power + shift, base);
-// 				ft_bigint_multi_bigint(&temp_bigint, &exp_bigint);
-// 				ft_bigint_multi_int(&exp_bigint, 10);
-// 			}
-// 			ft_bigint_sum_bigint(&res_bigint, &temp_bigint);
-// 			ft_reset_bigint(&temp_bigint);
-// 		}
-// 		else if (exp_bigint.size > 1)
-// 			ft_bigint_multi_int(&exp_bigint, 10);
-// 		power++;
-// 	}
-// 	return (res_bigint);
-// }
+	bigint = ft_get_bigint(num, shift);
+	if (!num)
+		bigint.size++;
+	size = bigint.size - 1;
+	maxlen = ft_unumlen(MAX_NUM, 10);
+	result = (char*)malloc(size * maxlen + ft_unumlen(bigint.num[size], 10) + 1);
+	len = ft_itoa_base(bigint.num[size], result, 10, 0);
+	while (size--)
+	{
+		numlen = ft_unumlen(bigint.num[size], 10);
+		while (numlen++ < maxlen - 1)
+			result[len++] = '0';
+		if (!bigint.num[size])
+			result[len++] = '0';
+		else
+			len += ft_itoa_base(bigint.num[size], result + len, 10, 0);
+	}
+	result[len] = '\0';
+	return (result);
+}

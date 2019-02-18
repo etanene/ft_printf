@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
+/*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 13:58:05 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/17 13:41:14 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/18 18:19:54 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ int		main(void)
 	// printf("len: %d\n", len);
 
 	
-	printf("%e\n", DBL_MIN);
-	printf("%e\n", 0.00025);
-	printf("%-+10f f\n", -0.00025);
-	ft_printf("%-+10f f\n", -0.00025);
-	printf("len: %d\n", ft_unumlen(ULLONG_MAX, 10));
+	printf("%.1020e\n", 0.1);
+	ft_printf("%.1020e\n", 0.1);
+	// printf("%e\n", 0.00025);
+	// printf("%f f\n", DBL_MIN);
+	// ft_printf("%f f\n", 0.135);
 	return (0);
 }

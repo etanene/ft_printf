@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 16:37:31 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/14 19:39:46 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/18 19:10:38 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int		ft_handle_other(t_options *opt, t_buff *buffer, va_list ap)
 	// else if (opt->spec == 'f' && opt->length == LEN_LL)
 	// 	ft_parse_lfnum(opt, buffer, va_arg(ap, long double));
 	else if (opt->spec == 'f' || opt->spec == 'F')
-		ft_parse_fnum(opt, buffer, va_arg(ap, double));
+		ft_parse_fnum(opt, buffer, va_arg(ap, double), ft_print_f);
+	// else if (opt->spec == 'e' && opt->length == LEN_LL)
+	// 	ft_parse_lfnum(opt, buffer, va_arg(ap, long double));
+	else if (opt->spec == 'e' || opt->spec == 'E')
+		ft_parse_fnum(opt, buffer, va_arg(ap, double), ft_print_e);
 	else if (opt->spec == 'p')
 		ft_print_p(opt, buffer, va_arg(ap, void*));
 	else if (opt->spec == 'r')
@@ -71,8 +75,6 @@ void	ft_handle_spec(t_options *opt, t_buff *buffer, va_list ap)
 		return ;
 	else if (ft_handle_other(opt, buffer, ap))
 		return ;
-	// else if (opt->spec == '%')
-	// 	ft_print_perc(opt, buffer, '%');
 	else if (opt->spec)
 		ft_print_rand(opt, buffer);
 }

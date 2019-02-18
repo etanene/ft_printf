@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:13:29 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/18 19:14:49 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/18 19:37:12 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,23 @@ int		ft_wstrnlen(wchar_t *str, int n)
 		}
 		else
 			break ;
+	}
+	return (len);
+}
+
+int		ft_rstrnlen(char *str, int n)
+{
+	int		len;
+
+	len = 0;
+	while (n--)
+	{
+		if (!*str)
+			break ;
+		if ((*str >= 7 && *str <= 13) || *str == '\e')
+			len++;
+		len++;
+		str++;
 	}
 	return (len);
 }

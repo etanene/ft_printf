@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:00:27 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/12 16:53:14 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/18 19:37:04 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,6 @@ void	ft_print_rand(t_options *opt, t_buff *buffer)
 	ft_in_buff(buffer, opt->spec);
 	if (opt->flags & F_MINUS)
 		ft_print_width(buffer, &opt->width, ' ');
-}
-
-int		ft_rstrnlen(char *str, int n)
-{
-	int		len;
-
-	len = 0;
-	while (n--)
-	{
-		if (!*str)
-			break ;
-		if ((*str >= 7 && *str <= 13) || *str == '\e')
-			len++;
-		len++;
-		str++;
-	}
-	return (len);
 }
 
 void	ft_print_r(t_options *opt, t_buff *buffer, char *str)

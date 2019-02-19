@@ -6,7 +6,7 @@
 #    By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/10 16:37:58 by aleksandr         #+#    #+#              #
-#    Updated: 2019/02/19 17:06:24 by afalmer-         ###   ########.fr        #
+#    Updated: 2019/02/19 18:42:40 by afalmer-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,6 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(HEADER)
 
 $(OBJDIR):
 	mkdir obj/
-
-main.o: main.c
-	gcc -c $< -o $@ -I $(INCLUDES) -g
-
-ex: main.o $(NAME)
-	gcc $(FLAGS) $< $(NAME)
 
 clean:
 	rm -rf $(OBJ) main.o

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 23:30:07 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/19 13:37:59 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 18:35:28 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		ft_get_zero(unsigned long long num, int shift, char *fpart)
 		if (num & (1ULL << power))
 		{
 			zero = 64 - power + shift - len;
-			break;
+			break ;
 		}
 		power++;
 	}

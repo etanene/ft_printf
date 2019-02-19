@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 20:27:24 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/12 17:17:54 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 18:36:38 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	ft_set_prec(const char **format, t_options *opt, va_list ap)
 		}
 		else
 			opt->prec = 0;
-		// if (opt->prec < 0)
 	}
 }
 
@@ -93,7 +92,7 @@ void	ft_set_length(const char **format, t_options *opt)
 		else if (**format == 'j')
 			opt->length = opt->length < LEN_J ? LEN_J : opt->length;
 		else
-			break;
+			break ;
 		(*format)++;
 	}
 }

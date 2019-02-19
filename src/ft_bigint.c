@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 16:27:20 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/18 19:02:33 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 18:32:22 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void		ft_set_bigint(t_bigint *bigint, int power, int base)
 	if (temp)
 		ft_bigint_multi_int(bigint, ft_pow(base, last_pow));
 }
-
 
 t_bigint	ft_get_fpart(unsigned long long num, int shift)
 {
@@ -101,12 +100,11 @@ t_bigint	ft_get_ipart(unsigned long long num, int shift)
 	return (res_bigint);
 }
 
-char	*ft_get_part(unsigned long long num, int shift, \
+char		*ft_get_part(unsigned long long num, int shift, \
 					t_bigint (*ft_get_bigint)(unsigned long long, int))
 {
 	t_bigint	bigint;
-	char		*result;
-	int			maxlen;
+	char		*res;
 	int			numlen;
 	int			size;
 	int			len;
@@ -115,19 +113,18 @@ char	*ft_get_part(unsigned long long num, int shift, \
 	if (!num)
 		bigint.size++;
 	size = bigint.size - 1;
-	maxlen = ft_unumlen(MAX_NUM, 10);
-	result = (char*)malloc(size * maxlen + ft_unumlen(bigint.num[size], 10) + 1);
-	len = ft_itoa_base(bigint.num[size], result, 10, 0);
+	res = (char*)malloc(size * NUM_LEN + ft_unumlen(bigint.num[size], 10) + 1);
+	len = ft_itoa_base(bigint.num[size], res, 10, 0);
 	while (size--)
 	{
 		numlen = ft_unumlen(bigint.num[size], 10);
-		while (numlen++ < maxlen - 1)
-			result[len++] = '0';
+		while (numlen++ < NUM_LEN - 1)
+			res[len++] = '0';
 		if (!bigint.num[size])
-			result[len++] = '0';
+			res[len++] = '0';
 		else
-			len += ft_itoa_base(bigint.num[size], result + len, 10, 0);
+			len += ft_itoa_base(bigint.num[size], res + len, 10, 0);
 	}
-	result[len] = '\0';
-	return (result);
+	res[len] = '\0';
+	return (res);
 }

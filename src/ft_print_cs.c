@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:05:27 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/12 18:33:16 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 18:36:19 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_print_c(t_options *opt, t_buff *buffer, unsigned char c)
 {
-	// if (opt->flags & F_MINUS)
-	// 	opt->flags &= ~F_NULL;
 	opt->width--;
 	if (!(opt->flags & F_MINUS))
 		ft_print_width(buffer, &opt->width, (opt->flags & F_NULL) ? '0' : ' ');

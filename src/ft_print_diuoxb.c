@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 00:55:24 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/12 20:04:18 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 18:38:23 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	ft_print_di(t_options *opt, t_buff *buffer, long long num)
 		number[len++] = '0';
 	else
 		len = ft_itoa_base(unum, number, 10, opt->flags & F_LOWER);
-	if (len > opt->prec && (opt->prec || num))
-		opt->prec = len;
+	opt->prec = (len > opt->prec && (opt->prec || num)) ? len : opt->prec;
 	opt->width -= opt->prec;
 	if (!(opt->flags & (F_NULL + F_MINUS)))
 		ft_print_width(buffer, &opt->width, ' ');

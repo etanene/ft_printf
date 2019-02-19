@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 14:54:27 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/19 12:41:58 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 18:35:46 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_rounding(char *number, int len)
 			if (number[len] == '9')
 				number[len] = '0';
 			else if (number[len] != '.')
-				break;
+				break ;
 			len--;
 		}
 		if (len >= 0)

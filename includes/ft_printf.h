@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/19 16:43:35 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 18:32:11 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,25 @@
 
 # define MAX_POWER 5
 # define MAX_NUM 100000000UL
+# define NUM_LEN 9
 # define MAX_BIGINT 1536
 
-typedef struct	s_options
+typedef struct			s_options
 {
-	int			flags;
-	int			width;
-	int			prec;
-	int			length;
-	int			base;
-	char		spec;
-}				t_options;
+	int					flags;
+	int					width;
+	int					prec;
+	int					length;
+	int					base;
+	char				spec;
+}						t_options;
 
-typedef struct	s_buff
+typedef struct			s_buff
 {
-	char		buff[MAX_LEN];
-	int			i;
-	int			len;
-}				t_buff;
+	char				buff[MAX_LEN];
+	int					i;
+	int					len;
+}						t_buff;
 
 union					u_f
 {
@@ -84,75 +85,92 @@ typedef struct			s_bigint
 	int					size;
 }						t_bigint;
 
-int				ft_printf(const char *format, ...);
+int						ft_printf(const char *format, ...);
 
-void			ft_set_buff(t_buff *buffer);
-void			ft_out_buff(t_buff *buffer);
-void			ft_in_buff(t_buff *buffer, unsigned char c);
+void					ft_set_buff(t_buff *buffer);
+void					ft_out_buff(t_buff *buffer);
+void					ft_in_buff(t_buff *buffer, unsigned char c);
 
-void			ft_strdel(char **str);
-void			*ft_memmove(void *dst, const void *src, size_t len);
-int				ft_strnlen(char *str, int n);
-int				ft_wstrnlen(wchar_t *str, int n);
-int				ft_rstrnlen(char *str, int n);
+void					ft_strdel(char **str);
+void					*ft_memmove(void *dst, const void *src, size_t len);
+int						ft_strnlen(char *str, int n);
+int						ft_wstrnlen(wchar_t *str, int n);
+int						ft_rstrnlen(char *str, int n);
 
-int				ft_pow(int base, int power);
-int				ft_atoi(const char *str);
-int				ft_unumlen(unsigned long long num, int base);
-int				ft_itoa_base(unsigned long long num, char *str, int base, \
-					char lower);
+int						ft_pow(int base, int power);
+int						ft_atoi(const char *str);
+int						ft_unumlen(unsigned long long num, int base);
+int						ft_itoa_base(unsigned long long num, char *str, \
+							int base, char lower);
 
-void			ft_set_options(t_options *opt, const char **format, va_list ap);
-void			ft_set_flags(const char **format, t_options *opt);
-void			ft_set_width(const char **format, t_options *opt, va_list ap);
-void			ft_set_prec(const char **format, t_options *opt, va_list ap);
-void			ft_set_length(const char **format, t_options *opt);
-int				ft_set_spec(char c, t_options *opt);
+void					ft_set_options(t_options *opt, const char **format, \
+							va_list ap);
+void					ft_set_flags(const char **format, t_options *opt);
+void					ft_set_width(const char **format, t_options *opt, \
+							va_list ap);
+void					ft_set_prec(const char **format, t_options *opt, \
+							va_list ap);
+void					ft_set_length(const char **format, t_options *opt);
+int						ft_set_spec(char c, t_options *opt);
 
-void			ft_handle_spec(t_options *opt, t_buff *buffer, va_list ap);
-int				ft_handle_num(t_options *opt, t_buff *buffer, va_list ap);
-int				ft_handle_other(t_options *opt, t_buff *buffer, va_list ap);
+void					ft_handle_spec(t_options *opt, t_buff *buffer, \
+							va_list ap);
+int						ft_handle_num(t_options *opt, t_buff *buffer, \
+							va_list ap);
+int						ft_handle_other(t_options *opt, t_buff *buffer, \
+							va_list ap);
 
-void			ft_parse_num(t_options *opt, t_buff *buffer, long long num);
-void			ft_parse_unum(t_options *opt, t_buff *buffer, \
-					unsigned long long unum);
-void			ft_parse_fnum(t_options *opt, t_buff *buffer, double num, \
-					void (*ft_print)(t_options*, t_buff*, t_fnum*));
-void			ft_parse_lfnum(t_options *opt, t_buff *buffer, long double num,\
-				void (*ft_print)(t_options*, t_buff*, t_fnum*));
+void					ft_parse_num(t_options *opt, t_buff *buffer, \
+							long long num);
+void					ft_parse_unum(t_options *opt, t_buff *buffer, \
+							unsigned long long unum);
+void					ft_parse_fnum(t_options *opt, t_buff *buffer, \
+							double num, \
+							void (*ft_print)(t_options*, t_buff*, t_fnum*));
+void					ft_parse_lfnum(t_options *opt, t_buff *buffer, \
+							long double num, \
+							void (*ft_print)(t_options*, t_buff*, t_fnum*));
 
-void			ft_print_di(t_options *opt, t_buff *buffer, long long num);
-void			ft_print_uoxb(t_options *opt, t_buff *buffer, \
-					unsigned long long unum);
-void			ft_print_c(t_options *opt, t_buff *buffer, unsigned char c);
-void			ft_print_lc(t_options *opt, t_buff *buffer, wchar_t c);
-void			ft_print_s(t_options *opt, t_buff *buffer, char *str);
-void			ft_print_ls(t_options *opt, t_buff *buffer, wchar_t *str);
-void			ft_print_p(t_options *opt, t_buff *buffer, void *pointer);
-void			ft_print_r(t_options *opt, t_buff *buffer, char *str);
-void			ft_print_f(t_options *opt, t_buff *buffer, t_fnum *fnum);
-void			ft_print_e(t_options *opt, t_buff *buffer, t_fnum *fnum);
-void			ft_print_k(t_options *opt, t_buff *buffer, \
-					unsigned long long unum);
-void			ft_print_rand(t_options *opt, t_buff *buffer);
+void					ft_print_di(t_options *opt, t_buff *buffer, \
+							long long num);
+void					ft_print_uoxb(t_options *opt, t_buff *buffer, \
+							unsigned long long unum);
+void					ft_print_c(t_options *opt, t_buff *buffer, \
+							unsigned char c);
+void					ft_print_lc(t_options *opt, t_buff *buffer, wchar_t c);
+void					ft_print_s(t_options *opt, t_buff *buffer, char *str);
+void					ft_print_ls(t_options *opt, t_buff *buffer, \
+							wchar_t *str);
+void					ft_print_p(t_options *opt, t_buff *buffer, \
+							void *pointer);
+void					ft_print_r(t_options *opt, t_buff *buffer, char *str);
+void					ft_print_f(t_options *opt, t_buff *buffer, \
+							t_fnum *fnum);
+void					ft_print_e(t_options *opt, t_buff *buffer, \
+							t_fnum *fnum);
+void					ft_print_k(t_options *opt, t_buff *buffer, \
+							unsigned long long unum);
+void					ft_print_rand(t_options *opt, t_buff *buffer);
 
-char			ft_get_sign_f(t_options *opt, char sign);
-void			ft_rounding(char *number, int len);
+char					ft_get_sign_f(t_options *opt, char sign);
+void					ft_rounding(char *number, int len);
 
-char			*ft_get_part(unsigned long long num, int shift, \
-					t_bigint (*ft_get_bigint)(unsigned long long, int));
-t_bigint		ft_get_fpart(unsigned long long num, int shift);
-t_bigint		ft_get_ipart(unsigned long long num, int shift);
+char					*ft_get_part(unsigned long long num, int shift, \
+							t_bigint (*ft_get_bigint)(unsigned long long, int));
+t_bigint				ft_get_fpart(unsigned long long num, int shift);
+t_bigint				ft_get_ipart(unsigned long long num, int shift);
 
-void			ft_reset_bigint(t_bigint *bigint);
-void			ft_set_bigint(t_bigint *bigint, int power, int base);
+void					ft_reset_bigint(t_bigint *bigint);
+void					ft_set_bigint(t_bigint *bigint, int power, int base);
 
-void			ft_bigint_sum_bigint(t_bigint *bigint1, t_bigint *bigint2);
-t_bigint		ft_bigint_multi_bigint(t_bigint *bigint1, t_bigint *bigint2);
-void			ft_bigint_multi_int(t_bigint *bigint, int num);
+void					ft_bigint_sum_bigint(t_bigint *bigint1, \
+							t_bigint *bigint2);
+t_bigint				ft_bigint_multi_bigint(t_bigint *bigint1, \
+							t_bigint *bigint2);
+void					ft_bigint_multi_int(t_bigint *bigint, int num);
 
-void			ft_print_width(t_buff *buffer, int *width, char c);
-void			ft_print_prec(t_buff *buffer, int prec, int len);
-void			ft_print_sharp(t_buff *buffer, t_options *opt);
+void					ft_print_width(t_buff *buffer, int *width, char c);
+void					ft_print_prec(t_buff *buffer, int prec, int len);
+void					ft_print_sharp(t_buff *buffer, t_options *opt);
 
 #endif

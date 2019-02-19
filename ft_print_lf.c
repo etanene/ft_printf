@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 16:35:23 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/04 19:28:53 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/14 17:33:10 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ int		ft_parse_lf(t_options opt, long double num)
 
 	len = 0;
 	fnum_div.fnum.lf = num;
+	ft_printbits(*(&fnum_div.fnum.ll + 1), 64);
+	ft_printbits(fnum_div.fnum.ll, 64);
+	ft_putchar('\n');
 	fnum_div.sign = ft_checkbit(*(&fnum_div.fnum.ll + 1), 15);
 	fnum_div.exponent = (*(&fnum_div.fnum.ll + 1) & 0x7FFF) - 16383;
 	fnum_div.mantissa = fnum_div.fnum.ll;

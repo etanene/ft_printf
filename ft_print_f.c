@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 12:21:14 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/04 19:30:37 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/14 15:05:33 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,9 @@ int		ft_parse_f(t_options opt, double num)
 	fnum_div.ipart = 0;
 	fnum_div.fpart = 0;
 	len = 0;
+	printf("exp: %d\n", fnum_div.exponent);
+	ft_printbits(fnum_div.mantissa, 64);
+	ft_putchar('\n');
 	if (fnum_div.exponent >= 52)
 		len = ft_print_ipart_bigint(opt, fnum_div, 52);
 	else if (fnum_div.exponent >= 0)

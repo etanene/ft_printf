@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 18:32:10 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/18 19:18:01 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 16:43:35 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define MAX_POWER 5
 # define MAX_NUM 100000000UL
-# define MAX_BIGINT 4096
+# define MAX_BIGINT 1536
 
 typedef struct	s_options
 {
@@ -118,6 +118,8 @@ void			ft_parse_unum(t_options *opt, t_buff *buffer, \
 					unsigned long long unum);
 void			ft_parse_fnum(t_options *opt, t_buff *buffer, double num, \
 					void (*ft_print)(t_options*, t_buff*, t_fnum*));
+void			ft_parse_lfnum(t_options *opt, t_buff *buffer, long double num,\
+				void (*ft_print)(t_options*, t_buff*, t_fnum*));
 
 void			ft_print_di(t_options *opt, t_buff *buffer, long long num);
 void			ft_print_uoxb(t_options *opt, t_buff *buffer, \
@@ -130,6 +132,8 @@ void			ft_print_p(t_options *opt, t_buff *buffer, void *pointer);
 void			ft_print_r(t_options *opt, t_buff *buffer, char *str);
 void			ft_print_f(t_options *opt, t_buff *buffer, t_fnum *fnum);
 void			ft_print_e(t_options *opt, t_buff *buffer, t_fnum *fnum);
+void			ft_print_k(t_options *opt, t_buff *buffer, \
+					unsigned long long unum);
 void			ft_print_rand(t_options *opt, t_buff *buffer);
 
 char			ft_get_sign_f(t_options *opt, char sign);

@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 16:37:31 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/18 19:10:38 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 16:42:55 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ int		ft_handle_other(t_options *opt, t_buff *buffer, va_list ap)
 		ft_print_s(opt, buffer, va_arg(ap, char*));
 	else if (opt->spec == 'S' || (opt->spec == 's' && opt->length == LEN_L))
 		ft_print_ls(opt, buffer, va_arg(ap, wchar_t*));
-	// else if (opt->spec == 'f' && opt->length == LEN_LL)
-	// 	ft_parse_lfnum(opt, buffer, va_arg(ap, long double));
+	else if (opt->spec == 'f' && opt->length == LEN_LL)
+		ft_parse_lfnum(opt, buffer, va_arg(ap, long double), ft_print_f);
 	else if (opt->spec == 'f' || opt->spec == 'F')
 		ft_parse_fnum(opt, buffer, va_arg(ap, double), ft_print_f);
-	// else if (opt->spec == 'e' && opt->length == LEN_LL)
-	// 	ft_parse_lfnum(opt, buffer, va_arg(ap, long double));
+	else if (opt->spec == 'e' && opt->length == LEN_LL)
+		ft_parse_lfnum(opt, buffer, va_arg(ap, long double), ft_print_e);
 	else if (opt->spec == 'e' || opt->spec == 'E')
 		ft_parse_fnum(opt, buffer, va_arg(ap, double), ft_print_e);
 	else if (opt->spec == 'p')
 		ft_print_p(opt, buffer, va_arg(ap, void*));
 	else if (opt->spec == 'r')
 		ft_print_r(opt, buffer, va_arg(ap, char*));
-	// else if (opt->spec == 'k')
-	// 	ft_print_k(opt, buffer, va_arg(ap, unsigned long long));
+	else if (opt->spec == 'k')
+		ft_print_k(opt, buffer, va_arg(ap, unsigned long long));
 	else
 		return (0);
 	return (1);

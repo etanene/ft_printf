@@ -6,7 +6,7 @@
 #    By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/10 16:37:58 by aleksandr         #+#    #+#              #
-#    Updated: 2019/02/18 19:12:41 by afalmer-         ###   ########.fr        #
+#    Updated: 2019/02/19 17:06:24 by afalmer-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ ex: main.o $(NAME)
 
 clean:
 	rm -rf $(OBJ) main.o
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -rf $(NAME)

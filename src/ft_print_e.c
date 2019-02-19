@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_e.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleksandr <aleksandr@student.42.fr>        +#+  +:+       +#+        */
+/*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:00:27 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/18 22:55:26 by aleksandr        ###   ########.fr       */
+/*   Updated: 2019/02/19 13:16:01 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ void	ft_set_exp(char *number, t_fnum *fnum, char spec)
 	*number = '\0';
 }
 
+int		ft_get_first_enum(char *number, char **ipart, char **fpart)
+{
+	int		i;
+
+	i = 0;
+	if (!*ipart && !*fpart)
+		number[i++] = '0';
+	else
+		number[i++] = *ipart ? *(*ipart)++ : *(*fpart)++;
+	number[i++] = '.';
+	return (i);
+}
+
 char	*ft_get_enum(t_fnum *fnum, int prec, int ilen, char spec)
 {
 	int		i;
@@ -44,29 +57,21 @@ char	*ft_get_enum(t_fnum *fnum, int prec, int ilen, char spec)
 	char	*fpart;
 	char	*number;
 
-	prec += prec ? 2 : 0;
 	number = (char*)malloc(ilen + prec + 2);
 	ipart = fnum->ipart;
 	fpart = fnum->fpart;
 	zero = fnum->zero;
-	i = 0;
-	if (!ipart && !fpart)
+	i = ft_get_first_enum(number, &ipart, &fpart);
+	while (ipart && *ipart && (i < prec + 1))
+		number[i++] = *ipart++;
+	while (ipart && zero-- && (i < prec + 1))
 		number[i++] = '0';
-	else
-		number[i++] = ipart ? *ipart++ : *fpart++;
-	if (prec)
-	{
-		number[i++] = '.';
-		while (ipart && *ipart && (i < prec + 1))
-			number[i++] = *ipart++;
-		while (ipart && zero-- && (i < prec + 1))
-			number[i++] = '0';
-		while (fpart && *fpart && (i < prec + 1))
-			number[i++] = *fpart++;
-		while (i < prec + 1)
-			number[i++] = '0';
-		ft_rounding(number, --i);
-	}
+	while (fpart && *fpart && (i < prec + 1))
+		number[i++] = *fpart++;
+	while (i < prec + 1)
+		number[i++] = '0';
+	ft_rounding(number, --i);
+	i = prec == 2 ? --i : i;
 	ft_set_exp(&number[i], fnum, spec);
 	return (number);
 }
@@ -89,7 +94,7 @@ void	ft_print_e(t_options *opt, t_buff *buffer, t_fnum *fnum)
 		ft_in_buff(buffer, sign);
 	if (!(opt->flags & F_MINUS))
 		ft_print_width(buffer, &opt->width, (opt->flags & F_NULL) ? '0' : ' ');
-	number = ft_get_enum(fnum, opt->prec, len, opt->spec);
+	number = ft_get_enum(fnum, opt->prec + 2, len, opt->spec);
 	temp = number;
 	while (*temp)
 		ft_in_buff(buffer, *temp++);

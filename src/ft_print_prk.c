@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:00:27 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/18 19:37:04 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 17:05:47 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,38 +53,38 @@ void	ft_print_r(t_options *opt, t_buff *buffer, char *str)
 		ft_print_width(buffer, &opt->width, ' ');
 }
 
-// hh:mm:ss	
+void	ft_reset_opt_k(t_options *opt)
+{
+	opt->flags = 0;
+	opt->width = -1;
+	opt->prec = 2;
+	opt->base = 10;
+}
 
-// void	ft_print_k(t_options *opt, t_buff *buffer, unsigned long long unum)
-// {
-// 	char	str[20];
-// 	int		len;
-// 	int		sec;
-// 	int		minutes;
-// 	int		hours;
+void	ft_print_k(t_options *opt, t_buff *buffer, unsigned long long unum)
+{
+	int		sec;
+	int		minutes;
+	int		hours;
 
-// 	len = 0;
-// 	// if (!unum)
-// 	// 	number[len++] = '0';
-// 	// else
-// 	// 	len = ft_itoa_base(unum, number, 10, 0);
-// 	sec = unum % 60;
-// 	unum /= 60;
-// 	minutes = unum % 60;
-// 	unum /= 60;
-// 	hours = unum;
-// 	while (len < 2)
-// 	{
-// 		str[len++] = sec % 10;
-// 		sec /= 10;
-// 	}
-// 	if (minutes)
-// 		str[len++] = ':';
-// 	while (len < 5)
-// 	{
-// 		str[len++] = minutes % 10;
-// 		minutes / 10;
-// 	}
-// 	if (hours)
-// 		str[len++] = ':';
-// }
+	sec = unum % 60;
+	unum /= 60;
+	minutes = unum % 60;
+	unum /= 60;
+	hours = unum;
+	ft_reset_opt_k(opt);
+	if (hours)
+		ft_print_di(opt, buffer, hours);
+	if (minutes || hours)
+	{
+		if (hours)
+			ft_in_buff(buffer, ':');
+		ft_print_di(opt, buffer, minutes);
+	}
+	if (sec || minutes || hours)
+	{
+		if (minutes || hours)
+			ft_in_buff(buffer, ':');
+		ft_print_di(opt, buffer, sec);
+	}
+}

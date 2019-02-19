@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 23:30:07 by aleksandr         #+#    #+#             */
-/*   Updated: 2019/02/18 19:03:25 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 13:37:59 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,36 @@ void	ft_parse_fnum(t_options *opt, t_buff *buffer, double num, \
 	{
 		fnum.fpart = ft_get_part(fnum.man << 11, -(fnum.exp + 1), ft_get_fpart);
 		fnum.zero = ft_get_zero(fnum.man << 11, -(fnum.exp + 1), fnum.fpart);
+	}
+	ft_print(opt, buffer, &fnum);
+	ft_strdel(&fnum.ipart);
+	ft_strdel(&fnum.fpart);
+}
+
+void	ft_parse_lfnum(t_options *opt, t_buff *buffer, long double num, \
+				void (*ft_print)(t_options*, t_buff*, t_fnum*))
+{
+	t_fnum	fnum;
+
+	fnum.num.lf = num;
+	fnum.sign = (*(&fnum.num.ll + 1) & (1ULL << 15)) ? 1 : 0;
+	fnum.exp = (*(&fnum.num.ll + 1) & 0x7FFF) - 16383;
+	fnum.man = fnum.num.ll;
+	fnum.ipart = NULL;
+	fnum.fpart = NULL;
+	fnum.zero = 0;
+	if (fnum.exp >= 64)
+		fnum.ipart = ft_get_part(fnum.man, fnum.exp - 63, ft_get_ipart);
+	else if (fnum.exp >= 0)
+	{
+		fnum.ipart = ft_get_part(fnum.man >> (63 - fnum.exp), 0, ft_get_ipart);
+		fnum.fpart = ft_get_part(fnum.man << (fnum.exp + 1), 0, ft_get_fpart);
+		fnum.zero = ft_get_zero(fnum.man << (fnum.exp + 1), 0, fnum.fpart);
+	}
+	else if (fnum.exp >= -16382)
+	{
+		fnum.fpart = ft_get_part(fnum.man, -(fnum.exp + 1), ft_get_fpart);
+		fnum.zero = ft_get_zero(fnum.man, -(fnum.exp + 1), fnum.fpart);
 	}
 	ft_print(opt, buffer, &fnum);
 	ft_strdel(&fnum.ipart);

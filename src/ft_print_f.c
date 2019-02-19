@@ -6,7 +6,7 @@
 /*   By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 14:54:27 by afalmer-          #+#    #+#             */
-/*   Updated: 2019/02/18 19:03:28 by afalmer-         ###   ########.fr       */
+/*   Updated: 2019/02/19 12:41:58 by afalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,22 @@ char	*ft_get_fnum(t_fnum *fnum, int prec, int ilen)
 	char	*ipart;
 	char	*fpart;
 
-	prec += prec ? 2 : 0;
+	prec += 2;
 	number = (char*)malloc(ilen + prec + 1);
 	ipart = fnum->ipart ? fnum->ipart : "0";
 	fpart = fnum->fpart ? fnum->fpart : "0";
 	i = 0;
 	while (i < ilen)
 		number[i++] = *ipart++;
-	if (prec)
-	{
-		number[i++] = '.';
-		while (fnum->zero-- && (i < ilen + prec))
-			number[i++] = '0';
-		while (*fpart && (i < ilen + prec))
-			number[i++] = *fpart++;
-		while (i < ilen + prec)
-				number[i++] = '0';	
-		ft_rounding(number, i - 1);
-	}
-	number[i] = '\0';
+	number[i++] = '.';
+	while (fnum->zero-- && (i < ilen + prec))
+		number[i++] = '0';
+	while (*fpart && (i < ilen + prec))
+		number[i++] = *fpart++;
+	while (i < ilen + prec)
+		number[i++] = '0';
+	ft_rounding(number, i - 1);
+	number[i - 2] = (prec == 2) ? '\0' : number[i - 2];
 	return (number);
 }
 

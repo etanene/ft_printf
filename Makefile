@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/12/28 19:13:21 by afalmer-          #+#    #+#              #
-#    Updated: 2019/02/07 18:56:03 by afalmer-         ###   ########.fr        #
+#    Created: 2019/02/10 16:37:58 by aleksandr         #+#    #+#              #
+#    Updated: 2019/02/19 17:06:24 by afalmer-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,31 +14,39 @@ NAME = libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror
 
-OBJ =	obj/ft_printf.o obj/ft_putchar.o obj/ft_atoi.o obj/ft_set_options.o \
-		obj/ft_parse_nums.o obj/ft_num_base.o obj/ft_print_di.o \
-		obj/ft_print_c.o obj/ft_print_s.o \
-		obj/ft_print_options.o obj/ft_print_u.o obj/ft_print_o.o \
-		obj/ft_print_x.o obj/ft_print_f.o obj/ft_bigint.o obj/ft_bits.o \
-		obj/ft_print_lf.o obj/ft_print_p.o obj/ft_print_b.o obj/ft_itoa.o \
-		obj/ft_print_k.o obj/ft_print_r.o obj/ft_print_perc.o \
-		obj/ft_print_rand.o
+SRCDIR = src/
+SRC = ft_printf.c ft_buff_manage.c ft_set_options.c ft_parse_nums.c \
+		ft_print_options.c ft_print_diuoxb.c ft_print_cs.c ft_print_prk.c \
+		ft_print_f.c ft_print_e.c ft_bigint.c ft_bigint_operations.c \
+		ft_utils_str.c ft_utils_num.c
 
-HEADER = ft_printf.h
+OBJDIR = obj/
+OBJ = $(addprefix $(OBJDIR), $(SRC:%.c=%.o))
+
+INCLUDES = includes/
+HEADER = $(addprefix $(INCLUDES), ft_printf.h)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJDIR) $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-obj/%.o: %.c $(HEADER)
-	gcc $(FLAGS) -c $< -o $@ -g
+$(OBJDIR)%.o: $(SRCDIR)%.c $(HEADER)
+	gcc $(FLAGS) -c $< -o $@ -I $(INCLUDES) -g
 
-ex: $(NAME)
-	gcc main.c $(NAME) -g
+$(OBJDIR):
+	mkdir obj/
+
+main.o: main.c
+	gcc -c $< -o $@ -I $(INCLUDES) -g
+
+ex: main.o $(NAME)
+	gcc $(FLAGS) $< $(NAME)
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) main.o
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -rf $(NAME)

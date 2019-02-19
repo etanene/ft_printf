@@ -6,7 +6,7 @@
 #    By: afalmer- <afalmer-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/10 16:37:58 by aleksandr         #+#    #+#              #
-#    Updated: 2019/02/19 18:42:40 by afalmer-         ###   ########.fr        #
+#    Updated: 2019/02/19 18:49:35 by afalmer-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ $(NAME): $(OBJDIR) $(OBJ)
 	ranlib $(NAME)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(HEADER)
-	gcc $(FLAGS) -c $< -o $@ -I $(INCLUDES) -g
+	gcc $(FLAGS) -c $< -o $@ -I $(INCLUDES)
 
 $(OBJDIR):
 	mkdir obj/
